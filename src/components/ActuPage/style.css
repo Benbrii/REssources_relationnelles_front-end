@@ -1,0 +1,16 @@
+.actu_page_container {
+    background-color: #d9d9d9;
+}
+
+.actu_page_add_button_container {
+    display: flex;
+    justify-content: center;
+}
+
+.actu_page_add_button {
+    margin: 2%;
+}
+
+.actu_details_container {
+    padding-bottom: 2%;
+}

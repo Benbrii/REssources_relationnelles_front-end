@@ -10,6 +10,7 @@ class Home extends Component {
       <>
         {// TOPNAVBAR DE THIBAUT
         }
+        <h2 className="fil_title_center">Fil d'actualité</h2>
         <ActuPage />
       </>
     );

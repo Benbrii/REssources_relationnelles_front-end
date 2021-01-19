@@ -28,7 +28,7 @@ class ActuDetails extends Component {
         </Card>
       </>
     );
-  }
+  }²
 }
 
 export default ActuDetails;

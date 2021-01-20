@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 
 // history
 import { createBrowserHistory } from "history";
@@ -8,6 +9,8 @@ import { Router, Route } from "react-router-dom";
 
 // containers
 import Home from "./containers/Home";
+
+axios.defaults.withCredentials = true;
 
 const history = createBrowserHistory();
 

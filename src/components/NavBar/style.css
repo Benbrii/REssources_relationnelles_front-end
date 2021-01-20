@@ -1,3 +1,8 @@
+/*navBAR*/
+.headerNavBar {
+	margin-bottom: 4.5em;
+}
+
 nav {
 	padding-top: 0!important;
 	padding-bottom: 0!important;
@@ -16,10 +21,10 @@ nav {
 	width: 100%;
 }
 
-	.navbar-nav li{
-		margin-top:0;
-		margin-bottom: 0;
-	}
+.navbar-nav li{
+    margin-top:0;
+    margin-bottom: 0;
+}
 
 .form-inline input {
 	border-radius: 14px;
@@ -33,6 +38,7 @@ nav a:hover{
 	color: rgb(116, 175, 149)!important;
 	text-decoration: underline!important;
 	transform : all; 
-	transition:0.95s;
+	transition:0.15s;
+	font-weight: bold;
 }
 

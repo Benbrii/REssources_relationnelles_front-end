@@ -5,13 +5,13 @@ import img from "../../assets/img/index.png";
 
 // reactstrap
 import {
-  Card, CardText, CardBody, CardLink,
+  Card, CardText, CardBody,
   CardTitle, CardSubtitle
 } from 'reactstrap';
 
 // redux
 import { connect } from "react-redux";
-import { getTest } from "../../actions/test.action";
+import { getRessource } from "../../actions/ressource.action";
 
 class ConnectedActuDetails extends Component {
   constructor(props) {
@@ -21,29 +21,26 @@ class ConnectedActuDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.getTest();
+    this.props.getRessource();
   }
 
   render() {
-    const { test } = this.props;
-    console.log(test);
+    const { ressource } = this.props;
 
     return (
       <>
         {
-          test.map(test => (
+          ressource.map(ressource => (
             <div>
               <Card>
                 <CardBody>
-                  <CardTitle tag="h5" className="card_title_center">{test.title}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">{test.theme}</CardSubtitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {test.date_envoie}</CardSubtitle>
+                  <CardTitle tag="h5" className="card_title_center">{ressource.title}</CardTitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
+                  <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
                 </CardBody>
                 <img className="actu_details_image" src={img} alt="poste_image" />
                 <CardBody>
-                  <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                  <CardLink href="#">Card Link</CardLink>
-                  <CardLink href="#">Another Link</CardLink>
+                  <CardText>Description de la ressource</CardText>
                 </CardBody>
               </Card>
             </div>
@@ -56,12 +53,12 @@ class ConnectedActuDetails extends Component {
 
 const mstp = state => {
   return {
-    test: state.test.test
+    ressource: state.ressource.ressource
   }
 }
 
 const mdtp = dispatch => ({
-  getTest: () => dispatch(getTest())
+  getRessource: () => dispatch(getRessource())
 })
 
 const ActuDetails = connect(

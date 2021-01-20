@@ -1,25 +1,25 @@
-import * as testConst from "../const/test.const";
+import * as ressourceConst from "../const/ressource.const";
 
 const initState = {
-    test: [],
+    ressource: [],
     isLoading: false
 };
 
-const test = (state = initState, action) => {
+const ressource = (state = initState, action) => {
     switch (action.type) {
 
-        case testConst.TEST_FULFILLED:
+        case ressourceConst.RESSOURCE_FULFILLED:
             return {
                 ...state,
-                test: action.payload.data,
+                ressource: action.payload.data,
                 isLoading: false
             }
-        case testConst.TEST_PENDING:
+        case ressourceConst.RESSOURCE_PENDING:
             return {
                 ...state,
                 isLoading: true
             }
-        case testConst.TEST_REJECTED:
+        case ressourceConst.RESSOURCE_REJECTED:
             return {
                 ...state,
                 error: action.payload
@@ -31,4 +31,4 @@ const test = (state = initState, action) => {
     }
 }
 
-export default test;
+export default ressource;

@@ -20,7 +20,7 @@ class Home extends Component {
         <NavBar onClick={this.appearNavBar}/> 
         <h2 className="fil_title_center">Fil d'actualité</h2>
         <ActuPage />
-        <Footer/>
+        <Footer />
       </>
     );
   }

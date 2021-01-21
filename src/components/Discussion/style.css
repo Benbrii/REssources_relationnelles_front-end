@@ -1,0 +1,8 @@
+.pictureProfile{
+    width: 100px;
+    height: 100px;
+}
+
+.pictureProfile img{
+    max-width: 100%;
+}

@@ -23,6 +23,7 @@ img{
 }
 /**/
 .sidebar{
+    margin-top: 3px;
     background: #2a1d52;
     font-family: 'Nova Round', cursive;
     width: 100%;

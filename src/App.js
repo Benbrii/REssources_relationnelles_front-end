@@ -10,6 +10,8 @@ import { Router, Route } from "react-router-dom";
 // containers
 import Home from "./containers/Home";
 import Profil from "./containers/Profil";
+import RegisterPage from "./containers/RegisterPage";
+
 
 axios.defaults.withCredentials = true;
 
@@ -23,6 +25,7 @@ class App extends Component {
         <Router history={history}>
           <Route exact path="/" component={Home} />
           <Route exact path="/profil" component={Profil} />
+          <Route exact path="/registerpage" component={RegisterPage} />
         </Router>
       </>
     );

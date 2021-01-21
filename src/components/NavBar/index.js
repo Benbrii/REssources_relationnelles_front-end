@@ -2,13 +2,13 @@ import React from 'react'
 import img from '../../assets/img/CUBE.png'
 import './style.css'
 
-const NavBar = () => (
+const NavBar = ({onClick}) => (
     <div className = "headerNavBar">
         <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
             <a className="navbar-brand lienImage" href="#">
                 <img src={img} alt="REsource RElationnelle"/>
             </a>
-            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+            <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" onClick={() => onClick()} aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">

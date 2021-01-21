@@ -11,10 +11,10 @@ class Home extends Component {
   render() {
     return (
       <>
-        <NavBar/> 
+        <NavBar />
         <h2 className="fil_title_center">Fil d'actualité</h2>
         <ActuPage />
-        <Footer/>
+        <Footer />
       </>
     );
   }

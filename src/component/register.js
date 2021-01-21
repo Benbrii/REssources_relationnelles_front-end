@@ -11,7 +11,7 @@ constructor(props) {
             firstName:null,
             lastName:null,
             email:null,
-            password:null,
+            motDePasse:null,
             birthDate:null,
             phoneNumber:null
         }
@@ -26,9 +26,7 @@ constructor(props) {
     e.preventDefault()
 
     const { user } = this.state;
-    console.log("USER",user)
     this.props.registerUser(user);
-    this.props.test(user);
   }
 
   render() {
@@ -61,7 +59,7 @@ constructor(props) {
                     <label htmlFor="password" className="col-sm-3 control-label">Password*</label>
                     <div className="col-sm-9">
                         <input type="password" id="password" placeholder="Password" className="form-control"
-                        onChange={e => { this.setState({user:{...this.state.user,password: e.target.value}}); e.preventDefault();}}/>
+                        onChange={e => { this.setState({user:{...this.state.user,motDePasse: e.target.value}}); e.preventDefault();}}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -104,8 +102,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-      registerUser: user => dispatch(registerUser(user)),
-      test: user => dispatch(test(user))
+      registerUser: user => dispatch(registerUser(user))
   };
 }
 

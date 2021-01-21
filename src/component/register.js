@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../actions'
+import { registerUser,test } from '../actions'
 
 class Register extends Component {
 
-  constructor(props) {
+constructor(props) {
     super(props);
     this.state = {
-      user:{
-        firstName:null,
-        lastName:null,
-        email:null,
-        password:null,
-        birthDate:null,
-        phoneNumber:null
-      }
-    };
+        user:{
+            firstName:null,
+            lastName:null,
+            email:null,
+            password:null,
+            birthDate:null,
+            phoneNumber:null
+        }
+};
 
     this.goRegister = this.goRegister.bind(this);
 
@@ -25,10 +25,10 @@ class Register extends Component {
 
     e.preventDefault()
 
-    const { firstName } = this.state;
-    console.log("FIRSTNAME",firstName)
-    this.props.registerUser(firstName);
-    
+    const { user } = this.state;
+    console.log("USER",user)
+    this.props.registerUser(user);
+    this.props.test(user);
   }
 
   render() {
@@ -40,28 +40,28 @@ class Register extends Component {
                     <label htmlFor="firstName" className="col-sm-3 control-label">First Name</label>
                     <div className="col-sm-9">
                         <input type="text" id="firstName" placeholder="First Name" className="form-control" autoFocus  
-                        onChange={e => { this.setState({firstName: e.target.value}); e.preventDefault();}}/>
+                        onChange={e => { this.setState({user:{...this.state.user,firstName: e.target.value}}); e.preventDefault();}}/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="lastName" className="col-sm-3 control-label">Last Name</label>
                     <div className="col-sm-9">
                         <input type="text" id="lastName" placeholder="Last Name" className="form-control" autoFocus
-                        onChange={e => { this.setState({lastName: e.target.value}); e.preventDefault();}}/>
+                        onChange={e => { this.setState({user:{...this.state.user,lastName: e.target.value}}); e.preventDefault();}}/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="email" className="col-sm-3 control-label">Email* </label>
                     <div className="col-sm-9">
                         <input type="email" id="email" placeholder="Email" className="form-control" name= "email"
-                        onChange={e => { this.setState({email: e.target.value}); e.preventDefault();}}/>
+                        onChange={e => { this.setState({user:{...this.state.user,email: e.target.value}}); e.preventDefault();}}/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="password" className="col-sm-3 control-label">Password*</label>
                     <div className="col-sm-9">
                         <input type="password" id="password" placeholder="Password" className="form-control"
-                        onChange={e => { this.setState({password: e.target.value}); e.preventDefault();}}/>
+                        onChange={e => { this.setState({user:{...this.state.user,password: e.target.value}}); e.preventDefault();}}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -74,14 +74,14 @@ class Register extends Component {
                     <label htmlFor="birthDate" className="col-sm-3 control-label">Date of Birth*</label>
                     <div className="col-sm-9">
                         <input type="date" id="birthDate" className="form-control"
-                         onChange={e => { this.setState({birthDate: e.target.value}); e.preventDefault();}}/>
+                         onChange={e => { this.setState({user:{...this.state.user,birthDate: e.target.value}}); e.preventDefault();}}/>
                     </div>
                 </div>
                 <div className="form-group">
                     <label htmlFor="phoneNumber" className="col-sm-3 control-label">Phone number </label>
                     <div className="col-sm-9">
                         <input type="phoneNumber" id="phoneNumber" placeholder="Phone number" className="form-control"
-                         onChange={e => { this.setState({phoneNumber: e.target.value}); e.preventDefault();}}/>
+                         onChange={e => { this.setState({user:{...this.state.user,phoneNumber: e.target.value}}); e.preventDefault();}}/>
                         <span className="help-block">Your phone number won't be disclosed anywhere </span>
                     </div>
                 </div>
@@ -104,7 +104,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-      registerUser: firstName => dispatch(registerUser(firstName))
+      registerUser: user => dispatch(registerUser(user)),
+      test: user => dispatch(test(user))
   };
 }
 

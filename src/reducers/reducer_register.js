@@ -3,7 +3,7 @@
 import * as RegisterConst from "../const/register.const";
 
 const initState = {
-    firstname:null
+    user:null
 };
 
 const registerReducer = (state = initState, action) => {
@@ -11,10 +11,20 @@ const registerReducer = (state = initState, action) => {
 
         case RegisterConst.USER_REGISTER:
             return {
-               firstname:action.payload
+
+                user:action.payload
+                
             };
+
+        case RegisterConst.USER_REGISTER_TEST:
+            return {
+
+                user:action.payload
+                
+            };
+           
         }
     return state
-}
+};
 
 export default registerReducer;

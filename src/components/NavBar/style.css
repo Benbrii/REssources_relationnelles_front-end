@@ -3,13 +3,17 @@
 	margin-bottom: 4.5em;
 }
 
-nav {
+.headerNavBar nav {
 	padding-top: 0!important;
 	padding-bottom: 0!important;
 }
 
+.navbar-brand {
+	margin-right: 0;
+}
+
 .lienImage {
-	width: 75px;
+	width: 57px;
 }
 
 .navbar img {
@@ -31,7 +35,7 @@ nav {
 }
 
 .nav-item {
-	margin: 1.8%;
+	margin: 1%;
 }
 
 nav a:hover{

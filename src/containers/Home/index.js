@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import "./style.css";
 
-
 // components
 import ActuPage from "../../components/ActuPage";
 import NavBar from '../../components/NavBar'

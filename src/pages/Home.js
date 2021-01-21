@@ -1,10 +1,8 @@
 import React from 'react';
-import Navigation from '../Components/Navigation';
 
 const Home = () => {
     return (
         <div className="home">
-            <Navigation/>
             <div className="homeContent">
                 <div className="content">
                     <h1>Ceci est l'accueil de la page</h1>

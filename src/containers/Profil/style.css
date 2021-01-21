@@ -1,0 +1,21 @@
+/* En ce qui concerne le style */
+
+.Main {
+    /* J'ai choisi d'utiliser flex mais on aurait pu utiliser css-grid 🤷‍♂️ */
+    /* Au cas où, tu peux regarder https://yoksel.github.io/flex-cheatsheet/ */
+    /* Ou https://css-tricks.com/snippets/css/a-guide-to-flexbox/ si tu préfères */
+    display: flex;
+    background-color:white;
+    border-bottom-left-radius: 30px;
+    border-top-left-radius:30px  ;
+    
+}
+
+.Navigation {
+}
+
+.Content {
+    /* Et j'indique au contenu qu'il doit prendre toute la place restante */
+    flex:1;
+}
+

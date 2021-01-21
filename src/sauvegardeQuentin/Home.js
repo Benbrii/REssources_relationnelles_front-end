@@ -3,6 +3,10 @@ import React from 'react';
 const Home = () => {
     return (
         <div className="home">
+<<<<<<< HEAD:src/pages/Home.js
+=======
+            <Navigation />
+>>>>>>> dev:src/sauvegardeQuentin/Home.js
             <div className="homeContent">
                 <div className="content">
                     <h1>Ceci est l'accueil de la page</h1>

@@ -16,7 +16,7 @@ class Home extends Component {
   render() {
     return (
       <>
-        <NavBar onClick={this.appearNavBar}/> 
+        <NavBar onClick={this.appearNavBar} />
         <h2 className="fil_title_center">Fil d'actualité</h2>
         <ActuPage />
         <Footer />

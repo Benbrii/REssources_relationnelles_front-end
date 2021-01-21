@@ -2,8 +2,8 @@ import React from 'react'
 import img from '../../assets/img/CUBE.png'
 import './style.css'
 
-const NavBar = ({onClick}) => (
-    <div className = "headerNavBar">
+const NavBar = ({ onClick }) => (
+    <div className="headerNavBar">
         <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
             <a className="navbar-brand lienImage" href="/">
                 <img src={img} alt="REsource RElationnelle" />

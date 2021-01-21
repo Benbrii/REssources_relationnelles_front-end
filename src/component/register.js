@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { registerUser,test } from '../actions'
+import { registerUser } from '../actions'
 
 class Register extends Component {
 
@@ -11,7 +11,7 @@ constructor(props) {
             firstName:null,
             lastName:null,
             email:null,
-            motDePasse:null,
+            password:null,
             birthDate:null,
             phoneNumber:null
         }
@@ -59,7 +59,7 @@ constructor(props) {
                     <label htmlFor="password" className="col-sm-3 control-label">Password*</label>
                     <div className="col-sm-9">
                         <input type="password" id="password" placeholder="Password" className="form-control"
-                        onChange={e => { this.setState({user:{...this.state.user,motDePasse: e.target.value}}); e.preventDefault();}}/>
+                        onChange={e => { this.setState({user:{...this.state.user,password: e.target.value}}); e.preventDefault();}}/>
                     </div>
                 </div>
                 <div className="form-group">
@@ -97,7 +97,7 @@ constructor(props) {
 }
 
 function mapStateToProps(state) {
-  return { };
+  return {};
 }
 
 function mapDispatchToProps(dispatch) {

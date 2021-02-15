@@ -5,3 +5,8 @@ export const getRessource = () => ({
     type: ressourceConst.RESSOURCE,
     payload: ressourceAPI.fetchRessource()
 });
+
+export const addPosteToCloud = (formData) => ({
+    type: ressourceConst.ADD_RESSOURCE,
+    payload: ressourceAPI.fetchAddPosteToCloud(formData)
+}) 

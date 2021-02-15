@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import "./style.css";
 
 // redux
-//import { addDocToCloud } from "../../../actions/documents.action";
+import { addPosteToCloud } from "../../../actions/ressource.action";
 
 // reactstrap
 import {
@@ -13,90 +13,53 @@ import {
   FormGroup, FormText
 } from 'reactstrap';
 
-// react calendar
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import moment from "moment";
-
 class ConnectedAddPosteModal extends Component {
   constructor(props) {
     super(props);
     this.state = {
       title: "",
-      categorie: "Autre",
-      methodologie: "Non défini",
-      selectedFile: null,
-      formatedDate: new Date().toLocaleDateString("fr-FR")
+      theme: "",
+      type: "",
+      description: "",
+      selectedFile: null
     }
-
-    this.onChange1 = this.onChange1.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  /*onChange1(initDate) {
-
-    const date = initDate.toLocaleDateString("fr-FR");
-
-    this.setState({ formatedDate: date });
-
   }
 
   async handleSubmit(e) {
     e.preventDefault();
-    const { title, selectedFile, formatedDate, categorie, methodologie } = this.state;
-
-    let serviceId = e.target.serviceId.value;
-    let serviceName = e.target.serviceName.value;
-    let serviceNiveau = e.target.serviceNiveau.value;
+    const { title, selectedFile, theme, type, description } = this.state;
 
     let formData = new FormData();
     formData.append("selectedFile", selectedFile);
     formData.append("title", title);
-    formData.append("serviceId", serviceId);
-    formData.append("selectedDate", formatedDate);
-    formData.append("categorie", categorie);
-    formData.append("serviceName", serviceName);
-    formData.append("serviceNiveau", serviceNiveau);
-    formData.append("methodologie", methodologie)
+    formData.append("theme", theme);
+    formData.append("type", type);
+    formData.append("description", description)
 
     if (title.length > 0) {
-      await this.props.addDocToCloud(formData);
+      await this.props.addPosteToCloud(formData);
     } else {
-      alert("Le titre d'un document ne peut pas être vide !");
+      alert("Le titre d'un poste ne peut pas être vide !");
     }
 
     this.setState({
       title: "",
-      cateogire: "Autre",
-      methodologie: "Non défini",
+      theme: "",
+      type: "",
+      description: "",
       selectedFile: null
     });
 
     window.location.reload(false);
-  }*/
+  }
 
   render() {
-    const { formatedDate } = this.state;
-    const { services } = this.props;
-
-    // get id from url
-    let full_url = document.URL;
-    let url_array = full_url.split('/')
-    let id = url_array[url_array.length - 1];
-
-    // eslint-disable-next-line
-    let selectedService = services.filter(service => service.id == id);
-
-    /* const isTodayDate = moment(new Date(), "DD/MM/YYYY")
-      .toDate()
-      .toLocaleDateString("fr-FR"); */
-
-    console.log(formatedDate);
 
     return (
-      <div>
+      <div className="addpostemodal_container">
         <ModalHeader>
-          Ajouter un document
+          Ajouter un poste
         </ModalHeader>
         <br />
         <Form
@@ -105,38 +68,13 @@ class ConnectedAddPosteModal extends Component {
           id="addForm"
           encType="multipart/form-data"
         >
-          {
-            selectedService.map(serv => (
-              <div key={serv.id}>
-                <Input
-                  className="modal_servicesid_hide"
-                  type="serviceId"
-                  name="serviceId"
-                  defaultValue={serv.id}
-                />
-                <Input
-                  className="modal_servicesid_hide"
-                  type="serviceName"
-                  name="serviceName"
-                  defaultValue={serv.name}
-                />
-                <Input
-                  className="modal_servicesid_hide"
-                  type="serviceNiveau"
-                  name="serviceNiveau"
-                  defaultValue={serv.niveau}
-                />
-              </div>
-            ))
-          }
-
           <FormGroup>
             <Label for="exampleTitle">Titre</Label>
             <Input
               type="title"
               name="title"
               id="exampleTitle"
-              placeholder="Indiquer le titre du document"
+              placeholder="Indiquer le titre du poste"
               onChange={e => {
                 this.setState({ title: e.target.value });
                 e.preventDefault();
@@ -155,50 +93,34 @@ class ConnectedAddPosteModal extends Component {
               }}
             />
             <FormText color="muted">
-              Afin d'obtenir une URL compréhensible auprès du CHU de Lille, il est préférable de renommer son fichier au bon intitulé.
+              Sélectionnez une image ou une vidéo pour votre poste
             </FormText>
           </FormGroup>
           <FormGroup>
-            <Label for="categorie">Catégorie</Label>
-            <Input type="select" name="categorie" id="categorie" onChange={e => {
-              this.setState({ categorie: e.target.value });
+            <Label for="theme">Thème</Label>
+            <Input type="select" name="theme" id="theme" onChange={e => {
+              this.setState({ theme: e.target.value });
               e.preventDefault();
             }}>
-              <option>Autre</option>
-              <option>Fiche d'intervention</option>
-              <option>Fiche matériel</option>
-              <option>Compte-rendu</option>
-              <option>Note de calcul</option>
-              <option>Schéma de principe</option>
-              <option>Plan</option>
-              <option>Procédure</option>
+              <option>Thème 1</option>
+              <option>Thème 2</option>
+              <option>Thème 3</option>
             </Input>
           </FormGroup>
           <FormGroup>
-            <Label for="methodologie">Méthodologie préparation hygiène</Label>
-            <Input type="select" name="methodologie" id="methodologie" onChange={e => {
-              this.setState({ methodologie: e.target.value });
+            <Label for="type">Type de la ressource</Label>
+            <Input type="select" name="type" id="type" onChange={e => {
+              this.setState({ type: e.target.value });
               e.preventDefault();
             }}>
-              <option>Non défini</option>
-              <option>FTI-01</option>
-              <option>FTI-02</option>
-              <option>FTI-03</option>
-              <option>FTI-04</option>
-              <option>FTI-05</option>
+              <option>Vidéo</option>
+              <option>Article</option>
+              <option>Photo</option>
             </Input>
           </FormGroup>
-          <Label for="exampleFile">Date de validation du document souhaité</Label>
-          <FormGroup className="calendar_container">
-            <DatePicker
-              selected={moment(formatedDate, "DD/MM/YYYY").toDate()}
-              minDate={moment().toDate()}
-              onChange={this.onChange1}
-              name="selectedDate"
-              type="selectedDate"
-              id="selectedDate"
-              inline
-            />
+          <FormGroup>
+            <Label for="description">Description | Contenu de la ressource</Label>
+            <Input type="textarea" name="description" id="description" />
           </FormGroup>
           <ModalFooter>
             <Button color="success" type="submit">Valider</Button>
@@ -213,6 +135,8 @@ const mstp = state => {
 };
 
 const mdtp = dispatch => ({
+  addPosteToCloud: (formData) =>
+    dispatch(addPosteToCloud(formData)),
 });
 
 const AddPosteModal = connect(

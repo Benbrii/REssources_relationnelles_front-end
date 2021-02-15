@@ -26,8 +26,9 @@ const NavBar = () => (
                         <a className="nav-link" href="/">Discussions</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/registerpage">Connexion</a>
+                        <a className="nav-link" href="/connection">Connexion</a>
                     </li>
+                    
                 </ul>
                 <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
 

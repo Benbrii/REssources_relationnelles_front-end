@@ -1,0 +1,1 @@
+export const USER_CONNECTION = 'USER_CONNECTION'

@@ -1,7 +1,7 @@
 import * as ressourceConst from "../const/ressource.const";
 
 const initState = {
-    ressource: [],
+    ressources: [],
     isLoading: false
 };
 
@@ -11,7 +11,7 @@ const ressource = (state = initState, action) => {
         case ressourceConst.RESSOURCE_FULFILLED:
             return {
                 ...state,
-                ressource: action.payload.data,
+                ressources: action.payload.data,
                 isLoading: false
             };
         case ressourceConst.RESSOURCE_PENDING:

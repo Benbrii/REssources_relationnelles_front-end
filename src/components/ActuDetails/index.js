@@ -25,38 +25,41 @@ class ConnectedActuDetails extends Component {
   }
 
   render() {
-    const { ressource } = this.props;
+    const { ressources } = this.props;
+    console.log(ressources.map(ressource => ressource.private));
 
     return (
-      <>
+      <div>
         {
-          ressource.map(ressource => (
-            ressource.private === 0 ?
-              <div>
-                <Card>
-                  <CardBody>
-                    <CardTitle tag="h5" className="card_title_center">{ressource.title}</CardTitle>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
-                  </CardBody>
-                  <img className="actu_details_image" src={ressource.lien} alt="poste_image" />
-                  <CardBody>
-                    <CardText>{ressource.description}</CardText>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
-                  </CardBody>
-                </Card>
-              </div>
-              :
-              null
-          ))
+          ressources.length > 0 ?
+            ressources.map(ressource => (
+              ressource.private === "0" ?
+                <div>
+                  <Card>
+                    <CardBody>
+                      <CardTitle tag="h5" className="card_title_center">{ressource.titre}</CardTitle>
+                      <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
+                    </CardBody>
+                    <img className="actu_details_image" src={ressource.lien} alt="poste_image" />
+                    <CardBody>
+                      <CardText>{ressource.description}</CardText>
+                      <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
+                    </CardBody>
+                  </Card>
+                </div>
+                :
+                null
+            ))
+            : <p>Aucune ressource n'a encore été ajoutée.</p>
         }
-      </>
+      </div>
     );
   }
 }
 
 const mstp = state => {
   return {
-    ressource: state.ressource.ressource
+    ressources: state.ressource.ressources
   }
 }
 

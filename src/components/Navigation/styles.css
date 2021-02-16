@@ -1,11 +1,11 @@
 
 /**/
-img{
+/*img{
     width: 75%;
     height: auto;
     border-radius: 50%;
     box-shadow: 0 0 0 4px rgb(99, 164, 233);
-}
+}*/
 /**/
 .id{
     grid-area:1;

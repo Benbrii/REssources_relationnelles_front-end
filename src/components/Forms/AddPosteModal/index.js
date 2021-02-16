@@ -21,6 +21,7 @@ class ConnectedAddPosteModal extends Component {
       theme: "",
       type: "",
       description: "",
+      privee: 0,
       selectedFile: null
     }
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -28,14 +29,15 @@ class ConnectedAddPosteModal extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    const { title, selectedFile, theme, type, description } = this.state;
+    const { title, selectedFile, theme, type, description, privee } = this.state;
 
     let formData = new FormData();
     formData.append("selectedFile", selectedFile);
     formData.append("title", title);
     formData.append("theme", theme);
     formData.append("type", type);
-    formData.append("description", description)
+    formData.append("description", description);
+    formData.append("privee", privee);
 
     if (title.length > 0) {
       await this.props.addPosteToCloud(formData);
@@ -48,6 +50,7 @@ class ConnectedAddPosteModal extends Component {
       theme: "",
       type: "",
       description: "",
+      privee: 0,
       selectedFile: null
     });
 
@@ -120,7 +123,20 @@ class ConnectedAddPosteModal extends Component {
           </FormGroup>
           <FormGroup>
             <Label for="description">Description | Contenu de la ressource</Label>
-            <Input type="textarea" name="description" id="description" />
+            <Input type="textarea" name="description" id="description" onChange={e => {
+              this.setState({ description: e.target.value });
+              e.preventDefault();
+            }} />
+          </FormGroup>
+          <FormGroup check>
+            <Label check>
+              <Input type="radio" name="privee" onChange={e => {
+                this.setState({ privee: 1 });
+                console.log(this.state.privee);
+                e.preventDefault();
+              }} />{' '}
+              Rendre ce poste privé
+          </Label>
           </FormGroup>
           <ModalFooter>
             <Button color="success" type="submit">Valider</Button>

@@ -31,19 +31,22 @@ class ConnectedActuDetails extends Component {
       <>
         {
           ressource.map(ressource => (
-            <div>
-              <Card>
-                <CardBody>
-                  <CardTitle tag="h5" className="card_title_center">{ressource.title}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
-                </CardBody>
-                <img className="actu_details_image" src={img} alt="poste_image" />
-                <CardBody>
-                  <CardText>Description de la ressource</CardText>
-                </CardBody>
-              </Card>
-            </div>
+            ressource.private === 0 ?
+              <div>
+                <Card>
+                  <CardBody>
+                    <CardTitle tag="h5" className="card_title_center">{ressource.title}</CardTitle>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
+                  </CardBody>
+                  <img className="actu_details_image" src={ressource.lien} alt="poste_image" />
+                  <CardBody>
+                    <CardText>{ressource.description}</CardText>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
+                  </CardBody>
+                </Card>
+              </div>
+              :
+              null
           ))
         }
       </>

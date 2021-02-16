@@ -105,9 +105,11 @@ class ConnectedAddPosteModal extends Component {
               this.setState({ theme: e.target.value });
               e.preventDefault();
             }}>
-              <option>Thème 1</option>
-              <option>Thème 2</option>
-              <option>Thème 3</option>
+              <option>Covid-19</option>
+              <option>Information générale</option>
+              <option>Société</option>
+              <option>Santé</option>
+              <option>Autres</option>
             </Input>
           </FormGroup>
           <FormGroup>
@@ -119,6 +121,7 @@ class ConnectedAddPosteModal extends Component {
               <option>Vidéo</option>
               <option>Article</option>
               <option>Photo</option>
+              <option>Publication</option>
             </Input>
           </FormGroup>
           <FormGroup>

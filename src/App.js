@@ -12,7 +12,6 @@ import Home from "./containers/Home";
 import Profil from "./containers/Profil";
 import RegisterPage from "./containers/RegisterPage";
 
-
 axios.defaults.withCredentials = true;
 
 const history = createBrowserHistory();

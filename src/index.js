@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./store";
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import * as serviceWorker from "./service-worker";
+import * as serviceWorker from "./serviceWorker";
 
 // reactstrap
 import 'bootstrap/dist/css/bootstrap.min.css';

@@ -1,36 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { connectUser } from '../../actions/index';
-import "./style.css";
+import { connectUser } from '../../actions/connexion.action';
+import './style.css';
+import Button from 'react-bootstrap/button'
+import Modal from 'react-bootstrap/Modal'
+import Register from '../Register'
 
-class Connection extends Component {
+class Connexion extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             user: {
-                
                 email: null,
                 password: null
-                
+            },
+            modal:{
+                setShow:false
             }
         };
-
         this.goConnect = this.goConnect.bind(this);
-
+        this.handleShow = this.handleShow.bind(this);
+        this.handleClose = this.handleClose.bind(this)
     }
 
     goConnect(e) {
-
         e.preventDefault()
-
         const { user } = this.state;
         this.props.connectUser(user);
     }
 
+    handleShow(e){
+        this.setState({ modal: {setShow: true }})
+        console.log("SHOW",this.state.modal.setShow)
+    }
+
+    handleClose(e){
+        this.setState({ modal: {setShow: false }})
+        console.log(this.state.modal.setShow)
+    }
+
     render() {
         return (
-            <div className="container">
+            <div className="container ">
                 <form className="form-horizontal" >
                     <h2>Connection</h2>
                     
@@ -49,11 +61,13 @@ class Connection extends Component {
                                 onChange={e => { this.setState({ user: { ...this.state.user, password: e.target.value } }); e.preventDefault(); }} />
                         </div>
                     </div>
-                    <button type="submit" className="btn btn-primary btn-block col-sm-9 col-sm-offset-3" onClick={this.goConnect} >Connection</button>
-                    <a href="/registerpage" className="btn btn-success btn-block col-sm-9 col-sm-offset-3" role="button">Create account</a>
-                    
+                    <button type="submit" className="btn btn-primary btn-block col-sm-9 col-sm-offset-3" onClick={this.goConnect} >Sign in</button>
+                    <Button variant="success" className="col-sm-9 col-sm-offset-3" onClick={this.handleShow}>Sign up</Button>
                 </form>
-                
+
+                <Modal show={this.state.modal.setShow} onHide={this.handleClose}>
+                    <Register/>
+                </Modal>
             </div>
             
         );
@@ -61,15 +75,17 @@ class Connection extends Component {
 }
 
 function mapStateToProps(state) {
-    return {};
+    
+    return {
+          
+    };
 }
 
 function mapDispatchToProps(dispatch) {
     
     return {
-        
         connectUser: user => dispatch(connectUser(user))
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Connection);
+export default connect(mapStateToProps, mapDispatchToProps)(Connexion);

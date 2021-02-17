@@ -2,7 +2,6 @@
 /* eslint-disable import/no-anonymous-default-export */
 import * as RegisterConst from "../const/register.const";
 
-
 const initState = {
     validation:true
 };
@@ -10,16 +9,11 @@ const initState = {
 const registerReducer = (state = initState, action) => {
     
     switch (action.type) {
-
         case RegisterConst.USER_REGISTER_FULFILLED:
-            
             return {
-
                 validation:action.payload.data.validation
             }
-        
         }
-    console.log("REDUCER",action.payload)
     return state
 };
 

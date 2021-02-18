@@ -9,4 +9,7 @@ export const fetchAddPosteToCloud = (formData) =>
         url: `${process.env.REACT_APP_API_URL}/upload`,
         credentials: 'true',
         data: formData
-    })
+    });
+
+export const fetchRessourceById = id =>
+    axios.get(`${process.env.REACT_APP_API_URL}/ressources/${id}`);

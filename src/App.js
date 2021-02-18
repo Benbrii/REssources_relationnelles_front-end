@@ -11,6 +11,7 @@ import { Router, Route } from "react-router-dom";
 import Home from "./containers/Home";
 import Profil from "./containers/Profil";
 import RegisterPage from "./containers/RegisterPage";
+import RessourceList from "./containers/RessourceList";
 
 axios.defaults.withCredentials = true;
 
@@ -23,6 +24,7 @@ class App extends Component {
       <>
         <Router history={history}>
           <Route exact path="/" component={Home} />
+          <Route exact path="/ressource/:id" component={RessourceList} />
           <Route exact path="/profil" component={Profil} />
           <Route exact path="/registerpage" component={RegisterPage} />
         </Router>

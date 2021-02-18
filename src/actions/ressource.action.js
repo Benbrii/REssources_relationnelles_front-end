@@ -9,4 +9,11 @@ export const getRessource = () => ({
 export const addPosteToCloud = (formData) => ({
     type: ressourceConst.ADD_RESSOURCE,
     payload: ressourceAPI.fetchAddPosteToCloud(formData)
-}) 
+});
+
+export function getRessourceById(id) {
+    return {
+        type: ressourceConst.GET_RESSOURCE_BY_ID,
+        payload: ressourceAPI.fetchRessourceById(id)
+    }
+}

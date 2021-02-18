@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import "./style.css";
 
-import img from "../../assets/img/index.png";
-
 // reactstrap
 import {
-  Card, CardText, CardBody,
-  CardTitle, CardSubtitle
+  Card, CardBody, Alert,
+  CardTitle, CardSubtitle, NavLink
 } from 'reactstrap';
 
 // redux
@@ -26,7 +24,6 @@ class ConnectedActuDetails extends Component {
 
   render() {
     const { ressources } = this.props;
-    console.log(ressources.map(ressource => ressource.private));
 
     return (
       <div>
@@ -34,15 +31,20 @@ class ConnectedActuDetails extends Component {
           ressources.length > 0 ?
             ressources.map(ressource => (
               ressource.private === "0" ?
-                <div>
+                <div key={ressource.id}>
                   <Card>
                     <CardBody>
-                      <CardTitle tag="h5" className="card_title_center">{ressource.titre}</CardTitle>
+                      <CardTitle tag="h5" className="card_title_center">
+                        <NavLink href={`/ressource/${ressource.id}`} className="ressource_link">
+                          <Alert color="primary">
+                            {ressource.titre}
+                          </Alert>
+                        </NavLink>
+                      </CardTitle>
                       <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
                     </CardBody>
                     <img className="actu_details_image" src={ressource.lien} alt="poste_image" />
                     <CardBody>
-                      <CardText>{ressource.description}</CardText>
                       <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
                     </CardBody>
                   </Card>

@@ -10,15 +10,17 @@ import { Jumbotron, Container } from 'reactstrap';
 
 class ConnectedRessourceDetails extends Component {
 
-    componentDidUpdate() {
+    componentDidMount() {
         let full_url = document.URL;
         let url_array = full_url.split('/')
         let id = url_array[url_array.length - 1];
         this.props.getRessourceById(id);
+        console.log(id);
     }
 
     render() {
         const { ressource } = this.props;
+        console.log(ressource);
         return (
             <>
                 <h2 className="fil_title_center">Ressource</h2>

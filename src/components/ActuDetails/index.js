@@ -18,12 +18,13 @@ class ConnectedActuDetails extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidMount() {
     this.props.getRessource();
   }
 
   render() {
     const { ressources } = this.props;
+    console.log(ressources);
 
     return (
       <div>

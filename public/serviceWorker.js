@@ -1,8 +1,10 @@
 var cacheName = 'todolist-PWA-v1.2';
 var appShellFiles = [
+  '*',
   '/',
   '/serviceWorker.js',
-  '/manifest.json'
+  '/manifest.json',
+  '/ressource/:id',
 ];
 
 self.addEventListener('install', (e) => {

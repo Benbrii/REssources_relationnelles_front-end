@@ -18,7 +18,7 @@ class ConnectedActuDetails extends Component {
     }
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.props.getRessource();
   }
 

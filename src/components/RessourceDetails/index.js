@@ -10,7 +10,7 @@ import { Jumbotron, Container } from 'reactstrap';
 
 class ConnectedRessourceDetails extends Component {
 
-    componentDidMount() {
+    componentDidUpdate() {
         let full_url = document.URL;
         let url_array = full_url.split('/')
         let id = url_array[url_array.length - 1];

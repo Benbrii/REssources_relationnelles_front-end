@@ -26,6 +26,7 @@
     "redux-promise-middleware": "^6.1.2",
     "redux-promise-middleware-actions": "^3.0.1",
     "redux-thunk": "^2.3.0",
+    "semantic-ui-react": "^2.0.3",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

@@ -35,6 +35,18 @@ export const authControlAPI = () => {
         credentials: 'true',
         data: ""
     })
-    console.log("REPONSE",response)
+    console.log("AUTHAPI",response)
+    return response
+}
+
+export const disconnectAPI = (user) => {
+    
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/connexion/disconnect`,
+        credentials: 'true',
+        data: user
+    })
+    
     return response
 }

@@ -13,37 +13,29 @@ import Profil from "./containers/Profil";
 import ConnexionPage from "./containers/connexionPage";
 import RegisterPage from "./containers/RegisterPage";
 
-import {authControl} from "./actions/auth.action"
-
 axios.defaults.withCredentials = true;
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 class App extends Component {
-  
-  componentDidMount(){
-    this.props.authControl();
-  }
 
   render() {
-    console.log("TOKEN",this.props.islogged)
-    const { islogged } = this.props;
-
+    console.log(this.props.connexion)
     return (
       <>
-          {islogged ? (
-            <Router history={history}>
+          
+
+              <Router history={history}>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/profil" component={Profil} />
-            </Router>
+              </Router>
+          
 
-          ) : (
               <Router history={history}>
-                <Route exact path="/" component={ConnexionPage} />
+                <Route exact path="/connexionPage"  component={ConnexionPage}/>
                 <Route exact path="/RegisterPage" component={RegisterPage} />
               </Router>
-            )
-          }
+           
       </>
     );
   }
@@ -52,15 +44,10 @@ class App extends Component {
 function mapStateToProps(state) {
 
   return {
-    islogged: state.connectReducer.islogged
+    connexion: state.connectReducer.connexion
+
   };
 }
 
-function mapDispatchToProps(dispatch) {
-    
-  return {
-    authControl: none => dispatch(authControl())
-  };
-}
 
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(mapStateToProps)(App);

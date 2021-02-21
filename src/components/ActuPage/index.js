@@ -7,8 +7,11 @@ import ActuDetails from '../ActuDetails';
 // reactstrap
 import { Container, Button } from 'reactstrap';
 
+
 class ActuPage extends Component {
   render() {
+   
+
     return (
       <>
         <Container className="actu_page_container">
@@ -24,4 +27,6 @@ class ActuPage extends Component {
   }
 }
 
-export default ActuPage;
+
+export default  ActuPage;
+

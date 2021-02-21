@@ -2,7 +2,7 @@ import React, { Component  } from 'react';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/connexion.action';
 import Modal from 'react-bootstrap/Modal'
-
+import { history } from '../../App';
 class Register extends Component {
 
     constructor(props) {
@@ -44,7 +44,12 @@ class Register extends Component {
     goRegister(e) {
 
         e.preventDefault()
-        this.props.registerUser(this.state.user);
+        this.props.registerUser(this.state.user).then(
+            () => {
+                console.log("connexion then")
+                history.push("/");
+                window.location.reload();
+            });
         console.log("USER",this.state.user)
     }
 
@@ -58,14 +63,14 @@ class Register extends Component {
                     <form className="form-horizontal" >
                         <div className="row">
                             <div className="form-group col-sm-6">
-                                <label htmlFor="firstName" className="control-label">First Name</label>
-                                <input type="text" id="firstName" placeholder="First Name"  className="form-control" autoFocus 
+                                <label htmlFor="firstName" className="control-label">Prenom</label>
+                                <input type="text" id="firstName" placeholder="Prenom"  className="form-control" autoFocus 
                                 onChange={e => { this.setState({ user: { ...this.state.user, firstName: e.target.value } }); e.preventDefault(); }} />
                               
                             </div>
                             <div className="form-group col-sm-6">
-                                <label htmlFor="lastName" className=" control-label">Last Name</label>
-                                <input type="text" id="lastName" placeholder="Last Name"  className="form-control"
+                                <label htmlFor="lastName" className=" control-label">Nom</label>
+                                <input type="text" id="lastName" placeholder="Nom"  className="form-control"
                                 onChange={e => { this.setState({ user: { ...this.state.user,lastName: e.target.value} }); e.preventDefault(); }} />
                                 
                             </div> 
@@ -81,13 +86,13 @@ class Register extends Component {
                         
                         <div className="row">
                             <div className="form-group col-sm-6">
-                                <label htmlFor="password" className="control-label">Password*</label>
-                                <input type="password" id="password1" placeholder="Password"  className="form-control" 
+                                <label htmlFor="password" className="control-label">Mot de passse*</label>
+                                <input type="password" id="password1" placeholder="Mot de passse"  className="form-control" 
                                         onChange={e => { this.setState({ user: { ...this.state.user,password1: e.target.value} }); e.preventDefault(); }} />
                             </div>
                             <div className="form-group col-sm-6">
-                                <label htmlFor="password" className="control-label">Confirm Password*</label>
-                                <input type="password" id="password2" placeholder="Confirm password"  className="form-control" 
+                                <label htmlFor="password" className="control-label">Confirmation</label>
+                                <input type="password" id="password2" placeholder="Confirmation"  className="form-control" 
                                         onChange={e => { this.setState({ user: { ...this.state.user,password2: e.target.value} }); e.preventDefault(); }} />
                             
                             </div>
@@ -96,15 +101,15 @@ class Register extends Component {
                         <div className="row">
                             <div className="form-group form-group col-sm-12">
                                 <label htmlFor="pseudo" className="control-label">Pseudo</label>
-                                    <input type="pseudo" id="pseudo" placeholder="pseudo" className="form-control"
+                                    <input type="pseudo" id="pseudo" placeholder="Pseudo" className="form-control"
                                         onChange={e => { this.setState({ user: { ...this.state.user,pseudo: e.target.value} }); e.preventDefault(); }} />
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="form-group col-sm-12">
-                                <label htmlFor="birthDate" className="control-label">Date of Birth</label>
-                            <input type="date" id="birthDate" className="form-control" 
+                                <label htmlFor="birthDate" className="control-label">Date de naissance</label>
+                            <input type="date" id="birthDate" className="form-control" placeholder="Date de naissance"
                                     onChange={e => { this.setState({ user: { ...this.state.user,birthDate: e.target.value} }); e.preventDefault(); }} />
                         
                             </div>
@@ -112,22 +117,22 @@ class Register extends Component {
                         
                         <div className="row">
                             <div className="form-group col-sm-12">
-                                <label htmlFor="adress" className="control-label">Adress</label>
-                            <input type="text" id="adress" placeholder="adress"  className="form-control"
+                                <label htmlFor="adress" className="control-label">Adresse</label>
+                            <input type="text" id="adress" placeholder="Adresse"  className="form-control"
                                     onChange={e => { this.setState({ user: { ...this.state.user,adress: e.target.value} }); e.preventDefault(); }} />
                             </div>
                         </div>
                         
                         <div className="row">
                             <div className="form-group col-sm-6">
-                                <label htmlFor="city" className="control-label">City</label>
-                                <input type="text" id="city" placeholder="city"  className="form-control"
+                                <label htmlFor="city" className="control-label">ville</label>
+                                <input type="text" id="city" placeholder="ville"  className="form-control"
                                         onChange={e => { this.setState({ user: { ...this.state.user,city: e.target.value} }); e.preventDefault(); }} />
                             </div>
                             
                             <div className="form-group col-sm-6">
-                                <label htmlFor="postalCode" className="control-label">Postal code</label>
-                                <input type="text" id="postalCode" placeholder="postalCode"  className="form-control"
+                                <label htmlFor="postalCode" className="control-label">Code postal</label>
+                                <input type="text" id="postalCode" placeholder="Code postal"  className="form-control"
                                         onChange={e => { this.setState({ user: { ...this.state.user,postalCode: e.target.value} }); e.preventDefault(); }} />
                             </div>
                         </div>

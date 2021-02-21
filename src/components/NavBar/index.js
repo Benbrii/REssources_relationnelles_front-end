@@ -1,8 +1,10 @@
 import React from 'react'
 import img from '../../assets/img/CUBE.png'
 import './style.css'
-
+import { disconnectUser } from '../../actions/connexion.action';
+import { connect } from 'react-redux';
 const NavBar = () => (
+
     <div className="headerNavBar">
         <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
             <a className="navbar-brand lienImage" href="/">
@@ -26,7 +28,7 @@ const NavBar = () => (
                         <a className="nav-link" href="/">Discussions</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/connexionPage">Connexion</a>
+                        <a className="nav-link"  href="/connexionPage">Déconnexion</a>
                     </li>
                     
                 </ul>
@@ -40,4 +42,12 @@ const NavBar = () => (
         </nav>
     </div>
 )
-export default NavBar
+
+function mapDispatchToProps(dispatch) {
+        
+    return {
+        disconnectUser: () => dispatch(disconnectUser())
+    };
+}
+
+export default connect(mapDispatchToProps)(NavBar);

@@ -4,7 +4,7 @@ import "./style.css";
 // components
 import Navigation from "../../components/Navigation";
 import Evenement from "../../components/Evénements";
-import NavBar from '../../components/NavBar'
+import NavBar from '../NavBar'
 
 import { connect } from 'react-redux';
 import {authControl} from "../../actions/connexion.action"
@@ -12,26 +12,18 @@ import {authControl} from "../../actions/connexion.action"
 
 class Profil extends Component {
 
-  componentDidMount(){
-    
-    this.props.authControl().then(() =>{
-
-        if (this.props.isLogged === false){
-          console.log("AUTREDIRECT",this.props.isLogged)
-         // window.location.href = "/connexionPage";
-        }
-        
-      }).catch(
-          () => {
-                
-            window.location.href = "/connexionPage";
-           
-          }
-    )
-  }
-
   render() {
-    console.log("isLogged",this.props.isLogged)
+
+    this.props.authControl().then(() =>{
+      if (this.props.isLogged === false){
+       window.location.href = "/";
+      }
+    }).catch(
+        (e) => {
+          window.location.href = "/";
+        }
+    )
+
     return (
       <main className="Main">
         <NavBar />
@@ -48,6 +40,7 @@ function mapStateToProps(state) {
     isLogged: state.connectReducer.isLogged
   };
 }
+
 
 function mapDispatchToProps(dispatch) {
     

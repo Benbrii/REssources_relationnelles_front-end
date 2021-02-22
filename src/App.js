@@ -20,19 +20,14 @@ export const history = createBrowserHistory();
 class App extends Component {
 
   render() {
-    console.log(this.props.connexion)
     return (
       <>
           
 
               <Router history={history}>
-                <Route exact path="/" component={Home} />
+                <Route exact path="/" component={ConnexionPage} />
                 <Route exact path="/profil" component={Profil} />
-              </Router>
-          
-
-              <Router history={history}>
-                <Route exact path="/connexionPage"  component={ConnexionPage}/>
+                <Route exact path="/home"  component={Home}/>
                 <Route exact path="/RegisterPage" component={RegisterPage} />
               </Router>
            
@@ -41,13 +36,5 @@ class App extends Component {
   }
 }
 
-function mapStateToProps(state) {
 
-  return {
-    connexion: state.connectReducer.connexion
-
-  };
-}
-
-
-export default connect(mapStateToProps)(App);
+export default (App);

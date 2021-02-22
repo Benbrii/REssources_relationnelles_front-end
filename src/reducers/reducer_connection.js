@@ -3,9 +3,9 @@
 import * as ConnectConst from "../const/connect.const";
 
 const initState = {
-    connexion:null,
+    connexion:false,
     isLogged:false,
-
+    authlevel:1
 };
 
 const connectReducer = (state = initState, action) => {
@@ -13,18 +13,36 @@ const connectReducer = (state = initState, action) => {
     switch (action.type) {
         case ConnectConst.USER_CONNECT_FULFILLED:
            
-                return {
-                    ...state,
-                    connexion:action.payload.data.connexion
-                }
+            return {
+                ...state,
+                connexion:action.payload.data.connexion,
+                authlevel:action.payload.data.authlevel,
+            }
 
         case ConnectConst.USER_AUTH_FULFILLED:
               
+            if(action.payload.data.islogged === false){
                 return {
                     ...state,
-                    isLogged:action.payload.data.islogged
+                    isLogged:false,
+                    connected:false
                 }
-                       
+            }else{
+                return {
+                    ...state,
+                    isLogged:true,
+                    connected:true
+                }
+            }
+        
+
+        case ConnectConst.USER_DISCONNECT_FULFILLED:
+              
+                return {
+                    isLogged:false,
+                    connexion:false,
+                }            
+               
     }
     return state
 };

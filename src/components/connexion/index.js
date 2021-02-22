@@ -8,7 +8,6 @@ import Modal from 'react-bootstrap/Modal'
 import Register from '../Register'
 import CubePng from '../../images/CUBE.png'
 
-import { history } from '../../App';
 class Connexion extends Component {
 
     constructor(props) {
@@ -32,7 +31,9 @@ class Connexion extends Component {
         const { user } = this.state;
         this.props.connectUser(user).then(
             () => {
-               window.location.href = "/";
+                if(this.props.connexion === true){
+                    window.location.href = "/home";
+                }
             }
         )
     }
@@ -91,7 +92,8 @@ class Connexion extends Component {
 function mapStateToProps(state) {
     
     return {
-        connexion: state.connectReducer.connexion
+        connexion: state.connectReducer.connexion,
+        isLogged:state.connectReducer.isLogged
     };
 }
 

@@ -1,25 +1,19 @@
 /* eslint-disable default-case */
 /* eslint-disable import/no-anonymous-default-export */
 import * as RegisterConst from "../const/register.const";
-import * as sendUserAPI from "../api/users.api"
 
 const initState = {
-    user:null
+    validation:true
 };
 
 const registerReducer = (state = initState, action) => {
     
     switch (action.type) {
-
-        case RegisterConst.USER_REGISTER:
-            
-            sendUserAPI.sendUser(action.payload)
-            
+        case RegisterConst.USER_REGISTER_FULFILLED:
             return {
-                user:action.payload
+                validation:action.payload.data.validation
             }
         }
-
     return state
 };
 

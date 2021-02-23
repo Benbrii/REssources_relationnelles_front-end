@@ -1,5 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+
 import { HomeOutlined, SyncOutlined, TeamOutlined } from '@ant-design/icons';
 import './styles.css';
 

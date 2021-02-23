@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-
+// import { connect } from 'react-redux';
 // history
 import { createBrowserHistory } from "history";
 
@@ -10,12 +10,13 @@ import { Router, Route } from "react-router-dom";
 // containers
 import Home from "./containers/Home";
 import Profil from "./containers/Profil";
+import ConnexionPage from "./containers/connexionPage";
 import RegisterPage from "./containers/RegisterPage";
 import RessourceList from "./containers/RessourceList";
 
 axios.defaults.withCredentials = true;
 
-const history = createBrowserHistory();
+export const history = createBrowserHistory();
 
 class App extends Component {
 
@@ -23,14 +24,17 @@ class App extends Component {
     return (
       <>
         <Router history={history}>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={ConnexionPage} />
           <Route exact path="/ressource/:id" component={RessourceList} />
           <Route exact path="/profil" component={Profil} />
-          <Route exact path="/registerpage" component={RegisterPage} />
+          <Route exact path="/home" component={Home} />
+          <Route exact path="/RegisterPage" component={RegisterPage} />
         </Router>
+
       </>
     );
   }
 }
 
-export default App;
+
+export default (App);

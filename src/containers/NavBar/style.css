@@ -1,6 +1,7 @@
-/*navBAR*/
+navBAR
 .headerNavBar {
-	margin-bottom: 4.5em;
+	margin-bottom: 100px;
+	
 }
 
 .headerNavBar nav {
@@ -45,4 +46,3 @@ nav a:hover{
 	transition:0.15s;
 	font-weight: bold;
 }
-

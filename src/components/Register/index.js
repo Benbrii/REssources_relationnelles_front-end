@@ -1,104 +1,163 @@
-import React, { Component } from 'react';
+import React, { Component  } from 'react';
 import { connect } from 'react-redux';
-import { registerUser } from '../../actions/index';
-import "./style.css";
-
+import { registerUser } from '../../actions/connexion.action';
+import Modal from 'react-bootstrap/Modal'
+import { history } from '../../App';
 class Register extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             user: {
-                firstName: null,
-                lastName: null,
                 email: null,
-                motDePasse: null,
-                birthDate: null,
-                phoneNumber: null
+                firstName : null,
+                lastName : null,
+                password1 : null,
+                password2 : null,
+                pseudo: null,
+                birthDate : null,
+                adress : null,
+                city : null,
+                postalCode: null
+            },
+            modal:{
+                setShow:false
             }
         };
-
+    
         this.goRegister = this.goRegister.bind(this);
+    }
+  
+     componentDidMount() {
+        localStorage.setItem('user', JSON.stringify(this.state.user));
 
+      }
+
+    ErrorMessage(){
+
+        const{validation} = this.props
+        if(validation === false){
+            return <div className="alert alert-danger" >le formulaire est mal remplie.</div> 
+        }
     }
 
     goRegister(e) {
 
         e.preventDefault()
-
-        const { user } = this.state;
-        this.props.registerUser(user);
+        this.props.registerUser(this.state.user).then(
+            () => {
+                console.log("connexion then")
+                history.push("/");
+                window.location.reload();
+            });
+        console.log("USER",this.state.user)
     }
 
-    render() {
+   render(){
         return (
             <div className="container">
-                <form className="form-horizontal">
-                    <h2>Registration</h2>
-                    <div className="form-group">
-                        <label htmlFor="firstName" className="col-sm-3 control-label">First Name</label>
-                        <div className="col-sm-9">
-                            <input type="text" id="firstName" placeholder="First Name" className="form-control" autoFocus
+                <Modal.Header closeButton>
+                    <Modal.Title>Registration</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <form className="form-horizontal" >
+                        <div className="row">
+                            <div className="form-group col-sm-6">
+                                <label htmlFor="firstName" className="control-label">Prenom</label>
+                                <input type="text" id="firstName" placeholder="Prenom"  className="form-control" autoFocus 
                                 onChange={e => { this.setState({ user: { ...this.state.user, firstName: e.target.value } }); e.preventDefault(); }} />
+                              
+                            </div>
+                            <div className="form-group col-sm-6">
+                                <label htmlFor="lastName" className=" control-label">Nom</label>
+                                <input type="text" id="lastName" placeholder="Nom"  className="form-control"
+                                onChange={e => { this.setState({ user: { ...this.state.user,lastName: e.target.value} }); e.preventDefault(); }} />
+                                
+                            </div> 
                         </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="lastName" className="col-sm-3 control-label">Last Name</label>
-                        <div className="col-sm-9">
-                            <input type="text" id="lastName" placeholder="Last Name" className="form-control" autoFocus
-                                onChange={e => { this.setState({ user: { ...this.state.user, lastName: e.target.value } }); e.preventDefault(); }} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="email" className="col-sm-3 control-label">Email* </label>
-                        <div className="col-sm-9">
-                            <input type="email" id="email" placeholder="Email" className="form-control" name="email"
-                                onChange={e => { this.setState({ user: { ...this.state.user, email: e.target.value } }); e.preventDefault(); }} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password" className="col-sm-3 control-label">Password*</label>
-                        <div className="col-sm-9">
-                            <input type="password" id="password" placeholder="Password" className="form-control"
-                                onChange={e => { this.setState({ user: { ...this.state.user, motDePasse: e.target.value } }); e.preventDefault(); }} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="password" className="col-sm-3 control-label">Confirm Password*</label>
-                        <div className="col-sm-9">
-                            <input type="password" id="ConfirmPassword" placeholder="Password" className="form-control" />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="birthDate" className="col-sm-3 control-label">Date of Birth*</label>
-                        <div className="col-sm-9">
-                            <input type="date" id="birthDate" className="form-control"
-                                onChange={e => { this.setState({ user: { ...this.state.user, birthDate: e.target.value } }); e.preventDefault(); }} />
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <label htmlFor="phoneNumber" className="col-sm-3 control-label">Phone number </label>
-                        <div className="col-sm-9">
-                            <input type="phoneNumber" id="phoneNumber" placeholder="Phone number" className="form-control"
-                                onChange={e => { this.setState({ user: { ...this.state.user, phoneNumber: e.target.value } }); e.preventDefault(); }} />
-                            <span className="help-block">Your phone number won't be disclosed anywhere </span>
-                        </div>
-                    </div>
 
-                    <div className="form-group">
-                        <div className="col-sm-9 col-sm-offset-3">
-                            <span className="help-block">*Required fields</span>
+                        <div className="row">
+                            <div className="form-group col-sm-12">
+                                <label htmlFor="email" className="control-label">Email* </label>
+                            <input type="email" id="email" placeholder="Email"  className="form-control" name="email"
+                                    onChange={e => { this.setState({ user: { ...this.state.user,email: e.target.value} }); e.preventDefault(); }} />
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" className="btn btn-primary btn-block" onClick={this.goRegister} >Register</button>
-                </form>
+                        
+                        <div className="row">
+                            <div className="form-group col-sm-6">
+                                <label htmlFor="password" className="control-label">Mot de passse*</label>
+                                <input type="password" id="password1" placeholder="Mot de passse"  className="form-control" 
+                                        onChange={e => { this.setState({ user: { ...this.state.user,password1: e.target.value} }); e.preventDefault(); }} />
+                            </div>
+                            <div className="form-group col-sm-6">
+                                <label htmlFor="password" className="control-label">Confirmation</label>
+                                <input type="password" id="password2" placeholder="Confirmation"  className="form-control" 
+                                        onChange={e => { this.setState({ user: { ...this.state.user,password2: e.target.value} }); e.preventDefault(); }} />
+                            
+                            </div>
+                        </div>
+                        
+                        <div className="row">
+                            <div className="form-group form-group col-sm-12">
+                                <label htmlFor="pseudo" className="control-label">Pseudo</label>
+                                    <input type="pseudo" id="pseudo" placeholder="Pseudo" className="form-control"
+                                        onChange={e => { this.setState({ user: { ...this.state.user,pseudo: e.target.value} }); e.preventDefault(); }} />
+                            </div>
+                        </div>
+
+                        <div className="row">
+                            <div className="form-group col-sm-12">
+                                <label htmlFor="birthDate" className="control-label">Date de naissance</label>
+                            <input type="date" id="birthDate" className="form-control" placeholder="Date de naissance"
+                                    onChange={e => { this.setState({ user: { ...this.state.user,birthDate: e.target.value} }); e.preventDefault(); }} />
+                        
+                            </div>
+                        </div>
+                        
+                        <div className="row">
+                            <div className="form-group col-sm-12">
+                                <label htmlFor="adress" className="control-label">Adresse</label>
+                            <input type="text" id="adress" placeholder="Adresse"  className="form-control"
+                                    onChange={e => { this.setState({ user: { ...this.state.user,adress: e.target.value} }); e.preventDefault(); }} />
+                            </div>
+                        </div>
+                        
+                        <div className="row">
+                            <div className="form-group col-sm-6">
+                                <label htmlFor="city" className="control-label">ville</label>
+                                <input type="text" id="city" placeholder="ville"  className="form-control"
+                                        onChange={e => { this.setState({ user: { ...this.state.user,city: e.target.value} }); e.preventDefault(); }} />
+                            </div>
+                            
+                            <div className="form-group col-sm-6">
+                                <label htmlFor="postalCode" className="control-label">Code postal</label>
+                                <input type="text" id="postalCode" placeholder="Code postal"  className="form-control"
+                                        onChange={e => { this.setState({ user: { ...this.state.user,postalCode: e.target.value} }); e.preventDefault(); }} />
+                            </div>
+                        </div>
+                       
+                        <div className="row">
+                            <div className="form-group col-sm-12">
+                                {this.ErrorMessage()}
+                            </div>
+                        </div>
+                    </form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <button type="submit" className="btn btn-success btn-block col-sm-6 col-sm-offset-3" onClick={this.goRegister} >Sign up</button>
+                </Modal.Footer>
             </div>
+                
         );
-    }
-}
-
+    }   
+} 
 function mapStateToProps(state) {
-    return {};
+    return {
+        
+        validation: state.registerReducer.validation
+        
+    };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -106,6 +165,5 @@ function mapDispatchToProps(dispatch) {
         registerUser: user => dispatch(registerUser(user))
     };
 }
-
-
+    
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

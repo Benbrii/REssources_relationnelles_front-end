@@ -8,6 +8,7 @@ import AddPosteModal from "../../components/Forms/AddPosteModal";
 // reactstrap
 import { Container, Button, Modal } from 'reactstrap';
 
+
 class ActuPage extends Component {
   constructor(props) {
     super(props);
@@ -58,4 +59,6 @@ class ActuPage extends Component {
   }
 }
 
+
 export default ActuPage;
+

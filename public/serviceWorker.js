@@ -5,6 +5,8 @@ var appShellFiles = [
   '/serviceWorker.js',
   '/manifest.json',
   '/ressource/:id',
+  '/connexion/authControl',
+  '/register'
 ];
 
 self.addEventListener('install', (e) => {

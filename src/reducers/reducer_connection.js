@@ -3,7 +3,7 @@
 import * as ConnectConst from "../const/connect.const";
 
 const initState = {
-    connexion:false,
+    connexion:null,
     isLogged:false,
     authlevel:1
 };
@@ -39,6 +39,7 @@ const connectReducer = (state = initState, action) => {
         case ConnectConst.USER_DISCONNECT_FULFILLED:
               
                 return {
+
                     isLogged:false,
                     connexion:false,
                 }            

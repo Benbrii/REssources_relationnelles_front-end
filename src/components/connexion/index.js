@@ -48,6 +48,14 @@ class Connexion extends Component {
         console.log(this.state.modal.setShow)
     }
 
+    ErrorMessage(){
+
+        const{connexion} = this.props
+        if(connexion === false){
+            return <div className="alert alert-danger col-sm-9 col-sm-offset-3" >utilisateur ou mots de passe incorrect.</div> 
+        }
+    }
+
     render() {
         console.log("CONNECTED:", this.props.connexion)
 
@@ -78,6 +86,7 @@ class Connexion extends Component {
                         </div>
                         <button type="submit" className="btn btn-primary btn-block col-sm-9 col-sm-offset-3" onClick={this.goConnect} >Sign in</button>
                         <Button color="success" className="col-sm-9 col-sm-offset-3" onClick={this.handleShow}>Sign up</Button>
+                        {this.ErrorMessage()}
                     </form>
                 </div>
 

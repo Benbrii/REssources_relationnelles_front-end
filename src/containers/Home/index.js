@@ -3,7 +3,7 @@ import "./style.css";
 
 // components
 import ActuPage from "../../components/ActuPage";
-import NavBar from '../NavBar'
+import NavBar from '../../components/NavBar'
 import Footer from '../../components/Footer';
 import { connect } from 'react-redux';
 import { authControl } from "../../actions/connexion.action"
@@ -24,14 +24,14 @@ class Home extends Component {
       }
     }).catch(
       (e) => {
-        window.location.href = "/";
+       window.location.href = "/";
       }
     )
 
     return (
       <>
         <NavBar onClick={this.appearNavBar} />
-        <h2 className="fil_title_center">Fil d'actualité</h2>
+          <h2 className="fil_title_center">Fil d'actualité</h2>
         <ActuPage />
         <Footer />
       </>
@@ -51,7 +51,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 
   return {
-    authControl: none => dispatch(authControl())
+    authControl: () => dispatch(authControl())
   };
 }
 

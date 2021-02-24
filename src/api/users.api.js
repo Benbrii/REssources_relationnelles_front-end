@@ -23,7 +23,7 @@ export const connectAPI = (user) => {
         credentials: 'true',
         data: user
     })
-    
+    console.log("CONNECT RESPONSE:", response)
     return response
 }
 
@@ -46,6 +46,19 @@ export const disconnectAPI = (user) => {
         url: `${process.env.REACT_APP_API_URL}/connexion/disconnect`,
         credentials: 'true',
         data: user
+    })
+    
+    return response
+}
+
+
+export const getProfilAPI = () => {
+    
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/user/getProfil`,
+        credentials: 'true',
+        data: ""
     })
     
     return response

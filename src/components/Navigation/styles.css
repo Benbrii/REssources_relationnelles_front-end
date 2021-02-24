@@ -1,90 +1,55 @@
+.wrapper {
+    display: flex;
+    align-items: stretch;
+}
 
-/**/
-.img{
-    width: 75%;
-    height: auto;
-    border-radius: 50%;
-    box-shadow: 0 0 0 4px rgb(99, 164, 233);
+#sidebar {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 100vh;
+    background: #3c9c9c;
+    color: #fff;
+    transition: all 0.3s;
 }
-/**/
-.id{
-    grid-area:1;
-    text-align: center;
-    user-select: none;
-    position: relative;
-}
-/**/
-.idContent{
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 100%;
-}
-/**/
-.sidebar{
-    background: #2a1d52;
-    font-family: 'Nova Round', cursive;
-    width: 100%;
-    height: 100%;
-    min-height: 95vh;
-    width: 264px;
-    border-radius: 25px;
-    position: relative;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 250px 1fr 108px;
-    grid-template-areas: 
-    "1"
-    "2"
-    "3";
-}
-/**/
-h3{
-font-size: 1.3rem;
-text-transform:uppercase;
-letter-spacing: .2rem;
-margin-top: 1.5rem;
-color:#36D0EA;
-}
-/**/
-.navigation{
-    grid-area: 2;
-    padding:2rem 1rem;
-}
-/**/
-ul{
-    height: 100%;
-    display: grid;
-}
-/**/
-li{
-    padding: 1rem 0 1rem .4rem ;
-    font-size: 1.3rem;
-    position: relative;
-}
-/**/
-cyan{
-color:#36D0EA;
-}
-/**/
-i{
-    position: absolute;
-    font-size: 0.95rem;
-    transform: translateY(3px);
-    transition: .2s ease;
-}
-/**/
-span{
-    margin-left: 1rem;
-}
-/**/
-.signature{
-    grid-area: 3;
 
+#sidebar.active {
+    margin-left: -250px;
 }
-/**/
-.homeContent, .EvennementsContent, .GroupeContent {
-    margin-left: .4rem;
+
+
+#sidebar .sidebar-header {
+    padding: 20px;
+    background: #3c9c9c;
 }
-/**/
+
+#sidebar ul.components {
+    padding: 20px 0;
+    border-bottom: 1px solid #47748b;
+}
+
+#sidebar ul p {
+    color: #fff;
+    padding: 10px;
+}
+
+#sidebar ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    color: #fff;
+}
+
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+    text-decoration: none;
+}
+
+
+#sidebar ul ul a {
+    font-size: 0.9em !important;
+    padding-left: 30px !important;
+    background: #3c9c9c;
+    text-decoration: none;
+}
+

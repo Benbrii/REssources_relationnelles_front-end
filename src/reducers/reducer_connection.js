@@ -21,7 +21,7 @@ const connectReducer = (state = initState, action) => {
 
         case ConnectConst.USER_AUTH_FULFILLED:
               
-            if(action.payload.data.islogged === false){
+            if(action.payload.data.islogged == false){
                 return {
                     ...state,
                     isLogged:false,
@@ -39,6 +39,7 @@ const connectReducer = (state = initState, action) => {
         case ConnectConst.USER_DISCONNECT_FULFILLED:
               
                 return {
+
                     isLogged:false,
                     connexion:false,
                 }            

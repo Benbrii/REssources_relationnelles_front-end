@@ -4,7 +4,7 @@ import "./style.css";
 // components
 import Navigation from "../../components/Navigation";
 import Evenement from "../../components/Evénements";
-import NavBar from '../NavBar'
+import NavBar from '../../components/NavBar'
 
 import { connect } from 'react-redux';
 import {authControl} from "../../actions/connexion.action"
@@ -15,12 +15,15 @@ class Profil extends Component {
   render() {
 
     this.props.authControl().then(() =>{
+      
       if (this.props.isLogged === false){
-       window.location.href = "/";
+        console.log("REDIRECT ",this.props.isLogged)
+       //window.location.href = "/";
       }
     }).catch(
         (e) => {
-          window.location.href = "/";
+          console.log("REDIRECT ",this.props.isLogged)
+          //window.location.href = "/";
         }
     )
 

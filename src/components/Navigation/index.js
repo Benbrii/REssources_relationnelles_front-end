@@ -1,47 +1,78 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
-
-import { HomeOutlined, SyncOutlined, TeamOutlined } from '@ant-design/icons';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getProfil } from '../../actions/user.action';
 import './styles.css';
 
 
+class Navigation extends Component {
 
-const Navigation = () => {
-    return (
-        <>
-            <div className="sidebar">
-                <div className="id">
-                    <div className="idContent">
-                        <img src="./media/babar.jpg" alt="profil-pic" />
-                        <h3>Babar Leroi</h3>
-                    </div>
-                </div>
+    constructor(props) {
+        super(props);
+        this.state = {
+            
+        };
+    }
 
-                <div className="navigation">
-                    <ul>
-                        <li >
-                            <NavLink exact to="/profil/" activeClassName="navActive" className='HomeNavLink'>
-                                <cyan><HomeOutlined /><span>Accueil</span></cyan>
-                            </NavLink>
-                        </li>
-                        <li >
-                            <NavLink exact to="/Evenements" activeClassName="navActive">
-                                <cyan><SyncOutlined spin /><span>Evenement</span></cyan>
-                            </NavLink>
-                        </li>
-                        <li >
-                            <NavLink exact to="/Groupe" activeClassName="navActive">
-                                <cyan><TeamOutlined /><span>Groupe</span></cyan>
-                            </NavLink>
-                        </li>
-                    </ul>
-                </div>
-                <div className="signature">
-                    <cyan><p>Les petits pédestres 2020-2021</p></cyan>
-                </div>
-            </div>
-        </>
-    );
-};
+    componentDidMount(){
+        
+        this.props.getProfil().then(
+            () => {
+               
+            }
+        )    
+    }
 
-export default Navigation;
+    render(){
+        return (
+            <>
+                <div className="wrapper">
+                    <nav id="sidebar">
+                        <div className="sidebar-header">
+                            <h3>PHOTO</h3>
+                        </div>
+
+                        <ul className="list-unstyled components">
+                            <p></p>
+                            <li>
+                                <a href="#">item 1</a>
+                            </li>
+                            <li>
+                                <a href="#">item 2</a>
+                            </li>
+                            <li>
+                                <a href="#">item 3</a>
+                            </li>
+                            <li>
+                                <a href="#">item 4</a>
+                            </li>
+                            <li>
+                                <a href="#">item 5</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </>
+        );
+    };
+}
+
+
+function mapStateToProps(state) {
+    
+    return {
+        firstname: state.UserReducer.firstname,
+        lastname:state.UserReducer.lastname
+    };
+}
+
+
+function mapDispatchToProps(dispatch) {
+    
+    return {
+        getProfil: () => dispatch(getProfil())
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Navigation);
+
+

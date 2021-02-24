@@ -3,7 +3,7 @@ import "./style.css";
 
 // components
 import ActuPage from "../../components/ActuPage";
-import NavBar from '../NavBar'
+import NavBar from '../../components/NavBar'
 import Footer from '../../components/Footer';
 import { connect } from 'react-redux';
 import {authControl} from "../../actions/connexion.action"

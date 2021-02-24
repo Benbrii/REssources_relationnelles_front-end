@@ -50,3 +50,16 @@ export const disconnectAPI = (user) => {
     
     return response
 }
+
+
+export const getProfilAPI = () => {
+    
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/user/getProfil`,
+        credentials: 'true',
+        data: ""
+    })
+    
+    return response
+}

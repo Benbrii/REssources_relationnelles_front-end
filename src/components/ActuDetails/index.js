@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import "./style.css";
 
-import img from "../../assets/img/index.png";
-
 // reactstrap
 import {
-  Card, CardText, CardBody,
-  CardTitle, CardSubtitle
+  Card, CardBody, Alert,
+  CardTitle, CardSubtitle, NavLink
 } from 'reactstrap';
 
 // redux
@@ -25,35 +23,46 @@ class ConnectedActuDetails extends Component {
   }
 
   render() {
-    const { ressource } = this.props;
+    const { ressources } = this.props;
+    console.log(ressources);
 
     return (
-      <>
+      <div>
         {
-          ressource.map(ressource => (
-            <div>
-              <Card>
-                <CardBody>
-                  <CardTitle tag="h5" className="card_title_center">{ressource.title}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
-                </CardBody>
-                <img className="actu_details_image" src={img} alt="poste_image" />
-                <CardBody>
-                  <CardText>Description de la ressource</CardText>
-                </CardBody>
-              </Card>
-            </div>
-          ))
+          ressources.length > 0 ?
+            ressources.map(ressource => (
+              ressource.private === "0" ?
+                <div key={ressource.id}>
+                  <Card>
+                    <CardBody>
+                      <CardTitle tag="h5" className="card_title_center">
+                        <NavLink href={`/ressource/${ressource.id}`} className="ressource_link">
+                          <Alert color="primary">
+                            {ressource.titre}
+                          </Alert>
+                        </NavLink>
+                      </CardTitle>
+                      <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
+                    </CardBody>
+                    <img className="actu_details_image" src={ressource.lien} alt="poste_image" />
+                    <CardBody>
+                      <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
+                    </CardBody>
+                  </Card>
+                </div>
+                :
+                null
+            ))
+            : <p>Aucune ressource n'a encore été ajoutée.</p>
         }
-      </>
+      </div>
     );
   }
 }
 
 const mstp = state => {
   return {
-    ressource: state.ressource.ressource
+    ressources: state.ressource.ressources
   }
 }
 

@@ -1,0 +1,9 @@
+.ressource_details_image {
+    max-width: 50%;
+    max-height: 50%;
+    margin: 0;
+}
+
+.ressource_text_wrapper {
+    white-space: pre-line;
+}

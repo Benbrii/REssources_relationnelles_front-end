@@ -23,7 +23,7 @@ export const connectAPI = (user) => {
         credentials: 'true',
         data: user
     })
-    
+    console.log("CONNECT RESPONSE:", response)
     return response
 }
 

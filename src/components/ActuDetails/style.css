@@ -1,5 +1,5 @@
 .actu_details_image {
-    width: 25%;
+    width: 20%;
     height: auto;
     margin: auto;
 }
@@ -10,4 +10,12 @@
 
 .mb-2 {
     text-align: center;
+}
+
+.ressource_link {
+    text-decoration: none;
+}
+
+.ressource_link:hover {
+    text-decoration: none;
 }

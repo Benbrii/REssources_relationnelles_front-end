@@ -10,12 +10,12 @@ class ConnectionPage extends Component {
 
         return (
             <>
-                <Connexion/>
-                <Footer/>
+                <Connexion />
+                <Footer />
             </>
         );
     }
 }
 
- 
+
 export default ConnectionPage;

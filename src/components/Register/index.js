@@ -46,11 +46,10 @@ class Register extends Component {
         e.preventDefault()
         this.props.registerUser(this.state.user).then(
             () => {
-                console.log("connexion then")
-                history.push("/");
-                window.location.reload();
+                if (this.props.validation === true) {
+                    window.location.href = "/";
+                }
             });
-        console.log("USER",this.state.user)
     }
 
    render(){

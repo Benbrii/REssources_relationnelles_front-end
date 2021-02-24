@@ -3,7 +3,7 @@
 import * as ConnectConst from "../const/connect.const";
 
 const initState = {
-    connexion:false,
+    connexion:null,
     isLogged:false,
     authlevel:1
 };
@@ -21,7 +21,7 @@ const connectReducer = (state = initState, action) => {
 
         case ConnectConst.USER_AUTH_FULFILLED:
               
-            if(action.payload.data.islogged == false){
+            if(action.payload.data.islogged === false){
                 return {
                     ...state,
                     isLogged:false,

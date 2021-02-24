@@ -5,6 +5,7 @@ var appShellFiles = [
   '/serviceWorker.js',
   '/manifest.json',
   '/ressource/:id',
+  '/authControl',
   '/connexion',
   '/connexion/authControl',
   '/connexion/disconnect',

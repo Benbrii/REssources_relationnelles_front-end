@@ -20,11 +20,13 @@ class Home extends Component {
     //On verifie la validité du token
     this.props.authControl().then(() => {
       if (this.props.isLogged === false) {
-        window.location.href = "/";
+        //window.location.href = "/";
+        console("ici je suis sencé redirect if")
       }
     }).catch(
       (e) => {
-        window.location.href = "/";
+        //window.location.href = "/";
+        console("ici je suis sencé redirect catch")
       }
     )
 

@@ -21,12 +21,12 @@ class Home extends Component {
     this.props.authControl().then(() => {
       if (this.props.isLogged === false) {
         //window.location.href = "/";
-        console("ici je suis sencé redirect if")
+        console.log("ici je suis sencé redirect if")
       }
     }).catch(
       (e) => {
         //window.location.href = "/";
-        console("ici je suis sencé redirect catch")
+        console.log("ici je suis sencé redirect catch")
       }
     )
 

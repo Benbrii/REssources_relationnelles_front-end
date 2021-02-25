@@ -6,7 +6,8 @@ const initState = {
     connexion: false,
     isLogged: false,
     authlevel: 1,
-    user: []
+    user: [],
+    thetoken: ""
 };
 
 const connectReducer = (state = initState, action) => {
@@ -18,7 +19,8 @@ const connectReducer = (state = initState, action) => {
                 ...state,
                 connexion: action.payload.data.connexion,
                 authlevel: action.payload.data.authlevel,
-                user: action.payload.data.user
+                user: action.payload.data.user,
+                thetoken: action.payload.data.token
             }
 
         case ConnectConst.USER_AUTH_FULFILLED:

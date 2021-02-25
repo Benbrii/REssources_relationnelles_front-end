@@ -49,7 +49,9 @@ class Connexion extends Component {
     }
 
     render() {
-        console.log("CONNECTED:", this.props.connexion)
+        console.log("CONNECTED:", this.props.connexion);
+        console.log("token ?", this.props.token);
+
 
         return (
             <div className="container connexionPage">
@@ -93,7 +95,8 @@ function mapStateToProps(state) {
 
     return {
         connexion: state.connectReducer.connexion,
-        isLogged: state.connectReducer.isLogged
+        isLogged: state.connectReducer.isLogged,
+        token: state.connectReducer.thetoken
     };
 }
 

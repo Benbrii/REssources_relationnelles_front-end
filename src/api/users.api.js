@@ -31,7 +31,7 @@ export const authControlAPI = () => {
 
     const response = axios({
         method: "post",
-        url: `${process.env.REACT_APP_API_URL}/connexion/authControl`,
+        url: `${process.env.REACT_APP_API_URL}/connexion/authcontroll`,
         credentials: 'true',
         data: ""
     })

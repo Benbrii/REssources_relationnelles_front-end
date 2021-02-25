@@ -7,7 +7,7 @@ var appShellFiles = [
   '/ressource/:id',
   '/authControl',
   '/connexion',
-  '/connexion/authControl',
+  '/connexion/authcontroll',
   '/connexion/disconnect',
   '/register'
 ];

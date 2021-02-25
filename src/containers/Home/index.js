@@ -14,10 +14,12 @@ class Home extends Component {
     this.props.authControl().then(() => {
       if (this.props.isLogged === false) {
         window.location.href = "/";
+        console.log("here authControl if")
       }
     }).catch(
       (e) => {
         window.location.href = "/";
+        console.log("here authControl catch")
       }
     )
   }

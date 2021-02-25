@@ -4,7 +4,7 @@ import img from '../../assets/img/CUBE.png'
 const NavBar = ({ onClick }) => (
     <div className="headerNavBar">
         <nav className="navbar fixed-top navbar-expand-md navbar-dark bg-dark">
-            <a className="navbar-brand lienImage" href="/">
+            <a className="navbar-brand lienImage" href="/home">
                 <img src={img} alt="REsource RElationnelle" />
             </a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" onClick={() => onClick()} aria-label="Toggle navigation">
@@ -19,21 +19,15 @@ const NavBar = ({ onClick }) => (
                         <a className="nav-link" href="/profil">Profil</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/">Notifications</a>
+                        <a className="nav-link" href="/home">Notifications</a>
                     </li>
                     <li className="nav-item">
-                        <a className="nav-link" href="/">Discussions</a>
+                        <a className="nav-link" href="/home">Discussions</a>
                     </li>
                     <li className="nav-item">
                         <a className="nav-link" href="/registerpage">Connexion</a>
                     </li>
                 </ul>
-                <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-
-                    <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Recherche" />
-                    </form>
-                </div>
             </div>
         </nav>
     </div>

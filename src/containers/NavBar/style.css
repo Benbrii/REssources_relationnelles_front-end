@@ -35,13 +35,27 @@
 }
 
 .nav-item {
-	margin: 1%;
+	text-align: center;
 }
 
 nav a:hover{
 	color: rgb(116, 175, 149)!important;
 	text-decoration: underline!important;
-	transform : all; 
-	transition:0.15s;
-	font-weight: bold;
+}
+
+.navbar {
+	background-color: #343A40 !important;
+}
+
+.text_top_nav {
+	color: #ffffff !important;
+}
+
+.nav-link {
+	text-align: center;
+	color: #ffffff;
+}
+
+.navbar-toggle {
+	color: #ffffff !important;
 }

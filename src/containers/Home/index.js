@@ -10,25 +10,24 @@ import { authControl } from "../../actions/connexion.action"
 
 class Home extends Component {
 
+  componentDidMount() {
+    this.props.authControl().then(() => {
+      if (this.props.isLogged === false) {
+        window.location.href = "/";
+      }
+    }).catch(
+      (e) => {
+        window.location.href = "/";
+      }
+    )
+  }
+
   appearNavBar() {
     const navs = document.querySelectorAll('.navbar-collapse')
     navs.forEach(nav => nav.classList.toggle('collapse'));
   }
 
   render() {
-
-    //On verifie la validité du token
-    this.props.authControl().then(() => {
-      if (this.props.isLogged === false) {
-        //window.location.href = "/";
-        console.log("ici je suis sencé redirect if")
-      }
-    }).catch(
-      (e) => {
-        //window.location.href = "/";
-        console.log("ici je suis sencé redirect catch")
-      }
-    )
 
     return (
       <>

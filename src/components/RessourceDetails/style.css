@@ -7,3 +7,23 @@
 .ressource_text_wrapper {
     white-space: pre-line;
 }
+
+.ressource_details_wrapper {
+    text-align: center;
+}
+
+.ressource_numéro {
+    font-size: small;
+}
+
+.ressource_title_row {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.ressource_favoris_row {
+    display: flex;
+    justify-content: space-around;
+    width: 20%;
+}

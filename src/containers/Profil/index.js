@@ -11,17 +11,19 @@ import { authControl } from "../../actions/connexion.action"
 
 class Profil extends Component {
 
-  render() {
-
+  componentDidMount() {
     this.props.authControl().then(() => {
       if (this.props.isLogged === false) {
-        //window.location.href = "/";
+        window.location.href = "/";
       }
     }).catch(
       (e) => {
-        //window.location.href = "/";
+        window.location.href = "/";
       }
     )
+  }
+
+  render() {
 
     return (
       <div>

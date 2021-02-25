@@ -10,7 +10,12 @@ import { authControl } from "../../actions/connexion.action"
 
 class Home extends Component {
 
-  componentDidMount() {
+  appearNavBar() {
+    const navs = document.querySelectorAll('.navbar-collapse')
+    navs.forEach(nav => nav.classList.toggle('collapse'));
+  }
+
+  render() {
     this.props.authControl().then(() => {
       if (this.props.isLogged === false) {
         window.location.href = "/";
@@ -22,14 +27,6 @@ class Home extends Component {
         console.log("here authControl catch")
       }
     )
-  }
-
-  appearNavBar() {
-    const navs = document.querySelectorAll('.navbar-collapse')
-    navs.forEach(nav => nav.classList.toggle('collapse'));
-  }
-
-  render() {
 
     return (
       <>

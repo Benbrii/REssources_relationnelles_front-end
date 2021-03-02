@@ -17,3 +17,10 @@ export function getRessourceById(id) {
         payload: ressourceAPI.fetchRessourceById(id)
     }
 }
+
+export function getCommentsByRessourceId(id) {
+    return {
+        type: ressourceConst.GET_COMMENT_BY_RESSOURCE_ID,
+        payload: ressourceAPI.fetchCommentByRessourceId(id)
+    }
+}

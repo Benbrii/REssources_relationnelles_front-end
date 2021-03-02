@@ -3,25 +3,48 @@ import { connect } from "react-redux";
 import "./style.css";
 
 // redux
-import { getRessourceById } from "../../actions/ressource.action";
+import { getRessourceById, getCommentsByRessourceId } from "../../actions/ressource.action";
+
+//components
+import AddCommentModal from "../../components/Forms/AddCommentModal";
 
 // reactstrap
-import { Jumbotron, Container } from 'reactstrap';
+import { Jumbotron, Container, Button, ListGroup, ListGroupItem, Card, Row, Modal } from 'reactstrap';
 import { IoIosStarOutline } from 'react-icons/io';
 
 class ConnectedRessourceDetails extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      ajoutationCommentModalOpened: false,
+    }
+  }
 
   componentDidMount() {
     let full_url = document.URL;
     let url_array = full_url.split('/')
     let id = url_array[url_array.length - 1];
     this.props.getRessourceById(id);
-    console.log(id);
+    this.props.getCommentsByRessourceId(id);
   }
 
+  // MODAL AJOUTATION
+
+  openAjoutationCommentModal = () => {
+    this.setState({
+      ajoutationCommentModalOpened: true
+    });
+  };
+
+  closeAjoutationCommentModal = () => {
+    this.setState({
+      ajoutationCommentModalOpened: false
+    });
+  };
+
   render() {
-    const { ressource } = this.props;
-    console.log(ressource);
+    const { ressource, comments } = this.props;
+    const { ajoutationCommentModalOpened } = this.state;
     return (
       <>
         <h2 className="fil_title_center">Ressource</h2>
@@ -49,6 +72,32 @@ class ConnectedRessourceDetails extends Component {
                       <hr className="my-2" />
                       <p className="ressource_text_wrapper">{ressource.description}</p>
                     </Container>
+                    <div>
+                      <Button color="info" onClick={() => this.openAjoutationCommentModal()}>Ajouter un commentaire</Button>{' '}
+                    </div>
+                    <br />
+                    <h4>Commentaires</h4>
+                    <ListGroup>
+                      {
+                        comments.length > 0 ?
+                          comments.map(comment => (
+                            <div>
+                              <Container>
+                                <Row className="comments_row_displayer">
+                                  <Card>
+                                    <h5>{comment.pseudo_compte}</h5>
+                                    <ListGroupItem>{' '}{comment.message}</ListGroupItem>
+                                  </Card>
+                                </Row>
+                              </Container>
+                            </div>
+                          ))
+                          :
+                          <div>
+                            Aucun commentaire n'a encore été publié sur cette ressource
+                        </div>
+                      }
+                    </ListGroup>
                   </Jumbotron>
                 </div>
                 :
@@ -57,6 +106,12 @@ class ConnectedRessourceDetails extends Component {
             :
             null
         }
+        {/* MODAL */}
+        {ajoutationCommentModalOpened &&
+          <Modal isOpen={ajoutationCommentModalOpened} toggle={this.closeAjoutationCommentModal}>
+            <AddCommentModal />
+          </Modal>
+        }
       </>
     );
   }
@@ -64,12 +119,14 @@ class ConnectedRessourceDetails extends Component {
 
 const mstp = state => {
   return {
-    ressource: state.ressource.ressource
+    ressource: state.ressource.ressource,
+    comments: state.ressource.comments,
   };
 };
 
 const mdtp = dispatch => ({
-  getRessourceById: id => dispatch(getRessourceById(id))
+  getRessourceById: id => dispatch(getRessourceById(id)),
+  getCommentsByRessourceId: id => dispatch(getCommentsByRessourceId(id))
 })
 
 const RessourceDetails = connect(

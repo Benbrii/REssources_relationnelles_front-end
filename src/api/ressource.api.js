@@ -13,3 +13,6 @@ export const fetchAddPosteToCloud = (formData) =>
 
 export const fetchRessourceById = id =>
     axios.get(`${process.env.REACT_APP_API_URL}/ressources/${id}`);
+
+export const fetchCommentByRessourceId = id =>
+    axios.get(`${process.env.REACT_APP_API_URL}/ressources/comments/${id}`);

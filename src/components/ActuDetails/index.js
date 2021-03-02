@@ -12,49 +12,51 @@ import { connect } from "react-redux";
 import { getRessource } from "../../actions/ressource.action";
 
 class ConnectedActuDetails extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-    }
-  }
 
   componentDidMount() {
     this.props.getRessource();
   }
 
   render() {
-    const { ressources } = this.props;
-    console.log(ressources);
+    const { ressources, whichTheme, whichType } = this.props;
+
+    const listRessources = ressources.length > 0 && ressources !== undefined && ressources !== null ?
+      // eslint-disable-next-line
+      ressources.filter((data) => {
+        if (whichTheme == null && whichType == null)
+          return data
+        else if (
+          data.theme.toLowerCase().includes(whichTheme.toLowerCase())
+          && data.type_ressource.toLowerCase().includes(whichType.toLowerCase())
+        ) {
+          return data
+        }
+      }).map(data => {
+        return (
+          <div key={data.id}>
+            <Card>
+              <CardBody>
+                <CardTitle tag="h5" className="card_title_center">
+                  <NavLink href={`/ressource/${data.id}`} className="ressource_link">
+                    <Alert color="primary">
+                      {data.titre}
+                    </Alert>
+                  </NavLink>
+                </CardTitle>
+                <CardSubtitle tag="h6" className="mb-2 text-muted">{data.theme}</CardSubtitle>
+              </CardBody>
+              <img className="actu_details_image" src={data.lien} alt="poste_image" />
+              <CardBody>
+                <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {data.date_envoie}</CardSubtitle>
+              </CardBody>
+            </Card>
+          </div>
+        )
+      }) : null
 
     return (
       <div>
-        {
-          ressources.length > 0 ?
-            ressources.map(ressource => (
-              ressource.private === "0" ?
-                <div key={ressource.id}>
-                  <Card>
-                    <CardBody>
-                      <CardTitle tag="h5" className="card_title_center">
-                        <NavLink href={`/ressource/${ressource.id}`} className="ressource_link">
-                          <Alert color="primary">
-                            {ressource.titre}
-                          </Alert>
-                        </NavLink>
-                      </CardTitle>
-                      <CardSubtitle tag="h6" className="mb-2 text-muted">{ressource.theme}</CardSubtitle>
-                    </CardBody>
-                    <img className="actu_details_image" src={ressource.lien} alt="poste_image" />
-                    <CardBody>
-                      <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {ressource.date_envoie}</CardSubtitle>
-                    </CardBody>
-                  </Card>
-                </div>
-                :
-                null
-            ))
-            : <p>Aucune ressource n'a encore été ajoutée.</p>
-        }
+        {listRessources}
       </div>
     );
   }

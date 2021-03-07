@@ -118,7 +118,6 @@ class ConnectedAddPosteModal extends Component {
               this.setState({ type: e.target.value });
               e.preventDefault();
             }}>
-              <option>Vidéo</option>
               <option>Article</option>
               <option>Photo</option>
               <option>Publication</option>

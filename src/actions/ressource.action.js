@@ -24,3 +24,23 @@ export function getCommentsByRessourceId(id) {
         payload: ressourceAPI.fetchCommentByRessourceId(id)
     }
 }
+
+export const addCommentToRessource = (commentaire, idUser, pseudoUser, idRessource) => ({
+    type: ressourceConst.ADD_COMMENT_TO_RESSOURCE,
+    payload: ressourceAPI.fetchAddCommentToRessource(commentaire, idUser, pseudoUser, idRessource)
+})
+
+export const addRessourceToFavoris = (id_user, idRessource) => ({
+    type: ressourceConst.ADD_TO_FAVORIS,
+    payload: ressourceAPI.fetchAddToFavoris(id_user, idRessource)
+})
+
+export const removeRessourceToFavoris = (id_user, idRessource) => ({
+    type: ressourceConst.REMOVE_FROM_FAVORIS,
+    payload: ressourceAPI.fetchRemoveToFavoris(id_user, idRessource)
+});
+
+export const getFavorisByUserId = (uId) => ({
+    type: ressourceConst.GET_ALL_FAVORIS_BY_USER_ID,
+    payload: ressourceAPI.fetchAllFavoris(uId)
+})

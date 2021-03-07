@@ -9,7 +9,7 @@ var appShellFiles = [
   '/connexion',
   '/connexion/authcontroll',
   '/connexion/disconnect',
-  '/register'
+  '/register',
 ];
 
 self.addEventListener('install', (e) => {

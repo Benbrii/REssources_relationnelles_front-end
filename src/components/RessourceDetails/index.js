@@ -3,20 +3,27 @@ import { connect } from "react-redux";
 import "./style.css";
 
 // redux
-import { getRessourceById, getCommentsByRessourceId } from "../../actions/ressource.action";
+import {
+  getRessourceById,
+  getCommentsByRessourceId,
+  addRessourceToFavoris,
+  removeRessourceToFavoris
+} from "../../actions/ressource.action";
 
 //components
 import AddCommentModal from "../../components/Forms/AddCommentModal";
 
 // reactstrap
 import { Jumbotron, Container, Button, ListGroup, ListGroupItem, Card, Row, Modal } from 'reactstrap';
-import { IoIosStarOutline } from 'react-icons/io';
+import { IoIosStarOutline, IoIosStar } from 'react-icons/io';
 
 class ConnectedRessourceDetails extends Component {
   constructor(props) {
     super(props);
     this.state = {
       ajoutationCommentModalOpened: false,
+      idRessource: null,
+      favStar: false
     }
   }
 
@@ -42,9 +49,29 @@ class ConnectedRessourceDetails extends Component {
     });
   };
 
+  async addToFavoris() {
+    const { ressource, id_user } = this.props;
+
+    let idRessource = ressource[0].id;
+
+    const { favStar } = this.state;
+
+    if (favStar === false) {
+      await this.props.addRessourceToFavoris(id_user, idRessource);
+      this.setState({
+        favStar: true
+      });
+    } else {
+      await this.props.removeRessourceToFavoris(id_user, idRessource);
+      this.setState({
+        favStar: false
+      });
+    }
+  }
+
   render() {
     const { ressource, comments } = this.props;
-    const { ajoutationCommentModalOpened } = this.state;
+    const { ajoutationCommentModalOpened, favStar } = this.state;
     return (
       <>
         <h2 className="fil_title_center">Ressource</h2>
@@ -59,9 +86,15 @@ class ConnectedRessourceDetails extends Component {
                       <div className="ressource_title_row">
                         <p className="ressource_numéro">Ressource numéro : {ressource.id}</p>
                         <div className="ressource_favoris_row">
-                          <p>Ajouter à ses favoris</p>
-                          <div>
-                            <IoIosStarOutline />
+                          <div
+                            onClick={() => this.addToFavoris()}
+                          >
+                            {
+                              favStar === false ?
+                                <IoIosStarOutline />
+                                :
+                                <IoIosStar />
+                            }
                           </div>
                         </div>
                       </div>
@@ -81,7 +114,7 @@ class ConnectedRessourceDetails extends Component {
                       {
                         comments.length > 0 ?
                           comments.map(comment => (
-                            <div>
+                            <div key={comment.id}>
                               <Container>
                                 <Row className="comments_row_displayer">
                                   <Card>
@@ -121,12 +154,20 @@ const mstp = state => {
   return {
     ressource: state.ressource.ressource,
     comments: state.ressource.comments,
+    id_user: state.connectReducer.user.id
   };
 };
 
 const mdtp = dispatch => ({
   getRessourceById: id => dispatch(getRessourceById(id)),
-  getCommentsByRessourceId: id => dispatch(getCommentsByRessourceId(id))
+
+  getCommentsByRessourceId: id => dispatch(getCommentsByRessourceId(id)),
+
+  addRessourceToFavoris: (id_user, idRessource) =>
+    dispatch(addRessourceToFavoris(id_user, idRessource)),
+
+  removeRessourceToFavoris: (id_user, idRessource) =>
+    dispatch(removeRessourceToFavoris(id_user, idRessource))
 })
 
 const RessourceDetails = connect(

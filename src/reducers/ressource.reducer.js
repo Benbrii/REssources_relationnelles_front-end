@@ -4,7 +4,7 @@ const initState = {
     ressources: [],
     ressource: [],
     isLoading: false,
-    comments: [],
+    comments: []
 };
 
 const ressource = (state = initState, action) => {

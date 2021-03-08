@@ -42,14 +42,15 @@ class Register extends Component {
     }
 
     goRegister(e) {
+        console.log("goRegister: ")
 
         e.preventDefault()
         this.props.registerUser(this.state.user).then(
             () => {
-                if (this.props.validation === true) {
-                    window.location.href = "/";
-                }
-            });
+                console.log("connexion then")
+                history.push("/");
+                window.location.reload();
+            }).catch((e)=>{console.log("ERROR REGISTER: ",e)});
     }
 
    render(){

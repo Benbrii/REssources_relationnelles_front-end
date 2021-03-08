@@ -11,8 +11,8 @@ import { Router, Route } from "react-router-dom";
 import Home from "./containers/Home";
 import Profil from "./containers/Profil";
 import ConnexionPage from "./containers/connexionPage";
-import RegisterPage from "./containers/RegisterPage";
 import RessourceList from "./containers/RessourceList";
+import AdminPage from "./containers/AdminPage"
 
 axios.defaults.withCredentials = true;
 
@@ -24,16 +24,17 @@ class App extends Component {
     return (
       <>
         <Router history={history}>
-          <Route exact path="/" component={ConnexionPage} />
+          <Route exact path="/connexion" component={ConnexionPage} />
+          <Route exact path="/" component={Home} />
           <Route exact path="/ressource/:id" component={RessourceList} />
           <Route exact path="/profil" component={Profil} />
-          <Route exact path="/home" component={Home} />
-          <Route exact path="/RegisterPage" component={RegisterPage} />
+          <Route exact path="/adminPage" component={AdminPage} />
         </Router>
 
       </>
     );
   }
 }
+
 
 export default (App);

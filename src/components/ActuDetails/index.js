@@ -24,7 +24,6 @@ class ConnectedActuDetails extends Component {
 
   render() {
     const { ressources } = this.props;
-    console.log(ressources);
 
     return (
       <div>

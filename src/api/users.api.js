@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 export const sendUser = (user) => {
-    
+
     const response = axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/register`,
@@ -16,50 +16,36 @@ export const sendUser = (user) => {
 
 
 export const connectAPI = (user) => {
-    
+
     const response = axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/connexion`,
         credentials: 'true',
         data: user
     })
-    console.log("CONNECT RESPONSE:", response)
     return response
 }
 
 export const authControlAPI = () => {
-    
+
     const response = axios({
         method: "post",
-        url: `${process.env.REACT_APP_API_URL}/connexion/authControl`,
+        url: `${process.env.REACT_APP_API_URL}/connexion/authcontroll`,
         credentials: 'true',
         data: ""
     })
-    console.log("AUTHAPI",response)
+    console.log("AUTHAPI", response)
     return response
 }
 
 export const disconnectAPI = (user) => {
-    
+
     const response = axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/connexion/disconnect`,
         credentials: 'true',
         data: user
     })
-    
-    return response
-}
-
-
-export const getProfilAPI = () => {
-    
-    const response = axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API_URL}/user/getProfil`,
-        credentials: 'true',
-        data: ""
-    })
-    
+    console.log("DISCONNECT")
     return response
 }

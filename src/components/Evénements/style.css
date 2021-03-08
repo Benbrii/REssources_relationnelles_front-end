@@ -93,3 +93,21 @@ body{
     font-weight: 600;
     color: #0062cc;
 }
+
+
+
+/* NEW */
+
+.profil_tabs_link {
+    margin-top: 10%;
+    background-color: #343a40;
+    text-decoration: none;
+}
+
+.profil_tabs_link:hover {
+    color: #3f999e !important;
+}
+
+.profil_tab_content_wrapper {
+    margin-top: 5%;
+}

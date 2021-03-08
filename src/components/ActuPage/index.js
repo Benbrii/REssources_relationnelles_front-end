@@ -7,7 +7,8 @@ import AddPosteModal from "../../components/Forms/AddPosteModal";
 
 // reactstrap
 import { Container, Button, Modal } from 'reactstrap';
-
+import { connect } from 'react-redux';
+import { authControl } from '../../actions/connexion.action';
 
 class ActuPage extends Component {
   constructor(props) {
@@ -18,6 +19,18 @@ class ActuPage extends Component {
   }
 
 
+  componentDidMount() {
+    this.props.authControl().then(() => {
+      console.log("authControl isLogged then: ",this.props.isLogged)
+     
+    }).catch(
+      (e) => {
+        console.log("authControl isLogged catch: ",this.props.isLogged)
+       
+      }
+    )
+  }
+  
   // MODAL AJOUTATION
 
   openAjoutationModal = () => {
@@ -44,7 +57,11 @@ class ActuPage extends Component {
             <Button color="info" className="actu_page_add_button" onClick={() => this.openAjoutationModal()}>Ajouter un poste</Button>{' '}
           </div>
           <div className="actu_details_container">
-            <ActuDetails />
+          {this.props.isLogged === true?
+             <ActuDetails />
+          :null
+          }
+           
           </div>
         </Container>
 
@@ -59,6 +76,20 @@ class ActuPage extends Component {
   }
 }
 
+function mapStateToProps(state) {
 
-export default ActuPage;
+  return {
+    isLogged: state.connectReducer.isLogged,
+    authlevel: state.connectReducer.authlevel
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return {
+    authControl: none => dispatch(authControl())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActuPage);
 

@@ -4,6 +4,9 @@ import React, { Component } from 'react';
 import Connexion from '../../components/connexion';
 import Footer from '../../components/Footer'
 
+//import { connect } from 'react-redux';
+//import {authControl} from "../../actions/connexion.action"
+
 class ConnectionPage extends Component {
 
     render() {

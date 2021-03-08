@@ -25,9 +25,9 @@ export const connectUser = (user) => ({
     
 })
 
-export const disconnectUser = (user) => ({
+export const disconnectUser = () => ({
 
     type: ConnectConst.USER_DISCONNECT,
-    payload: disconnectAPI(user)
+    payload: disconnectAPI()
     
 })

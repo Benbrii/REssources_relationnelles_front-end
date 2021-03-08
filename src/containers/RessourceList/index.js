@@ -4,7 +4,7 @@ import "./style.css";
 // components
 
 import RessourceDetails from "../../components/RessourceDetails";
-import NavBar from '../../components/NavBar';
+import NavBar from '../../containers/NavBar';
 // import Footer from '../../components/Footer';
 
 class RessourceList extends Component {

@@ -1,0 +1,34 @@
+
+
+.fieldset button{
+    width: 100px;
+}
+
+
+.adminCatForm{
+    margin:10px;
+}
+
+.fieldset {
+    border: 1px solid rgba(163, 159, 159, 0.918);
+    padding: 10px;
+    margin-top: 20px;
+    background-color: #eeeeee;
+}
+
+legend {
+  font-size: 20px !important;
+  display: block;
+  width: 10% !important;
+  padding: 0;
+  margin-bottom: 27px;
+  font-size: 19.5px;
+  line-height: 36px;
+  color: #333;
+  border: 0;
+  color: #7a7a7a !important;
+}
+
+.line{
+    margin-bottom: 100px;
+}

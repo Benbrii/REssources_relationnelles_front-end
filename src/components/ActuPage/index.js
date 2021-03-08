@@ -48,7 +48,7 @@ class ActuPage extends Component {
             <Col>
               <Form className="actufil_form_wrapper">
                 <FormGroup>
-                  <h5 for="exampleSelect">Filtrer par thème</h5>
+                  <h5 for="exampleSelect" className="filters_text">Filtrer par thème</h5>
                   <Input
                     type="select"
                     name="theme"
@@ -75,7 +75,7 @@ class ActuPage extends Component {
             <Col>
               <Form className="actufil_form_wrapper">
                 <FormGroup>
-                  <h5 for="exampleSelect">Filtrer par type</h5>
+                  <h5 for="exampleSelect" className="filters_text">Filtrer par type</h5>
                   <Input
                     type="select"
                     name="type"

@@ -3,7 +3,7 @@ import './style.css';
 
 import { connect } from 'react-redux';
 import { authControl } from "../../actions/connexion.action";
-import { getFavorisByUserId } from "../../actions/ressource.action";
+import { getFavorisByUserId, getRessource } from "../../actions/ressource.action";
 
 import { IoIosStar } from 'react-icons/io';
 
@@ -27,6 +27,8 @@ class ProfilDetails extends Component {
         window.location.href = "/";
       }
     )
+
+    this.props.getRessource();
   }
 
   toggle() {
@@ -46,9 +48,20 @@ class ProfilDetails extends Component {
   }
 
   render() {
-    const { userData, favoris } = this.props;
-    console.log(favoris);
+    const { userData, favoris, userRessources } = this.props;
     const { activeTab } = this.state;
+    let uId = userData.id;
+
+    let listUserRessources = userRessources.filter((ressource) => {
+      if (ressource.id_compte === uId) {
+        return ressource
+      } else {
+        return null
+      }
+    })
+
+    console.log(listUserRessources);
+
     return (
       <div>
         <div className="container emp-profile">
@@ -115,47 +128,47 @@ class ProfilDetails extends Component {
                   <Row>
                     <Col sm="12">
                       <h4>Informations générales</h4>
-                      <div class="row">
-                        <div class="col-md-6">
+                      <div className="row">
+                        <div className="col-md-6">
                           <h5>Nom</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <p>{userData.nom}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <h5>Prénom</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <p>{userData.prenom}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <h5>Email</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <p>{userData.email}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <h5>Date de naissance</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <p>{userData.date_de_naissance}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <h5>Ville</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <p>{userData.ville}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <h5>Code postal</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <p>{userData.code_postal}</p>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <h5>Adresse</h5>
                         </div>
-                        <div class="col-md-6">
+                        <div className="col-md-6">
                           <p>{userData.adresse}</p>
                         </div>
                       </div>
@@ -195,6 +208,42 @@ class ProfilDetails extends Component {
         </div>
         <div className="container emp-profile">
           <h3 className="my_ressources_title">Mes ressources</h3>
+          {
+            listUserRessources.length > 0 ?
+              listUserRessources.map(listUserRessource => (
+                <div key={listUserRessource.id}>
+                  <Row className="row_background_wrapper">
+                    <Col className="my_ressource_text_wrapper">
+                      Titre : {' '}
+                      {listUserRessource.titre}
+                    </Col>
+                    <Col className="my_ressource_text_wrapper">
+                      {listUserRessource.theme}
+                    </Col>
+                    <Col className="my_ressource_text_wrapper">
+                      {listUserRessource.type_ressource}
+                    </Col>
+                    <Col className="my_ressource_text_wrapper">
+                      Ressource privée : {' '}
+                      {
+                        listUserRessource.private === "0" ?
+                          <div className="private_non">Non</div>
+                          :
+                          <div className="private_oui">Oui</div>
+                      }
+                    </Col>
+                    <Col className="my_ressource_text_wrapper">
+                      <NavLink href={`/ressource/${listUserRessource.id}`} className="ressource_link_profil">
+                        Lien vers l'article
+                      </NavLink>
+                    </Col>
+                  </Row>
+                  <br />
+                </div>
+              ))
+              :
+              null
+          }
         </div>
       </div>
     );
@@ -207,7 +256,8 @@ function mapStateToProps(state) {
     isLogged: state.connectReducer.isLogged,
     authlevel: state.connectReducer.authlevel,
     userData: state.connectReducer.user,
-    favoris: state.ressource.favoris
+    favoris: state.ressource.favoris,
+    userRessources: state.ressource.ressources
   };
 }
 
@@ -216,6 +266,7 @@ function mapDispatchToProps(dispatch) {
   return {
     authControl: none => dispatch(authControl()),
     getFavorisByUserId: uId => dispatch(getFavorisByUserId(uId)),
+    getRessource: () => dispatch(getRessource())
   };
 }
 

@@ -32,7 +32,6 @@ export const authControlAPI = () => {
         credentials: 'true',
         data: ""
     })
-    console.log("AUTHAPI", response)
     return response
 }
 

@@ -46,23 +46,23 @@ class NavBar extends Component {
 
       < div >
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/home">
+          <NavbarBrand href="/">
             <img src={img} alt="REsource RElationnelle" />
           </NavbarBrand>
           <NavbarToggler onClick={() => this.toggle()} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink className="text_top_nav" href="/home">Accueil</NavLink>
+                <NavLink className="text_top_nav" href="/">Accueil</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink className="text_top_nav" href="/profil">Profil</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="text_top_nav" href="/home">Notifications</NavLink>
+                <NavLink className="text_top_nav" href="/">Notifications</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink className="text_top_nav" href="/home">Discussions</NavLink>
+                <NavLink className="text_top_nav" href="/">Discussions</NavLink>
               </NavItem>
 
               {this.props.authlevel === 4 || this.props.authlevel === 3 ?
@@ -73,7 +73,7 @@ class NavBar extends Component {
 
               {this.props.authlevel === 2?
               <NavItem>
-                <NavLink className="text_top_nav" href="/home">Moderateur</NavLink>
+                <NavLink className="text_top_nav" href="/">Moderateur</NavLink>
               </NavItem>
               :null}
             </Nav>

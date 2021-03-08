@@ -34,6 +34,7 @@ constructor(props) {
 
   render() {
    const {categories} = this.props
+   console.log("categories",categories)
     return (
       <div>
         <fieldset className="fieldset">

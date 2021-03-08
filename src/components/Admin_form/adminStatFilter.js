@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import {Form,Col,Button,FormControl,Row} from 'react-bootstrap'
+import {Form,Col,Button,Row} from 'react-bootstrap'
 
 import { connect } from 'react-redux';
-import {addCategorie} from '../../actions/admin.action';
+//import {addCategorie} from '../../actions/admin.action';
 
 class AdminStatFilter extends Component {
   

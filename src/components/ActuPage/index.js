@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 // components
 import ActuDetails from '../ActuDetails';
 import AddPosteModal from "../../components/Forms/AddPosteModal";
-import { authControl } from "../../actions/connexion.action"
 // reactstrap
 import { Container, Button, Modal, Input, Form, FormGroup, Row, Col } from 'reactstrap';
 
@@ -19,18 +18,6 @@ class ActuPage extends Component {
     }
   }
 
-
-  componentDidMount() {
-    this.props.authControl().then(() => {
-      console.log("authControl isLogged then: ",this.props.isLogged)
-     
-    }).catch(
-      (e) => {
-        console.log("authControl isLogged catch: ",this.props.isLogged)
-       
-      }
-    )
-  }
   
   // MODAL AJOUTATION
 
@@ -60,7 +47,7 @@ class ActuPage extends Component {
             <Col>
               <Form className="actufil_form_wrapper">
                 <FormGroup>
-                  <h5 for="exampleSelect" className="filters_text">Filtrer par thème</h5>
+                  <h5 htmlFor="exampleSelect" className="filters_text">Filtrer par thème</h5>
                   <Input
                     type="select"
                     name="theme"
@@ -87,7 +74,7 @@ class ActuPage extends Component {
             <Col>
               <Form className="actufil_form_wrapper">
                 <FormGroup>
-                  <h5 for="exampleSelect" className="filters_text">Filtrer par type</h5>
+                  <h5 htmlFor="exampleSelect" className="filters_text">Filtrer par type</h5>
                   <Input
                     type="select"
                     name="type"
@@ -130,20 +117,5 @@ class ActuPage extends Component {
   }
 }
 
-function mapStateToProps(state) {
-
-  return {
-    isLogged: state.connectReducer.isLogged,
-    authlevel: state.connectReducer.authlevel
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-
-  return {
-    authControl: none => dispatch(authControl())
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ActuPage);
+export default ActuPage;
 

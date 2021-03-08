@@ -12,7 +12,6 @@ export const updateAdminFormAPI = () => {
 }
 
 export const changeRoleAPI = (user) => {
-    console.log("changeRoleAPI ",user)
     const response = axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/admin/changeRole`,
@@ -23,7 +22,6 @@ export const changeRoleAPI = (user) => {
 }
 
 export const addCategorieAPI = (categorie) => {
-    console.log("categorie",categorie)
     const response = axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/admin/addCategorie`,
@@ -36,7 +34,6 @@ export const addCategorieAPI = (categorie) => {
 
 
 export const deleteCatAPI = (categorie) => {
-    console.log("categorie",categorie)
     const response = axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/admin/deleteCat`,

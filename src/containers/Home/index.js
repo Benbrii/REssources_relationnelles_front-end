@@ -6,25 +6,9 @@ import ActuPage from "../../components/ActuPage";
 import NavBar from '../NavBar'
 import Footer from '../../components/Footer';
 
-import { connect } from 'react-redux';
-import { authControl } from "../../actions/connexion.action"
-
 class Home extends Component {
 
-  
-  componentDidMount() {
-    this.props.authControl().then(() => {
-      if (this.props.isLogged === false) {
-        window.location.href = "/";
-        console.log("here authControl if")
-      }
-    }).catch(
-      (e) => {
-        window.location.href = "/";
-        console.log("here authControl catch")
-      }
-    )
-  }
+ 
 
   appearNavBar() {
     const navs = document.querySelectorAll('.navbar-collapse')
@@ -45,21 +29,7 @@ class Home extends Component {
   }
 }
 
-function mapStateToProps(state) {
 
-  return {
-    isLogged: state.connectReducer.isLogged
-  };
-}
-
-
-function mapDispatchToProps(dispatch) {
-
-  return {
-    authControl: none => dispatch(authControl())
-  };
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
 
 

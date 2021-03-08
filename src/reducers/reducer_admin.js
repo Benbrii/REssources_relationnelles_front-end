@@ -57,7 +57,6 @@ const adminReducer = (state = initState, action) => {
                     
                 }
     }
-    console.log("state: ",state)
     return state
 };
 

@@ -13,8 +13,6 @@ export const sendUser = (user) => {
     return response
 }
 
-
-
 export const connectAPI = (user) => {
 
     const response = axios({

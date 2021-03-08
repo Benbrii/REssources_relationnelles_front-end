@@ -4,7 +4,8 @@ const initState = {
     ressources: [],
     ressource: [],
     isLoading: false,
-    comments: []
+    comments: [],
+    favoris: []
 };
 
 const ressource = (state = initState, action) => {
@@ -82,6 +83,26 @@ const ressource = (state = initState, action) => {
                 isLoading: true,
             };
         case ressourceConst.GET_COMMENT_BY_RESSOURCE_ID_REJECTED:
+            return {
+                ...state,
+                isLoading: false,
+                error: action.payload
+            };
+
+        // GET FAVORIS BY USER ID
+
+        case ressourceConst.GET_ALL_FAVORIS_BY_USER_ID_FULFILLED:
+            return {
+                ...state,
+                favoris: action.payload.data,
+                isLoading: false
+            };
+        case ressourceConst.GET_ALL_FAVORIS_BY_USER_ID_PENDING:
+            return {
+                ...state,
+                isLoading: true,
+            };
+        case ressourceConst.GET_ALL_FAVORIS_BY_USER_ID_REJECTED:
             return {
                 ...state,
                 isLoading: false,

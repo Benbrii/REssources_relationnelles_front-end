@@ -52,12 +52,5 @@ export const fetchRemoveToFavoris = (id_user, idRessource) =>
         }
     })
 
-export const fetchAllFavoris = (uId) =>
-    axios({
-        method: "post",
-        url: `${process.env.REACT_APP_API_URL}/ressources/getallfavoris`,
-        credentials: 'true',
-        data: {
-            uId
-        }
-    })
+export const fetchAllFavoris = uId =>
+    axios.get(`${process.env.REACT_APP_API_URL}/ressources/getallfavoris/${uId}`);

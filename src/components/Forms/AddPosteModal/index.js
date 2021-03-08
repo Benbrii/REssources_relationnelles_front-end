@@ -30,6 +30,7 @@ class ConnectedAddPosteModal extends Component {
   async handleSubmit(e) {
     e.preventDefault();
     const { title, selectedFile, theme, type, description, privee } = this.state;
+    const { userID } = this.props;
 
     let formData = new FormData();
     formData.append("selectedFile", selectedFile);
@@ -38,6 +39,7 @@ class ConnectedAddPosteModal extends Component {
     formData.append("type", type);
     formData.append("description", description);
     formData.append("privee", privee);
+    formData.append("userID", userID);
 
     if (title.length > 0) {
       await this.props.addPosteToCloud(formData);
@@ -150,6 +152,9 @@ class ConnectedAddPosteModal extends Component {
 }
 
 const mstp = state => {
+  return {
+    userID: state.connectReducer.user.id
+  }
 };
 
 const mdtp = dispatch => ({

@@ -1,0 +1,22 @@
+  
+.actu_details_image {
+    width: 20%;
+    height: auto;
+    margin: auto;
+}
+
+.card_title_center {
+    text-align: center;
+}
+
+.mb-2 {
+    text-align: center;
+}
+
+.ressource_link {
+    text-decoration: none;
+}
+
+.ressource_link:hover {
+    text-decoration: none;
+}

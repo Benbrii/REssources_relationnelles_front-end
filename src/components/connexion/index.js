@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { connectUser } from '../../actions/connexion.action';
-import './style.css';
 import { Button } from 'reactstrap';
 import Image from 'react-bootstrap/Image'
 import Modal from 'react-bootstrap/Modal'
 import Register from '../Register'
-import CubePng from '../../images/CUBE.png'
+import CubePng from '../../assets/img/CUBE.png'
 
 class Connexion extends Component {
 

@@ -28,7 +28,6 @@ class NavBar extends Component {
 
   }
 
-
   toggle() {
     const { isOpen } = this.state;
     this.setState({
@@ -40,8 +39,8 @@ class NavBar extends Component {
     this.props.disconnectUser().then(() => {console.log("DISCONNECT")})
   };
 
-  render() {
 
+  render() {
     const { isOpen } = this.state;
     return (
 

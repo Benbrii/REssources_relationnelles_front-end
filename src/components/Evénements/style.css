@@ -111,3 +111,35 @@ body{
 .profil_tab_content_wrapper {
     margin-top: 5%;
 }
+
+.alert_fav_container {
+    display: flex;
+    justify-content: space-around;
+}
+
+.my_ressources_title {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
+.my_ressource_text_wrapper {
+    display: flex;
+    margin: auto;
+}
+
+.private_non {
+    color: green;
+}
+
+.private_oui {
+    color: red;
+}
+
+.ressource_link_profil {
+    color: #ffffff;
+}
+
+.row_background_wrapper {
+    background-color: #343a40;
+    color: #ffffff;
+}

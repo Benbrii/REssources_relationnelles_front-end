@@ -27,3 +27,9 @@
     justify-content: space-around;
     width: 20%;
 }
+
+.comments_row_displayer {
+    display: flex;
+    justify-content: center;
+    padding: auto;
+}

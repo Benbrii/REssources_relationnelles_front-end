@@ -13,8 +13,6 @@ export const sendUser = (user) => {
     return response
 }
 
-
-
 export const connectAPI = (user) => {
 
     const response = axios({
@@ -46,6 +44,5 @@ export const disconnectAPI = (user) => {
         credentials: 'true',
         data: user
     })
-    console.log("DISCONNECT")
     return response
 }

@@ -4,9 +4,11 @@ import "./style.css";
 // components
 import Evenement from "../../components/Evénements";
 import NavBar from '../NavBar'
+import Footer from "../../components/Footer";
 
 import { connect } from 'react-redux';
 import { authControl } from "../../actions/connexion.action"
+
 
 
 class Profil extends Component {
@@ -29,6 +31,7 @@ class Profil extends Component {
       <div>
         <NavBar />
         <Evenement />
+        <Footer />
       </div>
     );
   }
@@ -49,6 +52,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-
 export default connect(mapStateToProps, mapDispatchToProps)(Profil);
-

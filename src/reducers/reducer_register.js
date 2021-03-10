@@ -3,7 +3,7 @@
 import * as RegisterConst from "../const/register.const";
 
 const initState = {
-    validation:true
+    validation:false
 };
 
 const registerReducer = (state = initState, action) => {
@@ -14,7 +14,14 @@ const registerReducer = (state = initState, action) => {
                 ...state,
                 validation:action.payload.data.validation
             }
-        }
+       
+        case RegisterConst.USER_REGISTER_REJECTED:
+            return {
+                ...state,
+                validation:false
+            }
+    }
+
     return state
 };
 

@@ -14,12 +14,16 @@ import ConnexionPage from "./containers/connexionPage";
 import RessourceList from "./containers/RessourceList";
 import AdminPage from "./containers/AdminPage"
 
+import { connect } from 'react-redux';
+
 axios.defaults.withCredentials = true;
 
 export const history = createBrowserHistory();
 
 class App extends Component {
 
+
+  
   render() {
     return (
       <>
@@ -36,5 +40,19 @@ class App extends Component {
   }
 }
 
+function mapStateToProps(state) {
 
-export default (App);
+    return {
+    };
+}
+
+
+function mapDispatchToProps(dispatch) {
+
+    return {
+        
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
+

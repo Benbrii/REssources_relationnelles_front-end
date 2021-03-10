@@ -3,7 +3,6 @@
 import * as ConnectConst from "../const/connect.const";
 
 const initState = {
-    connexion: false,
     isLogged: false,
     authlevel: 1,
     user: [],
@@ -17,10 +16,18 @@ const connectReducer = (state = initState, action) => {
 
             return {
                 ...state,
-                connexion: action.payload.data.connexion,
+                isLogged: action.payload.data.isLogged,
                 authlevel: action.payload.data.authlevel,
                 user: action.payload.data.user,
                 thetoken: action.payload.data.token
+            }
+
+            case ConnectConst.USER_CONNECT_REJECTED:
+            console.log("action.payload",action.payload)
+            return {
+                ...state,
+                isLogged: false,
+                thetoken: ""
             }
 
         case ConnectConst.USER_AUTH_FULFILLED:

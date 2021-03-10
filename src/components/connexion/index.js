@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { connectUser } from '../../actions/connexion.action';
+
+import { connectUser} from '../../actions/connexion.action';
+
+
 import { Button } from 'reactstrap';
 import Image from 'react-bootstrap/Image'
 import Modal from 'react-bootstrap/Modal'
 import Register from '../Register'
 import CubePng from '../../assets/img/CUBE.png'
+
 
 class Connexion extends Component {
 
@@ -24,12 +28,13 @@ class Connexion extends Component {
         this.handleShow = this.handleShow.bind(this);
         this.handleClose = this.handleClose.bind(this)
     }
+
     goConnect(e) {
         e.preventDefault()
         const { user } = this.state;
         this.props.connectUser(user).then(
             () => {
-                if (this.props.connexion === true) {
+                if (this.props.isLogged === true) {
                     window.location.href = "/";
                 }
             }
@@ -45,6 +50,7 @@ class Connexion extends Component {
     }
 
     render() {
+        const {message} = this.props
         return (
             <div className="container connexionPage">
                 <div className="row">
@@ -70,6 +76,13 @@ class Connexion extends Component {
                                     onChange={e => { this.setState({ user: { ...this.state.user, password: e.target.value } }); e.preventDefault(); }} />
                             </div>
                         </div>
+                        {message && (
+                            <div className="form-group">
+                                <div className="alert alert-danger col-sm-9" role="alert">
+                                    {message}
+                                </div>
+                            </div>
+                        )}
                         <button type="submit" className="btn btn-primary btn-block col-sm-9 col-sm-offset-3" onClick={this.goConnect} >Sign in</button>
                         <Button color="success" className="col-sm-9 col-sm-offset-3" onClick={this.handleShow}>Sign up</Button>
                     </form>
@@ -86,9 +99,9 @@ class Connexion extends Component {
 function mapStateToProps(state) {
 
     return {
-        connexion: state.connectReducer.connexion,
         isLogged: state.connectReducer.isLogged,
-        token: state.connectReducer.thetoken
+        token: state.connectReducer.thetoken,
+        message:state.messageReducer.message
     };
 }
 

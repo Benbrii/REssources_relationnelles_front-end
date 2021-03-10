@@ -34,7 +34,6 @@ const adminReducer = (state = initState, action) => {
            }
 
         case ConnectConst.ADMIN_ADD_CATEGORIE_FULFILLED:
-            console.log(action.payload)
                 return {
                     ...state,
                     updateCategories:action.payload.data.update
@@ -50,7 +49,6 @@ const adminReducer = (state = initState, action) => {
                 }
 
         case ConnectConst.ADMIN_DELETE_CAT_FULFILLED:
-            console.log(action.payload)
                 return {
                     ...state,
                     deleteCategories:action.payload.data.update

@@ -11,13 +11,24 @@ export const fetchAddPosteToCloud = (formData) =>
         data: formData
     });
 
-export const fetchRessourceById = id =>
-    axios.get(`${process.env.REACT_APP_API_URL}/ressources/${id}`);
+
+export const fetchRessourceById = ({id_user,id}) => {
+    console.log("fetchRessourceById", id_user," ",id)
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/ressources/getRessourceById`,
+        credentials: 'true',
+        data: {id_user,id}
+    })
+
+    return response
+}
 
 export const fetchCommentByRessourceId = id =>
     axios.get(`${process.env.REACT_APP_API_URL}/ressources/comments/${id}`);
 
 export const fetchAddCommentToRessource = (commentaire, idUser, pseudoUser, idRessource) =>
+    
     axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/ressources/addcomment`,

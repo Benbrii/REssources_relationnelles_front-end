@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Form,Col,Button,Row} from 'react-bootstrap'
 
 import { connect } from 'react-redux';
-//import {addCategorie} from '../../actions/admin.action';
+import {getStat} from '../../actions/admin.action';
 
 class AdminStatFilter extends Component {
   
@@ -11,24 +11,26 @@ constructor(props) {
   this.state = {
     filter:{
         annee:"",
-        categorie:"",
-        theme:""
+        categorie:"toute categories",
+        type:"tout types"
     }
   };
  
-  
-  //this.delCat = this.delCat.bind(this);
+  this.filter = this.filter.bind(this);
 }
 
- 
- /* delCat(e) {
+componentDidMount(){
+  this.setState({ filter: {...this.state.filter, annee: this.props.years[0] } }) 
+}
+
+ filter(e) {
     e.preventDefault();
-    const {ressource} = this.state;
-    this.props.deleteCat(ressource);
-}*/
+    const {filter} = this.state;
+    this.props.getStat(filter);
+}
 
   render() {
-    const {categories,years} = this.props
+    const {categories,years,types} = this.props
     return (
       <div>
         <fieldset className="fieldset">
@@ -46,6 +48,7 @@ constructor(props) {
               </Col>
               <Col sm={3}>
                 <Form.Control as="select" onChange={e => { this.setState({ filter: {...this.state.filter, categorie: e.target.value } }); e.preventDefault(); }}>
+                <option key="tout">toute categories</option>
                 {
                       categories.map((categorie) =>
                         <option key={categorie.id}>{categorie.labelle}</option>
@@ -54,7 +57,13 @@ constructor(props) {
                 </Form.Control>
               </Col>
               <Col sm={3}>
-                <Form.Control as="select" onChange={e => { this.setState({ filter: {...this.state.filter, theme: e.target.value } }); e.preventDefault(); }}>
+                <Form.Control as="select" onChange={e => { this.setState({ filter: {...this.state.filter, type: e.target.value } }); e.preventDefault(); }}>
+                <option key="tout">tout types</option>
+                {
+                      types.map((type) =>
+                        <option key={type.id}>{type.labelle}</option>
+                      )
+                }
                 </Form.Control>
               </Col>
               <Col sm={1}>
@@ -73,15 +82,15 @@ constructor(props) {
 function mapStateToProps(state) {
   return {
     categories: state.adminReducer.categories,
-    years: state.adminReducer.years
+    years: state.adminReducer.years,
+    types: state.adminReducer.types
   };
 }
 
 function mapDispatchToProps(dispatch) {
 
   return {
-    //addCategorie: ressource => dispatch(addCategorie(ressource)),
-    
+    getStat: filter => dispatch(getStat(filter))
   };
 }
 

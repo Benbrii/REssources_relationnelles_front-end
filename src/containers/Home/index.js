@@ -5,10 +5,14 @@ import "./style.css";
 import ActuPage from "../../components/ActuPage";
 import NavBar from '../NavBar'
 import Footer from '../../components/Footer';
+import {updateAdminForm} from '../../actions/admin.action';
+import { connect } from 'react-redux';
 
 class Home extends Component {
 
- 
+  componentDidMount(){
+    this.props.updateAdminForm();
+  }
 
   appearNavBar() {
     const navs = document.querySelectorAll('.navbar-collapse')
@@ -29,7 +33,19 @@ class Home extends Component {
   }
 }
 
+function mapStateToProps(state) {
 
-export default Home;
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+
+  return {
+    updateAdminForm: () => dispatch(updateAdminForm())
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 

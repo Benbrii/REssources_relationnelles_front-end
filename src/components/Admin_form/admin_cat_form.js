@@ -4,7 +4,7 @@ import {Form,Col,Button,FormControl,Row} from 'react-bootstrap'
 import { connect } from 'react-redux';
 import {addCategorie,deleteCat} from '../../actions/admin.action';
 
-class AdminForm extends Component {
+class AdminCatForm extends Component {
   
 constructor(props) {
   super(props);
@@ -19,17 +19,16 @@ constructor(props) {
   this.delCat = this.delCat.bind(this);
 }
 
- 
   delCat(e) {
     e.preventDefault();
     const {ressource} = this.state;
-    this.props.deleteCat(ressource);
-}
+    this.props.deleteCat(ressource).then(() => {window.location.reload(true)});
+  }
 
   addCat(e){
     e.preventDefault();
     const {ressource} = this.state;
-    this.props.addCategorie(ressource);
+    this.props.addCategorie(ressource).then(() => {window.location.reload(true);});
   }
 
   render() {
@@ -64,6 +63,7 @@ constructor(props) {
               </Col>
             </Row>
         </Form>
+        
         </fieldset>
         
       </div>
@@ -73,7 +73,6 @@ constructor(props) {
 
 function mapStateToProps(state) {
   return {
-    message: state.adminReducer.message,
     categories: state.adminReducer.categories,
     deleteCategories: state.adminReducer.deleteCategories
   };
@@ -87,5 +86,5 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminForm);
+export default connect(mapStateToProps, mapDispatchToProps)(AdminCatForm);
 

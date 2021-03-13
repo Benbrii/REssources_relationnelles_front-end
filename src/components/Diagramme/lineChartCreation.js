@@ -2,10 +2,10 @@ import React from 'react';
 import {Line} from 'react-chartjs-2';
 
 const data = {
-  labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+  labels: ['Janvier', 'Fevrier', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet','Aout','Septembre','Octobre','Novembre','Decembre'],
   datasets: [
     {
-      label: 'My First dataset',
+      label: 'Consultation',
       fill: false,
       lineTension: 0.1,
       backgroundColor: 'rgba(75,192,192,0.4)',
@@ -30,10 +30,14 @@ const data = {
 
 const LineChart=(props)=> 
 { 
-  data.datasets[0].data = [90, 59, 80, 81, 56, 55, 40]
+  data.datasets[0].data = props.dataCrea
+  data.datasets[0].label = props.title
+
+  data.datasets[0].borderColor = props.color
+
+
   return (
     <div className="line">
-        <h2>Line Example</h2>
         <Line data={data} />
       </div>
   )

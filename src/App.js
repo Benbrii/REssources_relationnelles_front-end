@@ -14,27 +14,33 @@ import ConnexionPage from "./containers/connexionPage";
 import RessourceList from "./containers/RessourceList";
 import AdminPage from "./containers/AdminPage"
 
+import {authControl} from "./actions/connexion.action"
 import { connect } from 'react-redux';
+import {clearMessage} from "./actions/message.action"
 
 axios.defaults.withCredentials = true;
 
 export const history = createBrowserHistory();
 
-class App extends Component {
-
-
+  class App extends Component {
+  
+  componentDidMount(){
+      this.props.authControl().then(()=>{this.props.clearMessage()})
+  }
   
   render() {
     return (
       <>
         <Router history={history}>
-          <Route exact path="/connexion" component={ConnexionPage} />
-          <Route exact path="/" component={Home} />
-          <Route exact path="/ressource/:id" component={RessourceList} />
-          <Route exact path="/profil" component={Profil} />
-          <Route exact path="/adminPage" component={AdminPage} />
-        </Router>
+            <Route exact path="/connexion" component={ConnexionPage} />
+            <Route exact path="/" component={Home} />
+            <Route exact path="/ressource/:id" component={RessourceList} />
 
+            {/*PrivatePage*/}
+            <Route component={Profil} path="/profil" exact />
+            <Route component={AdminPage} path="/adminPage" exact />
+        </Router>
+         
       </>
     );
   }
@@ -43,14 +49,15 @@ class App extends Component {
 function mapStateToProps(state) {
 
     return {
+      isLogged: state.connectReducer.isLogged
     };
 }
-
 
 function mapDispatchToProps(dispatch) {
 
     return {
-        
+      authControl: () => dispatch(authControl()),
+      clearMessage: () => dispatch(clearMessage())
     };
 }
 

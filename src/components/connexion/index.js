@@ -9,8 +9,7 @@ import Image from 'react-bootstrap/Image'
 import Modal from 'react-bootstrap/Modal'
 import Register from '../Register'
 import CubePng from '../../assets/img/CUBE.png'
-
-
+import {clearMessage} from "../../actions/message.action"
 class Connexion extends Component {
 
     constructor(props) {
@@ -40,7 +39,7 @@ class Connexion extends Component {
             }
         )
     }
-    
+   
     handleShow(e) {
         this.setState({ modal: { setShow: true } })
     }
@@ -49,8 +48,9 @@ class Connexion extends Component {
         this.setState({ modal: { setShow: false } })
     }
 
+
     render() {
-        const {message} = this.props
+        const {ErrorMessage} = this.props
         return (
             <div className="container connexionPage">
                 <div className="row">
@@ -76,10 +76,10 @@ class Connexion extends Component {
                                     onChange={e => { this.setState({ user: { ...this.state.user, password: e.target.value } }); e.preventDefault(); }} />
                             </div>
                         </div>
-                        {message && (
+                        {ErrorMessage && (
                             <div className="form-group">
                                 <div className="alert alert-danger col-sm-9" role="alert">
-                                    {message}
+                                    {ErrorMessage}
                                 </div>
                             </div>
                         )}
@@ -101,7 +101,7 @@ function mapStateToProps(state) {
     return {
         isLogged: state.connectReducer.isLogged,
         token: state.connectReducer.thetoken,
-        message:state.messageReducer.message
+        ErrorMessage:state.messageReducer.ErrorMessage
     };
 }
 
@@ -109,7 +109,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 
     return {
-        connectUser: user => dispatch(connectUser(user))
+        connectUser: user => dispatch(connectUser(user)),
+        clearMessage: () => dispatch(clearMessage())
     };
 }
 

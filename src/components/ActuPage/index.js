@@ -13,8 +13,8 @@ class ActuPage extends Component {
     super(props);
     this.state = {
       ajoutationModalOpened: false,
-      theme: "",
-      type: "",
+      categorie: "toute categories",
+      type: "tout types"
     }
   }
 
@@ -34,12 +34,18 @@ class ActuPage extends Component {
   };
 
   render() {
+
     const {
       ajoutationModalOpened,
-      theme,
+      categorie,
       type
     } = this.state;
 
+    const {
+      categories,
+      types
+    } = this.props;
+    console.log("ACTU ",categorie,type)
     return (
       <>
         <Container className="actu_page_container">
@@ -47,26 +53,26 @@ class ActuPage extends Component {
             <Col>
               <Form className="actufil_form_wrapper">
                 <FormGroup>
-                  <h5 htmlFor="exampleSelect" className="filters_text">Filtrer par thème</h5>
+                  <h5 htmlFor="exampleSelect" className="filters_text">Filtrer par categorie</h5>
                   <Input
                     type="select"
-                    name="theme"
-                    id="theme"
+                    name="categorie"
+                    id="categorie"
                     onChange={e => {
                       e.preventDefault();
                       if (e.target.value !== "Tous") {
-                        this.setState({ theme: e.target.value });
+                        this.setState({ categorie: e.target.value });
                       } else {
-                        this.setState({ theme: "" })
+                        this.setState({ categorie: "" })
                       }
                     }}
-                    className="filter_form_theme_input">
-                    <option>Tous</option>
-                    <option>Covid-19</option>
-                    <option>Information générale</option>
-                    <option>Société</option>
-                    <option>Santé</option>
-                    <option>Autres</option>
+                    className="filter_form_categorie_input">
+                    <option key="toute categories">toute categories</option>
+                    {
+                      categories.map((categorie) =>
+                        <option key={categorie.id}>{categorie.labelle}</option>
+                      )
+                    }
                   </Input>
                 </FormGroup>
               </Form>
@@ -87,35 +93,58 @@ class ActuPage extends Component {
                         this.setState({ type: "" })
                       }
                     }}
-                    className="filter_form_theme_input">
-                    <option>Tous</option>
-                    <option>Vidéo</option>
-                    <option>Article</option>
-                    <option>Photo</option>
-                    <option>Publication</option>
+                    className="filter_form_categorie_input">
+                      <option key="toute categories">tout types</option>
+                    {
+                      types.map((type) =>
+                        <option key={type.id}>{type.labelle}</option>
+                      )
+                    }
                   </Input>
                 </FormGroup>
               </Form>
             </Col>
           </Row>
-          <div className="actu_page_add_button_container">
-            <Button color="info" className="actu_page_add_button" onClick={() => this.openAjoutationModal()}>Ajouter un poste</Button>{' '}
-          </div>
-          <div className="actu_details_container">
-            <ActuDetails whichTheme={theme} whichType={type} />
-          </div>
+
+          {this.props.isLogged === true ?
+              <div>
+                <div className="actu_page_add_button_container">
+                  <Button color="info" className="actu_page_add_button" onClick={() => this.openAjoutationModal()}>Ajouter un poste</Button>{' '}
+                </div>
+              </div>
+          :null}
+              <div>
+                <div className="actu_details_container">
+                  <ActuDetails whichCategorie={categorie} whichType={type} />
+                </div>
+              </div>
+           
         </Container>
 
         {/* MODALS */}
-        {ajoutationModalOpened &&
-          <Modal isOpen={ajoutationModalOpened} toggle={this.closeAjoutationModal}>
-            <AddPosteModal />
-          </Modal>
+        {
+        this.props.isLogged === true ?
+          ajoutationModalOpened &&
+            <Modal isOpen={ajoutationModalOpened} toggle={this.closeAjoutationModal}>
+              <AddPosteModal />
+            </Modal>
+        :null
         }
+        
       </>
     );
   }
 }
 
-export default ActuPage;
+function mapStateToProps(state) {
+
+    return {
+      categories: state.adminReducer.categories,
+      types: state.adminReducer.types,
+      isLogged: state.connectReducer.isLogged
+    };
+}
+
+export default connect(mapStateToProps)(ActuPage);
+
 

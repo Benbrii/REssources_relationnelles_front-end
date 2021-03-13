@@ -2,7 +2,6 @@ import React, { Component  } from 'react';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/connexion.action';
 import Modal from 'react-bootstrap/Modal'
-import { history } from '../../App';
 import {clearMessage} from "../../actions/message.action"
 class Register extends Component {
 
@@ -23,7 +22,8 @@ class Register extends Component {
             },
             modal:{
                 setShow:false
-            }
+            },
+            message:""
         };
     
         this.goRegister = this.goRegister.bind(this);
@@ -42,14 +42,15 @@ class Register extends Component {
         this.props.registerUser(this.state.user).then(
             () => {
                 if (this.props.validation === true) {
-                    window.location.href = "/";
+                    window.location.href = "/connexion";
                 }
             }
         )
     }
 
    render(){
-       const{message} = this.props
+       const{ErrorMessage} = this.props
+
         return (
             <div className="container">
                 <Modal.Header closeButton>
@@ -133,10 +134,10 @@ class Register extends Component {
                             </div>
                         </div>
                        
-                        {message && (
+                        {ErrorMessage && (
                             <div className="form-group">
                                 <div className="alert alert-danger col-sm-12" role="alert">
-                                    {message}
+                                    {ErrorMessage}
                                 </div>
                             </div>
                         )}
@@ -155,7 +156,7 @@ function mapStateToProps(state) {
     return {
         
         validation: state.registerReducer.validation,
-        message:state.messageReducer.message
+        ErrorMessage:state.messageReducer.ErrorMessage
     };
 }
 
@@ -167,3 +168,5 @@ function mapDispatchToProps(dispatch) {
 }
     
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
+
+

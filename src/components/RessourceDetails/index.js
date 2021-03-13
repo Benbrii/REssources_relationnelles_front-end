@@ -31,7 +31,11 @@ class ConnectedRessourceDetails extends Component {
     let full_url = document.URL;
     let url_array = full_url.split('/')
     let id = url_array[url_array.length - 1];
-    this.props.getRessourceById(id);
+    
+    console.log("CDM")
+
+    const id_user = this.props.id_user
+    this.props.getRessourceById({id_user,id});
     this.props.getCommentsByRessourceId(id);
   }
 
@@ -70,6 +74,7 @@ class ConnectedRessourceDetails extends Component {
   }
 
   render() {
+    console.log( "RENDER",this.props.id_user)
     const { ressource, comments } = this.props;
     const { ajoutationCommentModalOpened, favStar } = this.state;
     return (
@@ -78,7 +83,7 @@ class ConnectedRessourceDetails extends Component {
         {
           ressource.length > 0 ?
             ressource.map(ressource => (
-              ressource.private === "0" ?
+              ressource.private === 0 ?
                 <div className="ressource_details_wrapper" key={ressource.id}>
                   <Jumbotron fluid>
                     <Container fluid>
@@ -98,16 +103,19 @@ class ConnectedRessourceDetails extends Component {
                           </div>
                         </div>
                       </div>
-                      <p className="lead">{ressource.theme}</p>
+                      <p className="lead">{ressource.categorie}</p>
                       <p className="lead">Ressource envoyée le : {ressource.date_envoie}</p>
                       <hr className="my-2" />
                       <img src={ressource.lien} className="ressource_details_image" alt="ressource_image" />
                       <hr className="my-2" />
                       <p className="ressource_text_wrapper">{ressource.description}</p>
                     </Container>
-                    <div>
-                      <Button color="info" onClick={() => this.openAjoutationCommentModal()}>Ajouter un commentaire</Button>{' '}
-                    </div>
+                    {this.props.isLogged === true ?
+                      <div>
+                        <Button color="info" onClick={() => this.openAjoutationCommentModal()}>Ajouter un commentaire</Button>{' '}
+                      </div>
+                    :null
+                    }
                     <br />
                     <h4>Commentaires</h4>
                     <ListGroup>
@@ -118,7 +126,7 @@ class ConnectedRessourceDetails extends Component {
                               <Container>
                                 <Row className="comments_row_displayer">
                                   <Card>
-                                    <h5>{comment.pseudo_compte}</h5>
+                                    <h5>{comment.pseudo}</h5>
                                     <ListGroupItem>{' '}{comment.message}</ListGroupItem>
                                   </Card>
                                 </Row>
@@ -140,10 +148,12 @@ class ConnectedRessourceDetails extends Component {
             null
         }
         {/* MODAL */}
-        {ajoutationCommentModalOpened &&
-          <Modal isOpen={ajoutationCommentModalOpened} toggle={this.closeAjoutationCommentModal}>
-            <AddCommentModal />
-          </Modal>
+        {this.props.isLogged === true ?
+          ajoutationCommentModalOpened &&
+            <Modal isOpen={ajoutationCommentModalOpened} toggle={this.closeAjoutationCommentModal}>
+              <AddCommentModal />
+            </Modal>
+        :null
         }
       </>
     );
@@ -154,7 +164,8 @@ const mstp = state => {
   return {
     ressource: state.ressource.ressource,
     comments: state.ressource.comments,
-    id_user: state.connectReducer.user.id
+    id_user: state.userReducer.user.id,
+    isLogged: state.connectReducer.isLogged
   };
 };
 

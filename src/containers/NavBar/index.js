@@ -36,7 +36,7 @@ class NavBar extends Component {
   }
 
   logout = () => {
-    this.props.disconnectUser().then(() => {console.log("DISCONNECT")})
+    this.props.disconnectUser().then(() => {window.location.href = "/"})
   };
 
 
@@ -55,31 +55,22 @@ class NavBar extends Component {
               <NavItem>
                 <NavLink className="text_top_nav" href="/">Accueil</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink className="text_top_nav" href="/profil">Profil</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="text_top_nav" href="/">Notifications</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="text_top_nav" href="/">Discussions</NavLink>
-              </NavItem>
+              {this.props.isLogged === true?
+                <NavItem>
+                  <NavLink className="text_top_nav" href="/profil">Profil</NavLink>
+                </NavItem>
+                :null
+              }
 
               {this.props.authlevel === 4 || this.props.authlevel === 3 ?
               <NavItem>
                 <NavLink className="text_top_nav" href="/adminPage">Admin</NavLink>
               </NavItem>
               :null}
-
-              {this.props.authlevel === 2?
-              <NavItem>
-                <NavLink className="text_top_nav" href="/">Moderateur</NavLink>
-              </NavItem>
-              :null}
             </Nav>
             
             {this.props.isLogged === true?
-              <NavLink className="nav-link" onClick={this.logout} >Déconnexion</NavLink>
+              <NavLink className="nav-link" onClick={this.logout}>Déconnexion</NavLink>
               :
               <NavLink className="nav-link" href="/connexion" >Connexion</NavLink>
             }
@@ -95,7 +86,7 @@ function mapStateToProps(state) {
 
   return {
      
-      authlevel: state.connectReducer.authlevel,
+      authlevel: state.userReducer.authlevel,
       isLogged: state.connectReducer.isLogged
   };
 }

@@ -5,11 +5,12 @@ import * as ConnectConst from "../const/admin.const";
 const initState = {
     roles: [],
     updateRole:null,
-    message:null,
 
     updateCategories:null,
     categories:[],
     deleteCategories:"",
+
+    types:[],
 
     years:[]
 };
@@ -17,8 +18,7 @@ const initState = {
 const adminReducer = (state = initState, action) => {
     
     switch (action.type) {
-        
-        
+    
         case ConnectConst.ADMIN_CHANGE_ROLE_FULFILLED:
            if (action.payload.data.update === true){
                 return {
@@ -45,6 +45,7 @@ const adminReducer = (state = initState, action) => {
                     ...state,
                     categories : Array.from(action.payload.data.categories),
                     roles : Array.from(action.payload.data.roles),
+                    types: Array.from(action.payload.data.type),
                     years: action.payload.data.years
                 }
 

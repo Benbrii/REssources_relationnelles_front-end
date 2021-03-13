@@ -11,6 +11,17 @@ export const updateAdminFormAPI = () => {
     return response
 }
 
+export const filter = () => {
+
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/admin/UpdateAdminForm`,
+        credentials: 'true',
+        data: ""
+    })
+    return response
+}
+
 export const changeRoleAPI = (user) => {
     const response = axios({
         method: "post",
@@ -43,3 +54,33 @@ export const deleteCatAPI = (categorie) => {
     return response
 }
 
+export const accountActivationAPI = (user) => {
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/admin/AccountActivation`,
+        credentials: 'true',
+        data: user
+    })
+    return response
+}
+
+export const accountDesactivationAPI = (user) => {
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/admin/AccountDesactivation`,
+        credentials: 'true',
+        data: user
+    })
+    return response
+}
+
+
+export const getStatAPI = ({annee,categorie,type}) => {
+    const response = axios({
+        method: "post",
+        url: `${process.env.REACT_APP_API_URL}/admin/getStat`,
+        credentials: 'true',
+        data: {annee,categorie,type}
+    })
+    return response
+}

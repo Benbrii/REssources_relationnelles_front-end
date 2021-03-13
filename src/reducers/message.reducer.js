@@ -1,7 +1,8 @@
-import * as ConnectConst from "../const/message.const";
+import * as MessageConst from "../const/message.const";
 
 const initState = {
-    message: ""
+    ErrorMessage: "",
+    greatMessage:"",
 };
 
 const messageReducer = (state = initState, action) => {
@@ -9,14 +10,28 @@ const messageReducer = (state = initState, action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case ConnectConst.SET_MESSAGE:
-      return { message: payload };
+    case MessageConst.SET_ERROR_MESSAGE:
+     
+      return { 
+        ErrorMessage: payload 
+      };
 
-    case ConnectConst.CLEAR_MESSAGE:
-      return { message: "" };
+    case MessageConst.SET_GREAT_MESSAGE:
+      return { 
+        greatMessage: payload 
+      };
+
+    case MessageConst.CLEAR_MESSAGE:
+     
+      return { 
+        ErrorMessage: "",
+        greatMessage: ""
+      };
 
     default:
       return state;
+    
+  
   }
 }
 

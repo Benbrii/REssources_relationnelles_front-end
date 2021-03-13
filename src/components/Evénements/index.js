@@ -18,16 +18,6 @@ class ProfilDetails extends Component {
   }
 
   componentDidMount() {
-    this.props.authControl().then(() => {
-      if (this.props.isLogged === false) {
-        window.location.href = "/";
-      }
-    }).catch(
-      (e) => {
-        window.location.href = "/";
-      }
-    )
-
     this.props.getRessource();
   }
 
@@ -35,12 +25,13 @@ class ProfilDetails extends Component {
     const { userData } = this.props;
     let uId = userData.id;
     const { activeTab } = this.state;
-
+    
     this.setState({
       activeTab: !activeTab
     })
 
     if (uId !== undefined) {
+      
       this.props.getFavorisByUserId(uId);
     } else {
       return null
@@ -51,29 +42,32 @@ class ProfilDetails extends Component {
     const { userData, favoris, userRessources } = this.props;
     const { activeTab } = this.state;
     let uId = userData.id;
+    let listUserRessources = [];
 
-    let listUserRessources = userRessources.filter((ressource) => {
-      if (ressource.id_compte === uId) {
-        return ressource
-      } else {
-        return null
-      }
-    })
-
-    console.log(listUserRessources);
+    
+    if (userRessources.length > 0){
+      listUserRessources = userRessources.filter((ressource) => {
+        if (ressource.id_compte === uId) {
+          return ressource
+        } else {
+          return null
+        }
+      })
+      
+    }
 
     return (
       <div>
         <div className="container emp-profile">
           <form method="post">
-            <div class="row">
-              <div class="col-md-4">
-                <div class="profile-img">
+            <div className="row">
+              <div className="col-md-4">
+                <div className="profile-img">
                   <img src="https://res.cloudinary.com/djrdn2vgg/image/upload/v1609166421/santerne-application/users/depositphotos_171453724-stock-illustration-default-avatar-profile-icon-grey_bptleq.jpg" alt="profil-pic" />
                 </div>
               </div>
-              <div class="col-md-6">
-                <div class="profile-head">
+              <div className="col-md-6">
+                <div className="profile-head">
                   <h5>
                     {userData.nom}
                     {' '}
@@ -92,10 +86,10 @@ class ProfilDetails extends Component {
                         )
                     }
                   </h6>
-                  <p class="proile-rating">Email : {userData.email}</p>
+                  <p className="proile-rating">Email : {userData.email}</p>
                 </div>
               </div>
-              <div class="col-md-2">
+              <div className="col-md-2">
                 {/*<input type="submit" class="profile-edit-btn" name="btnAddMore" value="Modifier profil" />*/}
               </div>
             </div>
@@ -188,7 +182,7 @@ class ProfilDetails extends Component {
                                     <NavLink href={`/ressource/${fav.id_ressource}`} className="ressource_link">
                                       <Alert color="danger" className="alert_fav_container">
                                         <IoIosStar />
-                                      Ressource numéro : {fav.id_ressource}
+                                        Ressource numéro : {fav.id_ressource}
                                       </Alert>
                                     </NavLink>
                                   </CardTitle>
@@ -208,6 +202,7 @@ class ProfilDetails extends Component {
         </div>
         <div className="container emp-profile">
           <h3 className="my_ressources_title">Mes ressources</h3>
+        
           {
             listUserRessources.length > 0 ?
               listUserRessources.map(listUserRessource => (
@@ -226,14 +221,14 @@ class ProfilDetails extends Component {
                     <Col className="my_ressource_text_wrapper">
                       Ressource privée : {' '}
                       {
-                        listUserRessource.private === "0" ?
+                        listUserRessource.private === 0 ?
                           <div className="private_non">Non</div>
                           :
                           <div className="private_oui">Oui</div>
                       }
                     </Col>
                     <Col className="my_ressource_text_wrapper">
-                      <NavLink href={`/ressource/${listUserRessource.id}`} className="ressource_link_profil">
+                      <NavLink href={`/ressource/${listUserRessource.id_ressource}`} className="ressource_link_profil">
                         Lien vers l'article
                       </NavLink>
                     </Col>
@@ -255,7 +250,7 @@ function mapStateToProps(state) {
   return {
     isLogged: state.connectReducer.isLogged,
     authlevel: state.connectReducer.authlevel,
-    userData: state.connectReducer.user,
+    userData: state.userReducer.user,
     favoris: state.ressource.favoris,
     userRessources: state.ressource.ressources
   };

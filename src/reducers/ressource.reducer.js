@@ -5,7 +5,8 @@ const initState = {
     ressource: [],
     isLoading: false,
     comments: [],
-    favoris: []
+    favoris: [],
+    ressource_Date: "",
 };
 
 const ressource = (state = initState, action) => {
@@ -14,7 +15,7 @@ const ressource = (state = initState, action) => {
         // GET RESSOURCES
 
         case ressourceConst.RESSOURCE_FULFILLED:
-            
+
             return {
                 ...state,
                 ressources: action.payload.data.rows,
@@ -53,10 +54,12 @@ const ressource = (state = initState, action) => {
         // GET RESSOURCE BY ID
 
         case ressourceConst.GET_RESSOURCE_BY_ID_FULFILLED:
+            let ressourceDate = new Date(action.payload.data[0].date_envoie).toLocaleDateString("fr-FR");
             return {
                 ...state,
                 ressource: action.payload.data,
-                isLoading: false
+                isLoading: false,
+                ressource_Date: ressourceDate
             };
         case ressourceConst.GET_RESSOURCE_BY_ID_PENDING:
             return {

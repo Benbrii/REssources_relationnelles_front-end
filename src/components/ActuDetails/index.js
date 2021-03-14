@@ -22,18 +22,20 @@ class ConnectedActuDetails extends Component {
     const listRessources = ressources.length > 0 && ressources !== undefined && ressources !== null ?
       // eslint-disable-next-line
       ressources.filter((data) => {
-        
-      if ((data.categorie === whichCategorie || whichCategorie === "toute categories")  && (data.type === whichType || whichType === "tout types")) {
-        return data
-      }
-      
+
+        if ((data.categorie === whichCategorie || whichCategorie === "toute categories") && (data.type === whichType || whichType === "tout types")) {
+          return data
+        }
+
       }).map(data => {
+        let datetime = new Date(data.date_envoie)
+        let date_envoie = datetime.toLocaleDateString("fr-FR");
         return (
           <div key={data.id}>
             <Card>
               <CardBody>
                 <CardTitle tag="h5" className="card_title_center">
-                  <NavLink href={`/ressource/${data.id_ressource}`} className="ressource_link">
+                  <NavLink href={`/ressource/${data.id}`} className="ressource_link">
                     <Alert color="primary">
                       {data.titre}
                     </Alert>
@@ -43,7 +45,7 @@ class ConnectedActuDetails extends Component {
               </CardBody>
               <img className="actu_details_image" src={data.lien} alt="poste_image" />
               <CardBody>
-                <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {data.date_envoie}</CardSubtitle>
+                <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {date_envoie}</CardSubtitle>
               </CardBody>
             </Card>
           </div>

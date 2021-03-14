@@ -25,13 +25,13 @@ class ProfilDetails extends Component {
     const { userData } = this.props;
     let uId = userData.id;
     const { activeTab } = this.state;
-    
+
     this.setState({
       activeTab: !activeTab
     })
 
     if (uId !== undefined) {
-      
+
       this.props.getFavorisByUserId(uId);
     } else {
       return null
@@ -44,8 +44,8 @@ class ProfilDetails extends Component {
     let uId = userData.id;
     let listUserRessources = [];
 
-    
-    if (userRessources.length > 0){
+
+    if (userRessources.length > 0) {
       listUserRessources = userRessources.filter((ressource) => {
         if (ressource.id_compte === uId) {
           return ressource
@@ -53,7 +53,7 @@ class ProfilDetails extends Component {
           return null
         }
       })
-      
+
     }
 
     return (
@@ -80,10 +80,10 @@ class ProfilDetails extends Component {
                           Utilisateur
                         </div>
                       ) : (
-                          <div>
-                            Admin
-                          </div>
-                        )
+                        <div>
+                          Admin
+                        </div>
+                      )
                     }
                   </h6>
                   <p className="proile-rating">Email : {userData.email}</p>
@@ -202,7 +202,7 @@ class ProfilDetails extends Component {
         </div>
         <div className="container emp-profile">
           <h3 className="my_ressources_title">Mes ressources</h3>
-        
+
           {
             listUserRessources.length > 0 ?
               listUserRessources.map(listUserRessource => (
@@ -228,7 +228,7 @@ class ProfilDetails extends Component {
                       }
                     </Col>
                     <Col className="my_ressource_text_wrapper">
-                      <NavLink href={`/ressource/${listUserRessource.id_ressource}`} className="ressource_link_profil">
+                      <NavLink href={`/ressource/${listUserRessource.id}`} className="ressource_link_profil">
                         Lien vers l'article
                       </NavLink>
                     </Col>

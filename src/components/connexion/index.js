@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { connectUser } from '../../actions/connexion.action';
-import './style.css';
+
+import { connectUser} from '../../actions/connexion.action';
+
+
 import { Button } from 'reactstrap';
 import Image from 'react-bootstrap/Image'
 import Modal from 'react-bootstrap/Modal'
 import Register from '../Register'
-import CubePng from '../../images/CUBE.png'
-
+import CubePng from '../../assets/img/CUBE.png'
+import {clearMessage} from "../../actions/message.action"
 class Connexion extends Component {
 
     constructor(props) {
@@ -31,28 +33,24 @@ class Connexion extends Component {
         const { user } = this.state;
         this.props.connectUser(user).then(
             () => {
-                if (this.props.connexion === true) {
-                    window.location.href = "/home";
+                if (this.props.isLogged === true) {
+                    window.location.href = "/";
                 }
             }
         )
     }
-
+   
     handleShow(e) {
         this.setState({ modal: { setShow: true } })
-        console.log("SHOW", this.state.modal.setShow)
     }
 
     handleClose(e) {
         this.setState({ modal: { setShow: false } })
-        console.log(this.state.modal.setShow)
     }
 
+
     render() {
-        console.log("CONNECTED:", this.props.connexion);
-        console.log("token ?", this.props.token);
-
-
+        const {ErrorMessage} = this.props
         return (
             <div className="container connexionPage">
                 <div className="row">
@@ -78,6 +76,13 @@ class Connexion extends Component {
                                     onChange={e => { this.setState({ user: { ...this.state.user, password: e.target.value } }); e.preventDefault(); }} />
                             </div>
                         </div>
+                        {ErrorMessage && (
+                            <div className="form-group">
+                                <div className="alert alert-danger col-sm-9" role="alert">
+                                    {ErrorMessage}
+                                </div>
+                            </div>
+                        )}
                         <button type="submit" className="btn btn-primary btn-block col-sm-9 col-sm-offset-3" onClick={this.goConnect} >Sign in</button>
                         <Button color="success" className="col-sm-9 col-sm-offset-3" onClick={this.handleShow}>Sign up</Button>
                     </form>
@@ -94,9 +99,9 @@ class Connexion extends Component {
 function mapStateToProps(state) {
 
     return {
-        connexion: state.connectReducer.connexion,
         isLogged: state.connectReducer.isLogged,
-        token: state.connectReducer.thetoken
+        token: state.connectReducer.thetoken,
+        ErrorMessage:state.messageReducer.ErrorMessage
     };
 }
 
@@ -104,7 +109,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
 
     return {
-        connectUser: user => dispatch(connectUser(user))
+        connectUser: user => dispatch(connectUser(user)),
+        clearMessage: () => dispatch(clearMessage())
     };
 }
 

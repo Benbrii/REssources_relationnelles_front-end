@@ -21,7 +21,6 @@ export const connectAPI = (user) => {
         credentials: 'true',
         data: user
     })
-    console.log("CONNECT RESPONSE", response)
     return response
 }
 
@@ -33,7 +32,6 @@ export const authControlAPI = () => {
         credentials: 'true',
         data: ""
     })
-    console.log("AUTHAPI", response)
     return response
 }
 
@@ -45,6 +43,5 @@ export const disconnectAPI = (user) => {
         credentials: 'true',
         data: user
     })
-
     return response
 }

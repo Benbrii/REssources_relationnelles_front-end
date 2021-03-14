@@ -2,7 +2,7 @@ import React, { Component  } from 'react';
 import { connect } from 'react-redux';
 import { registerUser } from '../../actions/connexion.action';
 import Modal from 'react-bootstrap/Modal'
-import { history } from '../../App';
+import {clearMessage} from "../../actions/message.action"
 class Register extends Component {
 
     constructor(props) {
@@ -22,7 +22,8 @@ class Register extends Component {
             },
             modal:{
                 setShow:false
-            }
+            },
+            message:""
         };
     
         this.goRegister = this.goRegister.bind(this);
@@ -30,30 +31,26 @@ class Register extends Component {
   
      componentDidMount() {
         localStorage.setItem('user', JSON.stringify(this.state.user));
-
+        this.props.clearMessage()
       }
 
-    ErrorMessage(){
-
-        const{validation} = this.props
-        if(validation === false){
-            return <div className="alert alert-danger" >le formulaire est mal remplie.</div> 
-        }
-    }
 
     goRegister(e) {
+        console.log("goRegister: ")
 
         e.preventDefault()
         this.props.registerUser(this.state.user).then(
             () => {
-                console.log("connexion then")
-                history.push("/");
-                window.location.reload();
-            });
-        console.log("USER",this.state.user)
+                if (this.props.validation === true) {
+                    window.location.href = "/connexion";
+                }
+            }
+        )
     }
 
    render(){
+       const{ErrorMessage} = this.props
+
         return (
             <div className="container">
                 <Modal.Header closeButton>
@@ -137,11 +134,14 @@ class Register extends Component {
                             </div>
                         </div>
                        
-                        <div className="row">
-                            <div className="form-group col-sm-12">
-                                {this.ErrorMessage()}
+                        {ErrorMessage && (
+                            <div className="form-group">
+                                <div className="alert alert-danger col-sm-12" role="alert">
+                                    {ErrorMessage}
+                                </div>
                             </div>
-                        </div>
+                        )}
+
                     </form>
                 </Modal.Body>
                 <Modal.Footer>
@@ -155,15 +155,18 @@ class Register extends Component {
 function mapStateToProps(state) {
     return {
         
-        validation: state.registerReducer.validation
-        
+        validation: state.registerReducer.validation,
+        ErrorMessage:state.messageReducer.ErrorMessage
     };
 }
 
 function mapDispatchToProps(dispatch) {
     return {
-        registerUser: user => dispatch(registerUser(user))
+        registerUser: user => dispatch(registerUser(user)),
+        clearMessage: () => dispatch(clearMessage())
     };
 }
     
 export default connect(mapStateToProps, mapDispatchToProps)(Register);
+
+

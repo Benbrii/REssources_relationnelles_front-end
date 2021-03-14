@@ -36,8 +36,9 @@ class NavBar extends Component {
   }
 
   logout = () => {
-    this.props.disconnectUser()
+    this.props.disconnectUser().then(() => {window.location.href = "/"})
   };
+
 
   render() {
     const { isOpen } = this.state;
@@ -45,31 +46,49 @@ class NavBar extends Component {
 
       < div >
         <Navbar color="dark" dark expand="md">
-          <NavbarBrand href="/home">
+          <NavbarBrand href="/">
             <img src={img} alt="REsource RElationnelle" />
           </NavbarBrand>
           <NavbarToggler onClick={() => this.toggle()} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink className="text_top_nav" href="/home">Accueil</NavLink>
+                <NavLink className="text_top_nav" href="/">Accueil</NavLink>
               </NavItem>
+              {this.props.isLogged === true?
+                <NavItem>
+                  <NavLink className="text_top_nav" href="/profil">Profil</NavLink>
+                </NavItem>
+                :null
+              }
+
+              {this.props.authlevel === 4 || this.props.authlevel === 3 ?
               <NavItem>
-                <NavLink className="text_top_nav" href="/profil">Profil</NavLink>
+                <NavLink className="text_top_nav" href="/adminPage">Admin</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink className="text_top_nav" href="/home">Notifications</NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink className="text_top_nav" href="/home">Discussions</NavLink>
-              </NavItem>
+              :null}
             </Nav>
-            <NavLink className="nav-link" onClick={this.logout} href="/" >Déconnexion</NavLink>
+            
+            {this.props.isLogged === true?
+              <NavLink className="nav-link" onClick={this.logout}>Déconnexion</NavLink>
+              :
+              <NavLink className="nav-link" href="/connexion" >Connexion</NavLink>
+            }
+              
           </Collapse>
         </Navbar>
       </div >
     )
   }
+}
+
+function mapStateToProps(state) {
+
+  return {
+     
+      authlevel: state.userReducer.authlevel,
+      isLogged: state.connectReducer.isLogged
+  };
 }
 
 
@@ -79,6 +98,7 @@ function mapDispatchToProps(dispatch) {
     disconnectUser: () => dispatch(disconnectUser())
   };
 }
-export default connect(mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps,mapDispatchToProps)(NavBar);
+
 
 

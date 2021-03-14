@@ -18,8 +18,8 @@ class ConnectedAddPosteModal extends Component {
     super(props);
     this.state = {
       title: "",
-      theme: "",
-      type: "",
+      categorie: "categorie 1",
+      type: "photo",
       description: "",
       privee: 0,
       selectedFile: null
@@ -29,18 +29,19 @@ class ConnectedAddPosteModal extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    const { title, selectedFile, theme, type, description, privee } = this.state;
+    const { title, selectedFile, categorie, type, description, privee } = this.state;
     const { userID } = this.props;
 
     let formData = new FormData();
     formData.append("selectedFile", selectedFile);
     formData.append("title", title);
-    formData.append("theme", theme);
+    formData.append("categorie", categorie);
     formData.append("type", type);
     formData.append("description", description);
     formData.append("privee", privee);
     formData.append("userID", userID);
 
+    
     if (title.length > 0) {
       await this.props.addPosteToCloud(formData);
     } else {
@@ -49,8 +50,8 @@ class ConnectedAddPosteModal extends Component {
 
     this.setState({
       title: "",
-      theme: "",
-      type: "",
+      categorie: "categorie 1",
+      type: "photo",
       description: "",
       privee: 0,
       selectedFile: null
@@ -60,7 +61,7 @@ class ConnectedAddPosteModal extends Component {
   }
 
   render() {
-
+    const {categories,types} = this.props
     return (
       <div className="addpostemodal_container">
         <ModalHeader>
@@ -102,16 +103,16 @@ class ConnectedAddPosteModal extends Component {
             </FormText>
           </FormGroup>
           <FormGroup>
-            <Label for="theme">Thème</Label>
-            <Input type="select" name="theme" id="theme" onChange={e => {
-              this.setState({ theme: e.target.value });
+            <Label for="theme">catégorie</Label>
+            <Input type="select" name="categorie" id="categorie" onChange={e => {
+              this.setState({ categorie: e.target.value });
               e.preventDefault();
             }}>
-              <option>Covid-19</option>
-              <option>Information générale</option>
-              <option>Société</option>
-              <option>Santé</option>
-              <option>Autres</option>
+              {
+                  categories.map((categorie) =>
+                    <option key={categorie.id}>{categorie.labelle}</option>
+                  )
+              }
             </Input>
           </FormGroup>
           <FormGroup>
@@ -120,9 +121,11 @@ class ConnectedAddPosteModal extends Component {
               this.setState({ type: e.target.value });
               e.preventDefault();
             }}>
-              <option>Article</option>
-              <option>Photo</option>
-              <option>Publication</option>
+              {
+                  types.map((type) =>
+                    <option key={type.id}>{type.labelle}</option>
+                  )
+              }
             </Input>
           </FormGroup>
           <FormGroup>
@@ -153,7 +156,10 @@ class ConnectedAddPosteModal extends Component {
 
 const mstp = state => {
   return {
-    userID: state.connectReducer.user.id
+    userID: state.userReducer.user.id,
+    categories: state.adminReducer.categories,
+    types: state.adminReducer.types,
+    
   }
 };
 
@@ -168,3 +174,4 @@ const AddPosteModal = connect(
 )(ConnectedAddPosteModal);
 
 export default AddPosteModal;
+

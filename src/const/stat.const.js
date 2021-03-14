@@ -1,0 +1,5 @@
+export const GET_STAT = "GET_STAT";
+export const GET_STAT_FULFILLED = "GET_STAT_FULFILLED";
+export const GET_STAT_PENDING = "GET_STAT_PENDING";
+export const GET_STAT_REJECTED = "GET_STAT_REJECTED";
+

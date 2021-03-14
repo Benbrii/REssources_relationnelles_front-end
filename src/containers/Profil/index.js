@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
 import "./style.css";
+import { connect } from 'react-redux';
 
 // components
 import Evenement from "../../components/Evénements";
 import NavBar from '../NavBar'
 import Footer from "../../components/Footer";
 
-import { connect } from 'react-redux';
-import { authControl } from "../../actions/connexion.action"
-
-
+import {authControl} from "../../actions/connexion.action"
 class Profil extends Component {
 
-  componentDidMount() {
+  componentDidMount(){
     this.props.authControl().then(() => {
       if (this.props.isLogged === false) {
-        window.location.href = "/";
+        window.location.href = '/connexion'
       }
-    }).catch(
-      (e) => {
-        window.location.href = "/";
+    }).catch(()=>{
+      if (this.props.isLogged === false) {
+        window.location.href = '/connexion'
       }
-    )
+    })  
   }
 
   render() {
@@ -36,6 +34,7 @@ class Profil extends Component {
   }
 }
 
+
 function mapStateToProps(state) {
 
   return {
@@ -43,12 +42,11 @@ function mapStateToProps(state) {
   };
 }
 
-
 function mapDispatchToProps(dispatch) {
 
   return {
-    authControl: none => dispatch(authControl())
+    authControl: () => dispatch(authControl())
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Profil);
+export default connect(mapStateToProps,mapDispatchToProps)(Profil);

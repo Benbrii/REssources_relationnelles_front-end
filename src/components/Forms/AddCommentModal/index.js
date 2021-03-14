@@ -54,6 +54,7 @@ class ConnectedAddCommentModal extends Component {
   }
 
   render() {
+    
     return (
       <div className="addpostemodal_container">
         <ModalHeader>
@@ -83,15 +84,14 @@ class ConnectedAddCommentModal extends Component {
 
 const mstp = state => {
   return {
-    id_user: state.connectReducer.user.id,
-    pseudo_user: state.connectReducer.user.pseudo,
+    id_user: state.userReducer.user.id,
+    pseudo_user: state.userReducer.user.pseudo,
     id_ressource: state.ressource.ressource[0].id
   };
 };
 
 const mdtp = dispatch => ({
-  addCommentToRessource: (commentaire, idUser, pseudoUser, idRessource) =>
-    dispatch(addCommentToRessource(commentaire, idUser, pseudoUser, idRessource)),
+  addCommentToRessource: (commentaire, idUser, pseudoUser, idRessource) => dispatch(addCommentToRessource(commentaire, idUser, pseudoUser, idRessource)),
 });
 
 const AddCommentModal = connect(

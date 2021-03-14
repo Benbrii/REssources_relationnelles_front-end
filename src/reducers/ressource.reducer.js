@@ -14,9 +14,10 @@ const ressource = (state = initState, action) => {
         // GET RESSOURCES
 
         case ressourceConst.RESSOURCE_FULFILLED:
+            
             return {
                 ...state,
-                ressources: action.payload.data,
+                ressources: action.payload.data.rows,
                 isLoading: false
             };
         case ressourceConst.RESSOURCE_PENDING:

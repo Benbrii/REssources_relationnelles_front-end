@@ -13,7 +13,7 @@ class ActuPage extends Component {
     super(props);
     this.state = {
       ajoutationModalOpened: false,
-      categorie: "toute categories",
+      categorie: "Toutes categories",
       type: "tout types"
     }
   }
@@ -60,14 +60,15 @@ class ActuPage extends Component {
                     id="categorie"
                     onChange={e => {
                       e.preventDefault();
-                      if (e.target.value !== "Tous") {
+                      if (e.target.value !== "Toutes categories") {
                         this.setState({ categorie: e.target.value });
-                      } else {
-                        this.setState({ categorie: "" })
+                      } 
+                      else {this.setState({ categorie: "Toutes categories" })
                       }
+
                     }}
                     className="filter_form_categorie_input">
-                    <option key="toute categories">toute categories</option>
+                    <option key="Toutes categories">Toutes categories</option>
                     {
                       categories.map((categorie) =>
                         <option key={categorie.id}>{categorie.labelle}</option>
@@ -94,7 +95,7 @@ class ActuPage extends Component {
                       }
                     }}
                     className="filter_form_categorie_input">
-                      <option key="toute categories">tout types</option>
+                      <option key="Toutes categories">tout types</option>
                     {
                       types.map((type) =>
                         <option key={type.id}>{type.labelle}</option>

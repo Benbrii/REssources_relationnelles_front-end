@@ -45,3 +45,8 @@ export const getFavorisByUserId = (uId) => ({
     type: ressourceConst.GET_ALL_FAVORIS_BY_USER_ID,
     payload: ressourceAPI.fetchAllFavoris(uId)
 })
+
+export const deleteRessourceById = (id) => ({
+    type: ressourceConst.DELETE_RESSOURCE_BY_ID,
+    payload: ressourceAPI.fetchDeleteRessourceById(id)
+})

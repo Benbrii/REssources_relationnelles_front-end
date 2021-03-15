@@ -11,7 +11,7 @@ constructor(props) {
   this.state = {
     filter:{
         annee:"",
-        categorie:"toute categories",
+        categorie:"Toutes categories",
         type:"tout types"
     }
   };
@@ -48,7 +48,7 @@ componentDidMount(){
               </Col>
               <Col sm={3}>
                 <Form.Control as="select" onChange={e => { this.setState({ filter: {...this.state.filter, categorie: e.target.value } }); e.preventDefault(); }}>
-                <option key="tout">toute categories</option>
+                <option key="tout">Toutes categories</option>
                 {
                       categories.map((categorie) =>
                         <option key={categorie.id}>{categorie.labelle}</option>

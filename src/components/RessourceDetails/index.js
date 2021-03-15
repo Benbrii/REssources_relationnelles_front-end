@@ -126,6 +126,7 @@ class ConnectedRessourceDetails extends Component {
                               <Container>
                                 <Row className="comments_row_displayer">
                                   <Card>
+                                    {/* à modifier ici */}
                                     <h5>{comment.pseudo}</h5>
                                     <ListGroupItem>{' '}{comment.message}</ListGroupItem>
                                   </Card>

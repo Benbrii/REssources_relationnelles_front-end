@@ -18,7 +18,7 @@ class ActuPage extends Component {
     }
   }
 
-  
+
   // MODAL AJOUTATION
 
   openAjoutationModal = () => {
@@ -42,10 +42,9 @@ class ActuPage extends Component {
     } = this.state;
 
     const {
-      categories,
       types
     } = this.props;
-    console.log("ACTU ",categorie,type)
+    console.log("ACTU ", categorie, type)
     return (
       <>
         <Container className="actu_page_container">
@@ -67,12 +66,13 @@ class ActuPage extends Component {
                       }
                     }}
                     className="filter_form_categorie_input">
-                    <option key="toute categories">toute categories</option>
-                    {
-                      categories.map((categorie) =>
-                        <option key={categorie.id}>{categorie.labelle}</option>
-                      )
-                    }
+                    <option key="toute categories">Toute categories</option>
+                    <option key="information">Information</option>
+                    <option key="actualité">Actualité</option>
+                    <option key="personnel">Personnel</option>
+                    <option key="société">Société</option>
+                    <option key="santé">Santé</option>
+                    <option key="autres">Autres</option>
                   </Input>
                 </FormGroup>
               </Form>
@@ -94,7 +94,7 @@ class ActuPage extends Component {
                       }
                     }}
                     className="filter_form_categorie_input">
-                      <option key="toute categories">tout types</option>
+                    <option key="toute categories">Tout types</option>
                     {
                       types.map((type) =>
                         <option key={type.id}>{type.labelle}</option>
@@ -107,30 +107,30 @@ class ActuPage extends Component {
           </Row>
 
           {this.props.isLogged === true ?
-              <div>
-                <div className="actu_page_add_button_container">
-                  <Button color="info" className="actu_page_add_button" onClick={() => this.openAjoutationModal()}>Ajouter un poste</Button>{' '}
-                </div>
+            <div>
+              <div className="actu_page_add_button_container">
+                <Button color="info" className="actu_page_add_button" onClick={() => this.openAjoutationModal()}>Ajouter un poste</Button>{' '}
               </div>
-          :null}
-              <div>
-                <div className="actu_details_container">
-                  <ActuDetails whichCategorie={categorie} whichType={type} />
-                </div>
-              </div>
-           
+            </div>
+            : null}
+          <div>
+            <div className="actu_details_container">
+              <ActuDetails whichCategorie={categorie} whichType={type} />
+            </div>
+          </div>
+
         </Container>
 
         {/* MODALS */}
         {
-        this.props.isLogged === true ?
-          ajoutationModalOpened &&
+          this.props.isLogged === true ?
+            ajoutationModalOpened &&
             <Modal isOpen={ajoutationModalOpened} toggle={this.closeAjoutationModal}>
               <AddPosteModal />
             </Modal>
-        :null
+            : null
         }
-        
+
       </>
     );
   }
@@ -138,11 +138,10 @@ class ActuPage extends Component {
 
 function mapStateToProps(state) {
 
-    return {
-      categories: state.adminReducer.categories,
-      types: state.adminReducer.types,
-      isLogged: state.connectReducer.isLogged
-    };
+  return {
+    types: state.adminReducer.types,
+    isLogged: state.connectReducer.isLogged
+  };
 }
 
 export default connect(mapStateToProps)(ActuPage);

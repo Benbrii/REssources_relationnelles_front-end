@@ -18,8 +18,8 @@ class ConnectedAddPosteModal extends Component {
     super(props);
     this.state = {
       title: "",
-      categorie: "categorie 1",
-      type: "photo",
+      categorie: "",
+      type: "",
       description: "",
       privee: 0,
       selectedFile: null
@@ -41,7 +41,7 @@ class ConnectedAddPosteModal extends Component {
     formData.append("privee", privee);
     formData.append("userID", userID);
 
-    
+
     if (title.length > 0) {
       await this.props.addPosteToCloud(formData);
     } else {
@@ -50,8 +50,8 @@ class ConnectedAddPosteModal extends Component {
 
     this.setState({
       title: "",
-      categorie: "categorie 1",
-      type: "photo",
+      categorie: "",
+      type: "",
       description: "",
       privee: 0,
       selectedFile: null
@@ -61,7 +61,7 @@ class ConnectedAddPosteModal extends Component {
   }
 
   render() {
-    const {categories,types} = this.props
+    const { types } = this.props
     return (
       <div className="addpostemodal_container">
         <ModalHeader>
@@ -103,16 +103,17 @@ class ConnectedAddPosteModal extends Component {
             </FormText>
           </FormGroup>
           <FormGroup>
-            <Label for="theme">catégorie</Label>
+            <Label for="theme">Catégorie</Label>
             <Input type="select" name="categorie" id="categorie" onChange={e => {
               this.setState({ categorie: e.target.value });
               e.preventDefault();
             }}>
-              {
-                  categories.map((categorie) =>
-                    <option key={categorie.id}>{categorie.labelle}</option>
-                  )
-              }
+              <option>Information</option>
+              <option>Actualité</option>
+              <option>Personnel</option>
+              <option>Société</option>
+              <option>Santé</option>
+              <option>Autres</option>
             </Input>
           </FormGroup>
           <FormGroup>
@@ -122,9 +123,9 @@ class ConnectedAddPosteModal extends Component {
               e.preventDefault();
             }}>
               {
-                  types.map((type) =>
-                    <option key={type.id}>{type.labelle}</option>
-                  )
+                types.map((type) =>
+                  <option key={type.id}>{type.labelle}</option>
+                )
               }
             </Input>
           </FormGroup>
@@ -157,9 +158,8 @@ class ConnectedAddPosteModal extends Component {
 const mstp = state => {
   return {
     userID: state.userReducer.user.id,
-    categories: state.adminReducer.categories,
     types: state.adminReducer.types,
-    
+
   }
 };
 

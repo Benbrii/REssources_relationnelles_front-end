@@ -23,7 +23,7 @@ class ConnectedActuDetails extends Component {
       // eslint-disable-next-line
       ressources.filter((data) => {
 
-        if ((data.categorie === whichCategorie || whichCategorie === "toute categories") && (data.type === whichType || whichType === "tout types")) {
+        if ((data.categorie === whichCategorie || whichCategorie === "Toutes categories") && (data.type === whichType || whichType === "Tous types")) {
           return data
         }
 

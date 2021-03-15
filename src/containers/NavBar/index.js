@@ -36,7 +36,7 @@ class NavBar extends Component {
   }
 
   logout = () => {
-    this.props.disconnectUser().then(() => {window.location.href = "/"})
+    this.props.disconnectUser().then(() => { window.location.href = "/" })
   };
 
 
@@ -55,26 +55,26 @@ class NavBar extends Component {
               <NavItem>
                 <NavLink className="text_top_nav" href="/">Accueil</NavLink>
               </NavItem>
-              {this.props.isLogged === true?
+              {this.props.isLogged === true ?
                 <NavItem>
                   <NavLink className="text_top_nav" href="/profil">Profil</NavLink>
                 </NavItem>
-                :null
+                : null
               }
 
               {this.props.authlevel === 4 || this.props.authlevel === 3 ?
-              <NavItem>
-                <NavLink className="text_top_nav" href="/adminPage">Admin</NavLink>
-              </NavItem>
-              :null}
+                <NavItem>
+                  <NavLink className="text_top_nav" href="/adminPage">Admin</NavLink>
+                </NavItem>
+                : null}
             </Nav>
-            
-            {this.props.isLogged === true?
+
+            {this.props.isLogged === true ?
               <NavLink className="nav-link" onClick={this.logout}>Déconnexion</NavLink>
               :
               <NavLink className="nav-link" href="/connexion" >Connexion</NavLink>
             }
-              
+
           </Collapse>
         </Navbar>
       </div >
@@ -85,9 +85,9 @@ class NavBar extends Component {
 function mapStateToProps(state) {
 
   return {
-     
-      authlevel: state.userReducer.authlevel,
-      isLogged: state.connectReducer.isLogged
+
+    authlevel: state.userReducer.authlevel,
+    isLogged: state.connectReducer.isLogged
   };
 }
 
@@ -98,7 +98,7 @@ function mapDispatchToProps(dispatch) {
     disconnectUser: () => dispatch(disconnectUser())
   };
 }
-export default connect(mapStateToProps,mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
 
 
 

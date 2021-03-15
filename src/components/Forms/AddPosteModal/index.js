@@ -61,7 +61,7 @@ class ConnectedAddPosteModal extends Component {
   }
 
   render() {
-    const { types } = this.props
+    const { types, categories } = this.props
     return (
       <div className="addpostemodal_container">
         <ModalHeader>
@@ -108,12 +108,11 @@ class ConnectedAddPosteModal extends Component {
               this.setState({ categorie: e.target.value });
               e.preventDefault();
             }}>
-              <option>Information</option>
-              <option>Actualité</option>
-              <option>Personnel</option>
-              <option>Société</option>
-              <option>Santé</option>
-              <option>Autres</option>
+              {
+                categories.map((categorie) =>
+                  <option key={categorie.id}>{categorie.labelle}</option>
+                )
+              }
             </Input>
           </FormGroup>
           <FormGroup>
@@ -157,6 +156,7 @@ class ConnectedAddPosteModal extends Component {
 
 const mstp = state => {
   return {
+    categories: state.adminReducer.categories,
     userID: state.userReducer.user.id,
     types: state.adminReducer.types,
 

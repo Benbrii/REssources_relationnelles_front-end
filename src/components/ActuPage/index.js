@@ -13,8 +13,8 @@ class ActuPage extends Component {
     super(props);
     this.state = {
       ajoutationModalOpened: false,
-      categorie: "toute categories",
-      type: "tout types"
+      categorie: "Toutes categories",
+      type: "Tous types"
     }
   }
 
@@ -42,7 +42,8 @@ class ActuPage extends Component {
     } = this.state;
 
     const {
-      types
+      types,
+      categories
     } = this.props;
     console.log("ACTU ", categorie, type)
     return (
@@ -66,13 +67,12 @@ class ActuPage extends Component {
                       }
                     }}
                     className="filter_form_categorie_input">
-                    <option key="toute categories">Toute categories</option>
-                    <option key="information">Information</option>
-                    <option key="actualité">Actualité</option>
-                    <option key="personnel">Personnel</option>
-                    <option key="société">Société</option>
-                    <option key="santé">Santé</option>
-                    <option key="autres">Autres</option>
+                    <option key="toute categories">Toutes categories</option>
+                    {
+                      categories.map((categorie) =>
+                        <option key={categorie.id}>{categorie.labelle}</option>
+                      )
+                    }
                   </Input>
                 </FormGroup>
               </Form>
@@ -94,7 +94,7 @@ class ActuPage extends Component {
                       }
                     }}
                     className="filter_form_categorie_input">
-                    <option key="toute categories">Tout types</option>
+                    <option key="toute categories">Tous types</option>
                     {
                       types.map((type) =>
                         <option key={type.id}>{type.labelle}</option>
@@ -139,6 +139,7 @@ class ActuPage extends Component {
 function mapStateToProps(state) {
 
   return {
+    categories: state.adminReducer.categories,
     types: state.adminReducer.types,
     isLogged: state.connectReducer.isLogged
   };

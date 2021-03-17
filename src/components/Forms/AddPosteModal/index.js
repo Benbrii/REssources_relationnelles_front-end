@@ -18,7 +18,7 @@ class ConnectedAddPosteModal extends Component {
     super(props);
     this.state = {
       title: "",
-      categorie: "categorie 1",
+      ChooseCategories: [],
       type: "photo",
       description: "",
       privee: 0,
@@ -29,13 +29,14 @@ class ConnectedAddPosteModal extends Component {
 
   async handleSubmit(e) {
     e.preventDefault();
-    const { title, selectedFile, categorie, type, description, privee } = this.state;
+    const { title, selectedFile, ChooseCategories, type, description, privee } = this.state;
+    console.log("ChooseCategories",ChooseCategories)
     const { userID } = this.props;
 
     let formData = new FormData();
     formData.append("selectedFile", selectedFile);
     formData.append("title", title);
-    formData.append("categorie", categorie);
+    formData.append("categorie", ChooseCategories);
     formData.append("type", type);
     formData.append("description", description);
     formData.append("privee", privee);
@@ -50,7 +51,7 @@ class ConnectedAddPosteModal extends Component {
 
     this.setState({
       title: "",
-      categorie: "categorie 1",
+      ChooseCategories: [],
       type: "photo",
       description: "",
       privee: 0,
@@ -62,6 +63,7 @@ class ConnectedAddPosteModal extends Component {
 
   render() {
     const {categories,types} = this.props
+    const {ChooseCategories} = this.state
     return (
       <div className="addpostemodal_container">
         <ModalHeader>
@@ -83,6 +85,7 @@ class ConnectedAddPosteModal extends Component {
               placeholder="Indiquer le titre du poste"
               onChange={e => {
                 this.setState({ title: e.target.value });
+               
                 e.preventDefault();
               }}
             />
@@ -103,17 +106,29 @@ class ConnectedAddPosteModal extends Component {
             </FormText>
           </FormGroup>
           <FormGroup>
-            <Label for="theme">catégorie</Label>
+            <Label for="theme">catégories</Label>
             <Input type="select" name="categorie" id="categorie" onChange={e => {
-              this.setState({ categorie: e.target.value });
+
+             if( e.target.value !== "Choisir categories..."){
+                this.setState({ ChooseCategories: [...this.state.ChooseCategories, e.target.value] });
+             }
               e.preventDefault();
             }}>
+
+               <option key="none">Choisir categorie...</option>
               {
                   categories.map((categorie) =>
                     <option key={categorie.id}>{categorie.labelle}</option>
                   )
               }
             </Input>
+            <div>
+              categories : {
+                  ChooseCategories.map((ChooseCategorie) =>
+                    <span key={ChooseCategorie}>{ChooseCategorie} </span>
+                  )
+              }
+            </div>
           </FormGroup>
           <FormGroup>
             <Label for="type">Type de la ressource</Label>

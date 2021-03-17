@@ -25,19 +25,17 @@ export const fetchRessourceById = ({id_user,id}) => {
 }
 
 export const fetchCommentByRessourceId = id =>
+
     axios.get(`${process.env.REACT_APP_API_URL}/ressources/comments/${id}`);
 
-export const fetchAddCommentToRessource = (commentaire, idUser, pseudoUser, idRessource) =>
+export const fetchAddCommentToRessource = (commentaire, idUser, idRessource) =>
     
     axios({
         method: "post",
         url: `${process.env.REACT_APP_API_URL}/ressources/addcomment`,
         credentials: 'true',
         data: {
-            commentaire,
-            idUser,
-            pseudoUser,
-            idRessource
+            commentaire, idUser,idRessource
         }
     });
 

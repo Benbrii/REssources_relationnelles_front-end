@@ -32,10 +32,8 @@ class ConnectedRessourceDetails extends Component {
     let url_array = full_url.split('/')
     let id = url_array[url_array.length - 1];
     
-    console.log("CDM")
 
-    const id_user = this.props.id_user
-    this.props.getRessourceById({id_user,id});
+    this.props.getRessourceById({id});
     this.props.getCommentsByRessourceId(id);
   }
 
@@ -75,14 +73,14 @@ class ConnectedRessourceDetails extends Component {
 
   render() {
     console.log( "RENDER",this.props.id_user)
-    const { ressource, comments } = this.props;
+    const { ressources, comments } = this.props;
     const { ajoutationCommentModalOpened, favStar } = this.state;
     return (
       <>
         <h2 className="fil_title_center">Ressource</h2>
         {
-          ressource.length > 0 ?
-            ressource.map(ressource => (
+          ressources.length > 0 ?
+          ressources[0].map(ressource => (
               ressource.private === 0 ?
                 <div className="ressource_details_wrapper" key={ressource.id}>
                   <Jumbotron fluid>
@@ -103,12 +101,19 @@ class ConnectedRessourceDetails extends Component {
                           </div>
                         </div>
                       </div>
-                      <p className="lead">{ressource.categorie}</p>
+                      <p className="lead"></p>
                       <p className="lead">Ressource envoyée le : {ressource.date_envoie}</p>
                       <hr className="my-2" />
                       <img src={ressource.lien} className="ressource_details_image" alt="ressource_image" />
                       <hr className="my-2" />
-                      <p className="ressource_text_wrapper">{ressource.description}</p>
+                      <p className="ressource_text_wrapper">
+                        {
+                          ressources[0][1].map((categorie) =>
+                            <span key={categorie.labelle} > {categorie.labelle} </span>
+                          )
+                          
+                        }
+                      </p>
                     </Container>
                     {this.props.isLogged === true ?
                       <div>
@@ -162,7 +167,7 @@ class ConnectedRessourceDetails extends Component {
 
 const mstp = state => {
   return {
-    ressource: state.ressource.ressource,
+    ressources: state.ressource.ressource,
     comments: state.ressource.comments,
     id_user: state.userReducer.user.id,
     isLogged: state.connectReducer.isLogged

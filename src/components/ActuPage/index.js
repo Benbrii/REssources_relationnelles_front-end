@@ -45,7 +45,6 @@ class ActuPage extends Component {
       categories,
       types
     } = this.props;
-    console.log("ACTU ",categorie,type)
     return (
       <>
         <Container className="actu_page_container">

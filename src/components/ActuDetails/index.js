@@ -24,39 +24,65 @@ class ConnectedActuDetails extends Component {
 
   render() {
     const { ressources, whichCategorie, whichType } = this.props;
-    const listRessources = ressources.length > 0 && ressources !== undefined && ressources !== null ?
-      // eslint-disable-next-line
+    let listRessources = ""
+    if(ressources.length > 0){
+      listRessources = ressources[0].length > 0 && ressources[0] !== undefined && ressources[0] !== null ?
+      
       ressources.filter((data) => {
-        
-      if ((data.categorie === whichCategorie || whichCategorie === "Toutes categories")  && (data.type === whichType || whichType === "tout types")) {
+
+      let filterCat = false
+
+      for(let i = 0;i < data[1].length ;i++){
+
+        if (data[1][i].labelle === whichCategorie){
+          filterCat = true
+        }
+      }
+
+      if ((filterCat === true || whichCategorie === "Toutes categories")  && (data[0].type === whichType || whichType === "tout types")) {
         return data
+      }else{
+        return null
       }
       
       }).map(data => {
-        return (
-          <div key={data.id_ressource}>
-            <Card>
-              <NavLink href={`/ressource/${data.id_ressource}`} className="ressource_link">
-                <CardBody>
-                  <CardTitle tag="h5" className="card_title_center">
-                    
-                      <Alert color="primary">
-                        {data.titre}
-                      </Alert>
-                    
-                  </CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">{data.categorie}</CardSubtitle>
-                </CardBody>
-                <img className="actu_details_image" src={data.lien} alt="poste_image" />
-                <CardBody>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {data.date_envoie}</CardSubtitle>
-                  <Button  onClick={this.delRess(data.id_ressource)}> Supprimer </Button>
-                </CardBody>
-              </NavLink>
-            </Card>
-          </div>
-        )
+        if(data[0]){
+          return (
+            <div key={data[0].id}>
+              <Card>
+                <NavLink href={`/ressource/${data[0].id}`} className="ressource_link">
+                  <CardBody>
+                    <CardTitle tag="h5" className="card_title_center">
+                      
+                        <Alert color="primary">
+                          {data[0].titre}
+                        </Alert>
+                      
+                    </CardTitle>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">
+                    {
+                      data[1].map((categorie) =>
+                        <span key={categorie.labelle} > {categorie.labelle} </span>
+                      )
+                      
+                    }
+                    </CardSubtitle>
+                  </CardBody>
+                  <img className="actu_details_image" src={data[0].lien} alt="poste_image" />
+                  <CardBody>
+                    <CardSubtitle tag="h6" className="mb-2 text-muted">Date : {data[0].date_envoie}</CardSubtitle>
+                    <Button  onClick={this.delRess(data[0].id)}> Supprimer </Button>
+                  </CardBody>
+                </NavLink>
+              </Card>
+            </div>
+          )
+        }else{
+          return null
+        }
+        
       }) : null
+    }
 
     return (
       <div>

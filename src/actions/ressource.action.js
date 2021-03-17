@@ -12,10 +12,9 @@ export const addPosteToCloud = (formData) => ({
 });
 
 export function getRessourceById({id_user,id}) {
-    console.log("getRessourceById",id_user," ",id)
     return {
         type: ressourceConst.GET_RESSOURCE_BY_ID,
-        payload: ressourceAPI.fetchRessourceById({id_user,id})
+        payload: ressourceAPI.fetchRessourceById({id})
     }
 }
 
@@ -26,9 +25,9 @@ export function getCommentsByRessourceId(id) {
     }
 }
 
-export const addCommentToRessource = (commentaire, idUser, pseudoUser, idRessource) => ({
+export const addCommentToRessource = (commentaire, idUser, idRessource) => ({
     type: ressourceConst.ADD_COMMENT_TO_RESSOURCE,
-    payload: ressourceAPI.fetchAddCommentToRessource(commentaire, idUser, pseudoUser, idRessource)
+    payload: ressourceAPI.fetchAddCommentToRessource(commentaire, idUser,idRessource)
 })
 
 export const addRessourceToFavoris = (id_user, idRessource) => ({

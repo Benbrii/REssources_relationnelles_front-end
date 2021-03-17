@@ -29,16 +29,16 @@ class ConnectedAddCommentModal extends Component {
     this.setState({
       idUser: this.props.id_user,
       pseudoUser: this.props.pseudo_user,
-      idRessource: this.props.id_ressource
+      idRessource: this.props.ressource[0][0].id
     })
   }
 
   async handleSubmit(e) {
     e.preventDefault();
-    const { commentaire, idUser, pseudoUser, idRessource } = this.state;
-
+    const { commentaire, idUser, idRessource } = this.state;
+    console.log("idRessource",idRessource)
     if (commentaire.length > 0) {
-      await this.props.addCommentToRessource(commentaire, idUser, pseudoUser, idRessource);
+      await this.props.addCommentToRessource(commentaire, idUser, idRessource);
     } else {
       alert("Veuillez écrire un commentaire !");
     }
@@ -86,7 +86,7 @@ const mstp = state => {
   return {
     id_user: state.userReducer.user.id,
     pseudo_user: state.userReducer.user.pseudo,
-    id_ressource: state.ressource.ressource[0].id
+    ressource: state.ressource.ressource
   };
 };
 

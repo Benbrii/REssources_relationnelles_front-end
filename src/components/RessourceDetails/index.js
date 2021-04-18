@@ -54,9 +54,9 @@ class ConnectedRessourceDetails extends Component {
   };
 
   async addToFavoris() {
-    const { ressource, id_user } = this.props;
+    const { ressources, id_user } = this.props;
 
-    let idRessource = ressource[0].id;
+    let idRessource = ressources[0][0].id;
 
     const { favStar } = this.state;
 
@@ -75,14 +75,14 @@ class ConnectedRessourceDetails extends Component {
 
   render() {
     console.log("RENDER", this.props.id_user)
-    const { ressource, comments, labelledate } = this.props;
+    const { ressources, comments } = this.props;
     const { ajoutationCommentModalOpened, favStar } = this.state;
     return (
       <>
         <h2 className="fil_title_center">Ressource</h2>
         {
-          ressource.length > 0 ?
-            ressource.map(ressource => (
+          ressources.length > 0 ?
+            ressources[0].map(ressource => (
               ressource.private === 0 ?
                 <div className="ressource_details_wrapper" key={ressource.id}>
                   <Jumbotron fluid>
@@ -104,7 +104,7 @@ class ConnectedRessourceDetails extends Component {
                         </div>
                       </div>
                       <p className="lead">{ressource.categorie}</p>
-                      <p className="lead">Ressource envoyée le : {labelledate}</p>
+                      <p className="lead">Ressource envoyée le : {ressource.date_envoie}</p>
                       <hr className="my-2" />
                       <img src={ressource.lien} className="ressource_details_image" alt="ressource_image" />
                       <hr className="my-2" />
@@ -162,11 +162,10 @@ class ConnectedRessourceDetails extends Component {
 
 const mstp = state => {
   return {
-    ressource: state.ressource.ressource,
+    ressources: state.ressource.ressource,
     comments: state.ressource.comments,
     id_user: state.userReducer.user.id,
-    isLogged: state.connectReducer.isLogged,
-    labelledate: state.ressource.ressource_Date,
+    isLogged: state.connectReducer.isLogged
   };
 };
 

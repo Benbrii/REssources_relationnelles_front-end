@@ -44,10 +44,9 @@ class ProfilDetails extends Component {
     let uId = userData.id;
     let listUserRessources = [];
 
-
     if (userRessources.length > 0) {
       listUserRessources = userRessources.filter((ressource) => {
-        if (ressource.id_compte === uId) {
+        if (ressource[0].id_compte === uId) {
           return ressource
         } else {
           return null
@@ -55,6 +54,8 @@ class ProfilDetails extends Component {
       })
 
     }
+
+    console.log(listUserRessources);
 
     return (
       <div>
@@ -206,29 +207,29 @@ class ProfilDetails extends Component {
           {
             listUserRessources.length > 0 ?
               listUserRessources.map(listUserRessource => (
-                <div key={listUserRessource.id}>
+                <div key={listUserRessource[0].id}>
                   <Row className="row_background_wrapper">
                     <Col className="my_ressource_text_wrapper">
                       Titre : {' '}
-                      {listUserRessource.titre}
+                      {listUserRessource[0].titre}
                     </Col>
                     <Col className="my_ressource_text_wrapper">
-                      {listUserRessource.theme}
+                      {listUserRessource[0].theme}
                     </Col>
                     <Col className="my_ressource_text_wrapper">
-                      {listUserRessource.type_ressource}
+                      {listUserRessource[0].type_ressource}
                     </Col>
                     <Col className="my_ressource_text_wrapper">
                       Ressource privée : {' '}
                       {
-                        listUserRessource.private === 0 ?
+                        listUserRessource[0].private === 0 ?
                           <div className="private_non">Non</div>
                           :
                           <div className="private_oui">Oui</div>
                       }
                     </Col>
                     <Col className="my_ressource_text_wrapper">
-                      <NavLink href={`/ressource/${listUserRessource.id}`} className="ressource_link_profil">
+                      <NavLink href={`/ressource/${listUserRessource[0].id}`} className="ressource_link_profil">
                         Lien vers l'article
                       </NavLink>
                     </Col>

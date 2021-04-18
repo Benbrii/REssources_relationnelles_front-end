@@ -33,7 +33,7 @@ class AdminPage extends Component {
             let newDate = new Date();
             let year = newDate.getFullYear();
       
-            this.props.getStat({annee:year,categorie:"toute categories",type:"tout types"});
+            this.props.getStat({annee:year,categorie:"Toutes categories",type:"tout types"});
           }
         }).catch(()=>{
           if (this.props.isLogged === false) {

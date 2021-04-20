@@ -25,7 +25,7 @@ export const history = createBrowserHistory();
 class App extends Component {
 
   componentDidMount() {
-    //this.props.authControl().then(()=>{this.props.clearMessage()})
+    this.props.authControl().then(() => { this.props.clearMessage() })
   }
 
   render() {
